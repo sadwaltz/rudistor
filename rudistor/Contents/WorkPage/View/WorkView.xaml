@@ -1,0 +1,641 @@
+﻿<UserControl x:Class="rudistor.Contents.WorkPage.View.WorkView"
+        xmlns:wfi ="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration" 
+        xmlns:wf ="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" 
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:localConverter="clr-namespace:rudistor.Model.converter"
+        DataContext="{Binding WorkerViewModel, Source={StaticResource Locator}}"
+        Loaded="UserControl_Loaded" Height="768" Width="1366"
+         >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="KeyDown">
+            <cmd:EventToCommand Command="{Binding enterEventHandler}"  PassEventArgsToCommand="True"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        
+        <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/>
+        <localConverter:LabelConverter x:Key="LabelConverter"/>
+        <Style TargetType="{x:Type xctk:IntegerUpDown}" x:Key="Integerupdown">
+            <Style.Resources>
+                <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">30</sys:Double>
+            </Style.Resources>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="AutoSelectBehavior" Value="Never" />
+            <Setter Property="SelectAllOnGotFocus" Value="False" />
+            <Setter Property="Margin" Value="0,2,0,2" />
+        </Style>
+        <Style TargetType="{x:Type xctk:DecimalUpDown}" x:Key="Decimalupdown">
+            <Style.Resources>
+                <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">30</sys:Double>
+            </Style.Resources>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="AutoSelectBehavior" Value="Never" />
+            <Setter Property="SelectAllOnGotFocus" Value="False" />
+            <Setter Property="Margin" Value="0,2,0,2" />
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="ButtonStyle">
+            <Style.Resources>
+                <SolidColorBrush x:Key="brush" Color="Yellow"/>
+            </Style.Resources>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="LabelStyle">
+
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}" x:Key="ComboStyle">
+
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="-20,-4,4,0" />
+            <Setter Property="Height" Value="25"/>
+        </Style>
+
+        
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition x:Name="RowA" Height="Auto"/>
+            <RowDefinition x:Name="RowB" Height="Auto"/>
+            <RowDefinition Height="160"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="ColA" Width="Auto"/>
+            <ColumnDefinition x:Name="ColB" Width="Auto"/>
+            <ColumnDefinition x:Name="ColC" Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="全部生效" Visibility="{Binding IsNotAllActivated, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="0" Margin="20,5,0,5" VerticalAlignment="Center"  Width="60" Height="30" HorizontalAlignment="Left" Command="{Binding ActivateAll, Mode=OneWay}"/>
+        <Button Content="全部关闭" Visibility="{Binding IsAllActivated, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="0" Margin="20,5,0,5" VerticalAlignment="Center"  Width="60" Height="30" HorizontalAlignment="Left" Command="{Binding ActivateAll, Mode=OneWay}"/>
+        <Label Content="OFF" Visibility="{Binding IsNotAllActivated, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,7,0,7" Width="60" Background="Red"/>
+        <Label Content="ON" Grid.Column="0" Visibility="{Binding IsAllActivated, Converter={StaticResource BoolVisibilityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,7,0,7" Width="60" Background="Green"/>
+
+
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Positions}" IsReadOnly="True" Name="dataGrid1" CanUserAddRows="False" Grid.Column="0" Height="auto" Margin="5,0,0,5" Grid.Row="3" VerticalAlignment="Stretch"  Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="策略号" Binding="{Binding StageID}"/>
+                <DataGridTextColumn Header="腿1合约" Binding="{Binding T1}"/>
+                <DataGridTextColumn Header="腿2合约" Binding="{Binding T2}"/>
+                <DataGridTextColumn Header="方向" Binding="{Binding Direction}"/>
+                <DataGridTextColumn Header="实际价差" Binding="{Binding RealPrice}"/>
+                <DataGridTextColumn Header="目标价差" Binding="{Binding ExpPrice}"/>
+                <DataGridTextColumn Header="数量" Binding="{Binding Volume}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CanceledOrder}" IsReadOnly="True" Name="dataGrid2" CanUserAddRows="False" Grid.Column="2" Height="auto" Margin="5,0,0,5" Grid.Row="3" VerticalAlignment="Stretch"  Grid.ColumnSpan="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="合约" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="撤单数量" Binding="{Binding cnt}"/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border BorderThickness="2" CornerRadius="5" Grid.Column="0" Grid.Row="1" x:Name="GridA" DataContext="{Binding StrategyA}">
+            
+            <Grid Grid.Column="0"  HorizontalAlignment="Stretch"  Margin="0" Grid.Row="1" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="GridA_up" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridA_up_rowA" MinHeight="40"/>
+                        <RowDefinition x:Name="GridA_up_rowB"/>
+                        <RowDefinition x:Name="GridA_up_rowC"/>
+                        <RowDefinition x:Name="GridA_up_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridA_up_colA"/>
+                        <ColumnDefinition x:Name="GridA_up_colB"/>
+                        <ColumnDefinition x:Name="GridA_up_colC"/>
+                        <ColumnDefinition x:Name="GridA_up_colD"/>
+                        <ColumnDefinition x:Name="GridA_up_colE"/>
+                        <ColumnDefinition x:Name="GridA_up_colF"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding StageId}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top"></Label>
+                    <Label Content="总仓位限制 4" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"></Label>
+                    <Label Content="{Binding limit, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=限仓}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding lockNum, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=锁定}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=每笔}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}" x:Name="xc_A"  FormatString="N0" Value="{Binding limit}" Increment="1" Maximum="1000" Minimum="0" Grid.Row="1" Margin="0,2" Grid.Column="1" Width="73"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}" x:Name="sd_A"  FormatString="N0" Value="{Binding lockNum}" Increment="1" Maximum="1000" Minimum="0" Grid.Row="2" Margin="0,2" Grid.Column="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}" x:Name="mb_A"  FormatString="N0" Value="{Binding vol}" Increment="1" Maximum="1000" Minimum="0" Grid.Row="3" Margin="0,2" Grid.Column="1"/>
+                    
+
+                    <Button Content="修改" Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ModifyStage, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridA"/>
+                    <Label Content="空开价差：" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多开价差：" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="OFF" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Red"></Label>
+                    <Label Content="ON"  Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Green"></Label>
+
+                    <xctk:DecimalUpDown Style="{StaticResource Decimalupdown}" x:Name="kkjc_A" FormatString="F2" Value="{Binding kkjc}" Increment="{Binding WorkerViewModel.GridAIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Margin="57,2,0,2"/>
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}" x:Name="dkjc_A" FormatString="F2" Value="{Binding dkjc}" Increment="{Binding WorkerViewModel.GridAIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Margin="57,2,0,2"/>
+                    
+
+                    <Button Content="开启策略" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridA"/>
+                    <Button Content="关闭策略" Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridA"/>
+                    <Label Content="空平：" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kp, Mode=OneWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多平：" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dp, Mode=OneWay}" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Button Content="发送参数" Grid.Column="5" Grid.Row="0"  Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Send, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridA"/>
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}" x:Name="kp_A" FormatString="F2" Value="{Binding kp}" Increment="{Binding WorkerViewModel.GridAIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Margin="47,2,0,2"/>
+                    <xctk:DecimalUpDown  Style="{StaticResource Decimalupdown}"  x:Name="dp_A" FormatString="F2" Value="{Binding dp}" Increment="{Binding WorkerViewModel.GridAIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2" Margin="47,2,0,2"/>
+                    
+                </Grid>
+                <Grid Grid.Row="1" x:Name="GridA_down" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridA_down_rowA"/>
+                        <RowDefinition x:Name="GridA_down_rowB"/>
+                        <RowDefinition x:Name="GridA_down_rowC"/>
+                        <RowDefinition x:Name="GridA_down_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridA_down_colA"/>
+                        <ColumnDefinition x:Name="GridA_down_colB"/>
+                        <ColumnDefinition x:Name="GridA_down_colC"/>
+                        <ColumnDefinition x:Name="GridA_down_colD"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding t1cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1超价}" Grid.Column="0" Grid.Row="0" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t1dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1等待}" Grid.Column="0" Grid.Row="1" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2超价}" Grid.Column="0" Grid.Row="2" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2等待}" Grid.Column="0" Grid.Row="3" Background="{x:Null}"></Label>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  x:Name="t1cj_A" FormatString="N0" Value="{Binding t1cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Row="0" Margin="0,2" Grid.Column="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  x:Name="t1dd_A" FormatString="N0" Value="{Binding t1dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Row="1" Margin="0,2" Grid.Column="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  x:Name="t2cj_A" FormatString="N0" Value="{Binding t2cj}" Increment="1"  Maximum="10" Minimum="0" Grid.Row="2" Margin="0,2" Grid.Column="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  x:Name="t2dd_A" FormatString="N0" Value="{Binding t2dd}" Increment="1"  Maximum="100" Minimum="-100" Grid.Row="3" Margin="0,2" Grid.Column="1" HorizontalAlignment="Right" Width="83"/>
+
+                    <Label Content="腿2策略" Grid.Column="2" Grid.Row="0"/>
+                    <Label Content="{Binding t2vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=PermitVol}" Grid.Column="2" Grid.Row="1"/>
+                    <Button Content="重置仓位" Grid.Column="2" Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ResetPosition, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridA"/>
+                    <Label Content="策略" Grid.Column="2" Grid.Row="3"/>
+                    <ComboBox  x:Name="t2cl_A"  SelectedValue="{Binding t2cl}" Grid.Column="3" Grid.Row="0"  Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.T2ComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index" />
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  x:Name="t2vol_A" FormatString="N0" Value="{Binding t2vol}" Increment="1"  Maximum="2000" Minimum="0" Grid.Column="3" Grid.Row="1" Margin="0,2"/>
+                   
+                    <ComboBox  x:Name="cl_A" Grid.Column="3" Grid.Row="3"  SelectedValue="{Binding cl}" Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.ClComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index"/>
+                </Grid>
+            </Grid>
+
+        </Border>
+        <Border BorderThickness="2" CornerRadius="5" Grid.Column="1" Grid.Row="1" x:Name="GridB" DataContext="{Binding StrategyB}">
+            <Grid Grid.Column="0"  HorizontalAlignment="Stretch"  Margin="0" Grid.Row="1" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="GridB_up" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridB_up_rowA" MinHeight="40"/>
+                        <RowDefinition x:Name="GridB_up_rowB"/>
+                        <RowDefinition x:Name="GridB_up_rowC"/>
+                        <RowDefinition x:Name="GridB_up_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridB_up_colA"/>
+                        <ColumnDefinition x:Name="GridB_up_colB"/>
+                        <ColumnDefinition x:Name="GridB_up_colC"/>
+                        <ColumnDefinition x:Name="GridB_up_colD"/>
+                        <ColumnDefinition x:Name="GridB_up_colE"/>
+                        <ColumnDefinition x:Name="GridB_up_colF"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding StageId}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top"></Label>
+                    <Label Content="总仓位限制 4" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"></Label>
+                    <Label Content="{Binding limit, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=限仓}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding lockNum, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=锁定}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=每笔}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding limit}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding lockNum}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="2"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding vol}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="3"/>
+
+
+                    <Button Content="修改" Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ModifyStage, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridB"/>
+                    <Label Content="空开价差：" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多开价差：" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="OFF" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Red"></Label>
+                    <Label Content="ON"  Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Green"></Label>
+
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding kkjc}" Increment="{Binding WorkerViewModel.GridBIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="3" Grid.Row="2"/>
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding dkjc}" Increment="{Binding WorkerViewModel.GridBIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="3" Grid.Row="3"/>
+
+
+                    <Button Content="开启策略" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridB"/>
+                    <Button Content="关闭策略" Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridB"/>
+                    <Label Content="空平：" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kp, Mode=OneWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多平：" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dp, Mode=OneWay}" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Button Content="发送参数" Grid.Column="5" Grid.Row="0"  Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Send, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridB"/>
+                    <xctk:DecimalUpDown  Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding kp}" Increment="{Binding WorkerViewModel.GridBIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="5" Grid.Row="2"/>
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding dp}" Increment="{Binding WorkerViewModel.GridBIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="5" Grid.Row="3"/>
+
+                </Grid>
+                <Grid Grid.Row="1" x:Name="GridB_down" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridB_down_rowA"/>
+                        <RowDefinition x:Name="GridB_down_rowB"/>
+                        <RowDefinition x:Name="GridB_down_rowC"/>
+                        <RowDefinition x:Name="GridB_down_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridB_down_colA"/>
+                        <ColumnDefinition x:Name="GridB_down_colB"/>
+                        <ColumnDefinition x:Name="GridB_down_colC"/>
+                        <ColumnDefinition x:Name="GridB_down_colD"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding t1cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1超价}" Grid.Column="0" Grid.Row="0" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t1dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1等待}" Grid.Column="0" Grid.Row="1" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2超价}" Grid.Column="0" Grid.Row="2" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2等待}" Grid.Column="0" Grid.Row="3" Background="{x:Null}"></Label>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t1cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Column="1" Grid.Row="0"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t1dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Column="1" Grid.Row="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t2cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Column="1" Grid.Row="2"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t2dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Column="1" Grid.Row="3"/>
+
+                    <Label Content="腿2策略" Grid.Column="2" Grid.Row="0"/>
+                    <Label Content="{Binding t2vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=PermitVol}" Grid.Column="2" Grid.Row="1"/>
+                    <Button Content="重置仓位" Grid.Column="2" Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ResetPosition, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridB"/>
+                    <Label Content="策略" Grid.Column="2" Grid.Row="3"/>
+                    <ComboBox   SelectedValue="{Binding t2cl}" Grid.Column="3" Grid.Row="0"  Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.T2ComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index" />
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding t2vol}" Increment="1"  Maximum="2000" Minimum="0" Grid.Column="3" Grid.Row="1"/>
+
+                    <ComboBox   Grid.Column="3" Grid.Row="3"  SelectedValue="{Binding cl}" Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.ClComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index"/>
+                </Grid>
+            </Grid>
+
+        </Border>
+        <Border BorderThickness="2" CornerRadius="5" Grid.Column="2" Grid.Row="1" x:Name="GridC" DataContext="{Binding StrategyC}">
+            <Grid Grid.Column="0"  HorizontalAlignment="Stretch"  Margin="0" Grid.Row="1" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="GridC_up" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridC_up_rowA" MinHeight="40"/>
+                        <RowDefinition x:Name="GridC_up_rowB"/>
+                        <RowDefinition x:Name="GridC_up_rowC"/>
+                        <RowDefinition x:Name="GridC_up_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridC_up_colA"/>
+                        <ColumnDefinition x:Name="GridC_up_colB"/>
+                        <ColumnDefinition x:Name="GridC_up_colC"/>
+                        <ColumnDefinition x:Name="GridC_up_colD"/>
+                        <ColumnDefinition x:Name="GridC_up_colE"/>
+                        <ColumnDefinition x:Name="GridC_up_colF"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding StageId}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top"></Label>
+                    <Label Content="总仓位限制 4" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"></Label>
+                    <Label Content="{Binding limit, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=限仓}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding lockNum, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=锁定}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=每笔}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding limit}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding lockNum}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="2"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding vol}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="3"/>
+
+
+                    
+                    <Button Content="修改" Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ModifyStage, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridC"/>
+                    <Label Content="空开价差：" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多开价差：" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="OFF" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Red"></Label>
+                    <Label Content="ON"  Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Green"></Label>
+
+                    <xctk:DecimalUpDown  Style="{StaticResource Decimalupdown}"   FormatString="F2" Value="{Binding kkjc}" Increment="{Binding WorkerViewModel.GridCIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="3" Grid.Row="2"/>
+                    <xctk:DecimalUpDown  Style="{StaticResource Decimalupdown}"   FormatString="F2" Value="{Binding dkjc}" Increment="{Binding WorkerViewModel.GridCIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="3" Grid.Row="3"/>
+
+
+                    <Button Content="开启策略" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridC"/>
+                    <Button Content="关闭策略" Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridC"/>
+                    <Label Content="空平：" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kp, Mode=OneWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多平：" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dp, Mode=OneWay}" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Button Content="发送参数" Grid.Column="5" Grid.Row="0"  Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Send, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridC"/>
+                    <xctk:DecimalUpDown  Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding kp}" Increment="{Binding WorkerViewModel.GridCIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="5" Grid.Row="2"/>
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding dp}" Increment="{Binding WorkerViewModel.GridCIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="5" Grid.Row="3"/>
+
+                </Grid>
+                <Grid Grid.Row="1" x:Name="GridC_down" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridC_down_rowA"/>
+                        <RowDefinition x:Name="GridC_down_rowB"/>
+                        <RowDefinition x:Name="GridC_down_rowC"/>
+                        <RowDefinition x:Name="GridC_down_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridC_down_colA"/>
+                        <ColumnDefinition x:Name="GridC_down_colB"/>
+                        <ColumnDefinition x:Name="GridC_down_colC"/>
+                        <ColumnDefinition x:Name="GridC_down_colD"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding t1cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1超价}" Grid.Column="0" Grid.Row="0" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t1dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1等待}" Grid.Column="0" Grid.Row="1" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2超价}" Grid.Column="0" Grid.Row="2" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2等待}" Grid.Column="0" Grid.Row="3" Background="{x:Null}"></Label>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t1cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Column="1" Grid.Row="0"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t1dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Column="1" Grid.Row="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t2cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Column="1" Grid.Row="2"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t2dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Column="1" Grid.Row="3"/>
+
+                    <Label Content="腿2策略" Grid.Column="2" Grid.Row="0"/>
+                    <Label Content="{Binding t2vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=PermitVol}" Grid.Column="2" Grid.Row="1"/>
+                    <Button Content="重置仓位" Grid.Column="2" Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ResetPosition, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridC"/>
+                    <Label Content="策略" Grid.Column="2" Grid.Row="3"/>
+                    <ComboBox   SelectedValue="{Binding t2cl}" Grid.Column="3" Grid.Row="0"  Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.T2ComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index" />
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding t2vol}" Increment="1"  Maximum="2000" Minimum="0" Grid.Column="3" Grid.Row="1"/>
+
+                    <ComboBox   Grid.Column="3" Grid.Row="3"  SelectedValue="{Binding cl}" Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.ClComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index"/>
+                </Grid>
+            </Grid>
+
+        </Border>
+        <Border BorderThickness="2" CornerRadius="5" Grid.Column="0" Grid.Row="2" x:Name="GridD" DataContext="{Binding StrategyD}">
+            <Grid Grid.Column="0"  HorizontalAlignment="Stretch"  Margin="0" Grid.Row="1" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="GridD_up" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridD_up_rowA" MinHeight="40"/>
+                        <RowDefinition x:Name="GridD_up_rowB"/>
+                        <RowDefinition x:Name="GridD_up_rowC"/>
+                        <RowDefinition x:Name="GridD_up_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridD_up_colA"/>
+                        <ColumnDefinition x:Name="GridD_up_colB"/>
+                        <ColumnDefinition x:Name="GridD_up_colC"/>
+                        <ColumnDefinition x:Name="GridD_up_colD"/>
+                        <ColumnDefinition x:Name="GridD_up_colE"/>
+                        <ColumnDefinition x:Name="GridD_up_colF"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding StageId}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top"></Label>
+                    <Label Content="总仓位限制 4" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"></Label>
+                    <Label Content="{Binding limit, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=限仓}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding lockNum, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=锁定}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=每笔}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding limit}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding lockNum}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="2"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding vol}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="3"/>
+
+
+                    <Button Content="修改" Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ModifyStage, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridD"/>
+                    <Label Content="空开价差：" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多开价差：" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="OFF" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Red"></Label>
+                    <Label Content="ON"  Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Green"></Label>
+
+                    <xctk:DecimalUpDown  Style="{StaticResource Decimalupdown}"   FormatString="F2" Value="{Binding kkjc}" Increment="{Binding WorkerViewModel.GridDIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="3" Grid.Row="2"/>
+                    <xctk:DecimalUpDown  Style="{StaticResource Decimalupdown}"   FormatString="F2" Value="{Binding dkjc}" Increment="{Binding WorkerViewModel.GridDIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="3" Grid.Row="3"/>
+
+
+                    <Button Content="开启策略" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridD"/>
+                    <Button Content="关闭策略" Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridD"/>
+                    <Label Content="空平：" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kp, Mode=OneWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多平：" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dp, Mode=OneWay}" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Button Content="发送参数" Grid.Column="5" Grid.Row="0"  Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Send, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridD"/>
+                    <xctk:DecimalUpDown  Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding kp}" Increment="{Binding WorkerViewModel.GridDIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="5" Grid.Row="2"/>
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding dp}" Increment="{Binding WorkerViewModel.GridDIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="5" Grid.Row="3"/>
+
+                </Grid>
+                <Grid Grid.Row="1" x:Name="GridD_down" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridD_down_rowA"/>
+                        <RowDefinition x:Name="GridD_down_rowB"/>
+                        <RowDefinition x:Name="GridD_down_rowC"/>
+                        <RowDefinition x:Name="GridD_down_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridD_down_colA"/>
+                        <ColumnDefinition x:Name="GridD_down_colB"/>
+                        <ColumnDefinition x:Name="GridD_down_colC"/>
+                        <ColumnDefinition x:Name="GridD_down_colD"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding t1cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1超价}" Grid.Column="0" Grid.Row="0" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t1dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1等待}" Grid.Column="0" Grid.Row="1" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2超价}" Grid.Column="0" Grid.Row="2" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2等待}" Grid.Column="0" Grid.Row="3" Background="{x:Null}"></Label>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t1cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Column="1" Grid.Row="0"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t1dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Column="1" Grid.Row="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t2cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Column="1" Grid.Row="2"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding t2dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Column="1" Grid.Row="3"/>
+
+                    <Label Content="腿2策略" Grid.Column="2" Grid.Row="0"/>
+                    <Label Content="{Binding t2vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=PermitVol}" Grid.Column="2" Grid.Row="1"/>
+                    <Button Content="重置仓位" Grid.Column="2" Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ResetPosition, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridD"/>
+                    <Label Content="策略" Grid.Column="2" Grid.Row="3"/>
+                    <ComboBox   SelectedValue="{Binding t2cl}" Grid.Column="3" Grid.Row="0"  Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.T2ComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index" />
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding t2vol}" Increment="1"  Maximum="2000" Minimum="0" Grid.Column="3" Grid.Row="1"/>
+
+                    <ComboBox   Grid.Column="3" Grid.Row="3"  SelectedValue="{Binding cl}" Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.ClComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index"/>
+                </Grid>
+            </Grid>
+
+        </Border>
+        <Border BorderThickness="2" CornerRadius="5" Grid.Column="1" Grid.Row="2" x:Name="GridE" DataContext="{Binding StrategyE}">
+            <Grid Grid.Column="0"  HorizontalAlignment="Stretch"  Margin="0" Grid.Row="1" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="GridE_up" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridE_up_rowA" MinHeight="40"/>
+                        <RowDefinition x:Name="GridE_up_rowB"/>
+                        <RowDefinition x:Name="GridE_up_rowC"/>
+                        <RowDefinition x:Name="GridE_up_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridE_up_colA"/>
+                        <ColumnDefinition x:Name="GridE_up_colB"/>
+                        <ColumnDefinition x:Name="GridE_up_colC"/>
+                        <ColumnDefinition x:Name="GridE_up_colD"/>
+                        <ColumnDefinition x:Name="GridE_up_colE"/>
+                        <ColumnDefinition x:Name="GridE_up_colF"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding StageId}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top"></Label>
+                    <Label Content="总仓位限制 4" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"></Label>
+                    <Label Content="{Binding limit, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=限仓}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding lockNum, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=锁定}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=每笔}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding limit}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding lockNum}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="2"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding vol}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="3"/>
+
+
+                    <Button Content="修改" Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ModifyStage, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridE"/>
+                    <Label Content="空开价差：" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多开价差：" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="OFF" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Red"></Label>
+                    <Label Content="ON"  Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Green"></Label>
+
+                    <xctk:DecimalUpDown Style="{StaticResource Decimalupdown}"    FormatString="F2" Value="{Binding kkjc}" Increment="{Binding WorkerViewModel.GridEIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="3" Grid.Row="2"/>
+                    <xctk:DecimalUpDown  Style="{StaticResource Decimalupdown}"   FormatString="F2" Value="{Binding dkjc}" Increment="{Binding WorkerViewModel.GridEIncre,Source={StaticResource Locator}}" Maximum="10000" Minimum="-10000" Grid.Column="3" Grid.Row="3"/>
+
+
+                    <Button Content="开启策略" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridE"/>
+                    <Button Content="关闭策略" Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridE"/>
+                    <Label Content="空平：" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kp, Mode=OneWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多平：" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dp, Mode=OneWay}" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Button Content="发送参数" Grid.Column="5" Grid.Row="0"  Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Send, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridE"/>
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}" FormatString="F2" Value="{Binding kp}" Increment="{Binding WorkerViewModel.GridEIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="5" Grid.Row="2"/>
+                    <xctk:DecimalUpDown    Style="{StaticResource Decimalupdown}" FormatString="F2" Value="{Binding dp}" Increment="{Binding WorkerViewModel.GridEIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="5" Grid.Row="3"/>
+
+                </Grid>
+                <Grid Grid.Row="1" x:Name="GridE_down" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridE_down_rowA"/>
+                        <RowDefinition x:Name="GridE_down_rowB"/>
+                        <RowDefinition x:Name="GridE_down_rowC"/>
+                        <RowDefinition x:Name="GridE_down_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridE_down_colA"/>
+                        <ColumnDefinition x:Name="GridE_down_colB"/>
+                        <ColumnDefinition x:Name="GridE_down_colC"/>
+                        <ColumnDefinition x:Name="GridE_down_colD"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding t1cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1超价}" Grid.Column="0" Grid.Row="0" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t1dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1等待}" Grid.Column="0" Grid.Row="1" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2超价}" Grid.Column="0" Grid.Row="2" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2等待}" Grid.Column="0" Grid.Row="3" Background="{x:Null}"></Label>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t1cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Column="1" Grid.Row="0"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t1dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Column="1" Grid.Row="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t2cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Column="1" Grid.Row="2"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t2dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Column="1" Grid.Row="3"/>
+
+                    <Label Content="腿2策略" Grid.Column="2" Grid.Row="0"/>
+                    <Label Content="{Binding t2vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=PermitVol}" Grid.Column="2" Grid.Row="1"/>
+                    <Button Content="重置仓位" Grid.Column="2" Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ResetPosition, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridE"/>
+                    <Label Content="策略" Grid.Column="2" Grid.Row="3"/>
+                    <ComboBox   SelectedValue="{Binding t2cl}" Grid.Column="3" Grid.Row="0"  Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.T2ComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index" />
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding t2vol}" Increment="1"  Maximum="2000" Minimum="0" Grid.Column="3" Grid.Row="1"/>
+
+                    <ComboBox   Grid.Column="3" Grid.Row="3"  SelectedValue="{Binding cl}" Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.ClComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index"/>
+                </Grid>
+            </Grid>
+
+        </Border>
+        <Border BorderThickness="2" CornerRadius="5" Grid.Column="2" Grid.Row="2" x:Name="GridF" DataContext="{Binding StrategyF}">
+            <Grid Grid.Column="0"  HorizontalAlignment="Stretch"  Margin="0" Grid.Row="1" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="GridF_up" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Background="#FFDAD6D6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridF_up_rowA" MinHeight="40"/>
+                        <RowDefinition x:Name="GridF_up_rowB"/>
+                        <RowDefinition x:Name="GridF_up_rowC"/>
+                        <RowDefinition x:Name="GridF_up_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridF_up_colA"/>
+                        <ColumnDefinition x:Name="GridF_up_colB"/>
+                        <ColumnDefinition x:Name="GridF_up_colC"/>
+                        <ColumnDefinition x:Name="GridF_up_colD"/>
+                        <ColumnDefinition x:Name="GridF_up_colE"/>
+                        <ColumnDefinition x:Name="GridF_up_colF"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding StageId}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top"></Label>
+                    <Label Content="总仓位限制 4" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"></Label>
+                    <Label Content="{Binding limit, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=限仓}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding lockNum, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=锁定}" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+                    <Label Content="{Binding vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=每笔}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Stretch"></Label>
+
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding limit}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding lockNum}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="2"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding vol}" Increment="1" Maximum="1000" Minimum="0" Grid.Column="1" Grid.Row="3"/>
+
+
+                    <Button Content="修改" Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ModifyStage, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridF"/>
+                    <Label Content="空开价差：" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多开价差：" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dkjc, Mode=OneWay}" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="OFF" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Red"></Label>
+                    <Label Content="ON"  Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Style="{StaticResource LabelStyle}" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" Background="Green"></Label>
+
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding kkjc}" Increment="{Binding WorkerViewModel.GridFIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="3" Grid.Row="2"/>
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding dkjc}" Increment="{Binding WorkerViewModel.GridFIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="3" Grid.Row="3"/>
+
+
+                    <Button Content="开启策略" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridF"/>
+                    <Button Content="关闭策略" Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="4" Grid.Row="0" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Activate, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridF"/>
+                    <Label Content="空平：" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding kp, Mode=OneWay}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Label Content="多平：" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top"></Label>
+                    <Label Content="{Binding dp, Mode=OneWay}" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Bottom"></Label>
+                    <Button Content="发送参数" Grid.Column="5" Grid.Row="0"  Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.Send, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridF"/>
+                    <xctk:DecimalUpDown  Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding kp}" Increment="{Binding WorkerViewModel.GridFIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="5" Grid.Row="2"/>
+                    <xctk:DecimalUpDown   Style="{StaticResource Decimalupdown}"  FormatString="F2" Value="{Binding dp}" Increment="{Binding WorkerViewModel.GridFIncre,Source={StaticResource Locator}}"  Maximum="10000" Minimum="-10000" Grid.Column="5" Grid.Row="3"/>
+
+                </Grid>
+                <Grid Grid.Row="1" x:Name="GridF_down" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="GridF_down_rowA"/>
+                        <RowDefinition x:Name="GridF_down_rowB"/>
+                        <RowDefinition x:Name="GridF_down_rowC"/>
+                        <RowDefinition x:Name="GridF_down_rowD"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridF_down_colA"/>
+                        <ColumnDefinition x:Name="GridF_down_colB"/>
+                        <ColumnDefinition x:Name="GridF_down_colC"/>
+                        <ColumnDefinition x:Name="GridF_down_colD"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding t1cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1超价}" Grid.Column="0" Grid.Row="0" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t1dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿1等待}" Grid.Column="0" Grid.Row="1" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2cj, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2超价}" Grid.Column="0" Grid.Row="2" Background="{x:Null}"></Label>
+                    <Label Content="{Binding t2dd, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=腿2等待}" Grid.Column="0" Grid.Row="3" Background="{x:Null}"></Label>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t1cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Column="1" Grid.Row="0"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t1dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Column="1" Grid.Row="1"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t2cj}" Increment="1"  Maximum="100" Minimum="-100" Grid.Column="1" Grid.Row="2"/>
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"   FormatString="N0" Value="{Binding t2dd}" Increment="1"  Maximum="10" Minimum="0" Grid.Column="1" Grid.Row="3"/>
+
+                    <Label Content="腿2策略" Grid.Column="2" Grid.Row="0"/>
+                    <Label Content="{Binding t2vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=PermitVol}" Grid.Column="2" Grid.Row="1"/>
+                    <Button Content="重置仓位" Grid.Column="2" Grid.Row="2" Style="{StaticResource ButtonStyle}" Command="{Binding WorkerViewModel.ResetPosition, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="GridF"/>
+                    <Label Content="策略" Grid.Column="2" Grid.Row="3"/>
+                    <ComboBox   SelectedValue="{Binding t2cl}" Grid.Column="3" Grid.Row="0"  Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.T2ComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index" />
+                    <xctk:IntegerUpDown Style="{StaticResource Integerupdown}"  FormatString="N0" Value="{Binding t2vol}" Increment="1"  Maximum="2000" Minimum="0" Grid.Column="3" Grid.Row="1"/>
+
+                    <ComboBox   Grid.Column="3" Grid.Row="3"  SelectedValue="{Binding cl}" Style="{StaticResource ComboStyle}" ItemsSource="{Binding WorkerViewModel.ClComboboxItems, Source={StaticResource Locator}}" DisplayMemberPath="describe" SelectedValuePath="index"/>
+                </Grid>
+            </Grid>
+
+        </Border>
+
+
+    </Grid>
+</UserControl>
