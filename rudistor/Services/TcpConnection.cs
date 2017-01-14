@@ -153,23 +153,23 @@ namespace Communication
                         Thread.Sleep(1000);
                         //正式代码
                         
-#if RELEASE
+//#if RELEASE
                         if (response["response"]["errorid"].ToString() == "0")
                         {
-#endif
+//#endif
                             var msg = new GoToPageMessage() { PageName = "WorkView" };
                             DispatcherHelper.CheckBeginInvokeOnUI(
                             () =>
                             {
                                 Messenger.Default.Send<GoToPageMessage>(msg);
                             });
-#if RELEASE
+//#if RELEASE
                         }
                         else
                         {
                             System.Windows.MessageBox.Show(response["response"]["errormsg"].ToString(), "登录失败");
                         }
-#endif
+//#endif
                         //test code
                         
                         /*

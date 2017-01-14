@@ -174,6 +174,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
                     _ClComboboxItems.Add(new ComboboxItem() { index = "1", describe = "1-mm策略" });
                     _ClComboboxItems.Add(new ComboboxItem() { index = "2", describe = "2-商品策略" });
                     _ClComboboxItems.Add(new ComboboxItem() { index = "3", describe = "3-商品策略2" });
+                    _ClComboboxItems.Add(new ComboboxItem() { index = "4", describe = "4-认购+认估" });
+                    _ClComboboxItems.Add(new ComboboxItem() { index = "5", describe = "5-认购+认估MM" });
                 }
                 return _ClComboboxItems;
             }
@@ -735,7 +737,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
         private string getIncre(string stage)
         {
             
-            string header = stage.Substring(0, 2);
+            string header = stage.Substring(0, 2).ToUpper();
             string index = header + "Incre";
             try
             {

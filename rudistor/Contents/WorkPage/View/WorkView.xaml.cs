@@ -40,24 +40,24 @@ namespace rudistor.Contents.WorkPage.View
             double height = displayHeight == null ? 768 : Double.Parse(displayHeight);
             //double colWidth = rc.Width / 3;
             double colWidth = width / 3;
-            ColA.Width = new GridLength(colWidth);
-            ColB.Width = new GridLength(colWidth);
-            ColC.Width = new GridLength(colWidth);
+            //ColA.Width = new GridLength(colWidth);
+            //ColB.Width = new GridLength(colWidth);
+            //ColC.Width = new GridLength(colWidth);
             //double rowHeight = (rc.Height - 200 - 2 * 4) / 2 - 4;
-            double rowHeight = (height - 200 - 2 * 4) / 2 - 4;
-            RowA.Height = new GridLength(rowHeight);
-            RowB.Height = new GridLength(rowHeight);
-            GridA_up.Height = GridB_up.Height = GridC_up.Height = GridD_up.Height = GridE_up.Height = GridF_up.Height = rowHeight / 9 * 5;
-            GridA_down.Height = GridB_down.Height = GridC_down.Height = GridD_down.Height = GridE_down.Height = GridF_down.Height = rowHeight / 9 * 4;
-            GridA_down_rowA.Height = GridA_down_rowB.Height = GridA_down_rowC.Height = GridA_down_rowD.Height = new GridLength(GridA_down.Height / 4);
-            GridA_down_colA.Width = GridA_down_colB.Width = GridA_down_colC.Width = GridA_down_colD.Width = new GridLength(colWidth / 4);
-            GridA_up_rowA.Height = GridA_up_rowB.Height = GridA_up_rowC.Height = GridA_up_rowD.Height = new GridLength(GridA_up.Height / 4);
-            GridA_up_colA.Width = GridA_up_colB.Width = GridA_up_colC.Width = GridA_up_colD.Width = GridA_up_colE.Width = GridA_up_colF.Width = new GridLength(colWidth / 6);
+            //double rowHeight = (height - 200 - 2 * 4) / 2 - 4;
+            //RowA.Height = new GridLength(rowHeight);
+            //RowB.Height = new GridLength(rowHeight);
+            //GridA_up.Height = GridB_up.Height = GridC_up.Height = GridD_up.Height = GridE_up.Height = GridF_up.Height = rowHeight / 9 * 5;
+            //GridA_down.Height = GridB_down.Height = GridC_down.Height = GridD_down.Height = GridE_down.Height = GridF_down.Height = rowHeight / 9 * 4;
+            //GridA_down_rowA.Height = GridA_down_rowB.Height = GridA_down_rowC.Height = GridA_down_rowD.Height = new GridLength(GridA_down.Height / 4);
+            //GridA_down_colA.Width = GridA_down_colB.Width = GridA_down_colC.Width = GridA_down_colD.Width = new GridLength(colWidth / 4);
+            //GridA_up_rowA.Height = GridA_up_rowB.Height = GridA_up_rowC.Height = GridA_up_rowD.Height = new GridLength(GridA_up.Height / 4);
+            //GridA_up_colA.Width = GridA_up_colB.Width = GridA_up_colC.Width = GridA_up_colD.Width = GridA_up_colE.Width = GridA_up_colF.Width = new GridLength(colWidth / 6);
 
-            GridB_down_rowA.Height = GridB_down_rowB.Height = GridB_down_rowC.Height = GridB_down_rowD.Height = new GridLength(GridB_down.Height / 4);
-            GridB_down_colA.Width = GridB_down_colB.Width = GridB_down_colC.Width = GridB_down_colD.Width = new GridLength(colWidth / 4);
-            GridB_up_rowA.Height = GridB_up_rowB.Height = GridB_up_rowC.Height = GridB_up_rowD.Height = new GridLength(GridB_up.Height / 4);
-            GridB_up_colA.Width = GridB_up_colB.Width = GridB_up_colC.Width = GridB_up_colD.Width = GridB_up_colE.Width = GridB_up_colF.Width = new GridLength(colWidth / 6);
+            //GridB_down_rowA.Height = GridB_down_rowB.Height = GridB_down_rowC.Height = GridB_down_rowD.Height = new GridLength(GridB_down.Height / 4);
+            //GridB_down_colA.Width = GridB_down_colB.Width = GridB_down_colC.Width = GridB_down_colD.Width = new GridLength(colWidth / 4);
+            //GridB_up_rowA.Height = GridB_up_rowB.Height = GridB_up_rowC.Height = GridB_up_rowD.Height = new GridLength(GridB_up.Height / 4);
+            //GridB_up_colA.Width = GridB_up_colB.Width = GridB_up_colC.Width = GridB_up_colD.Width = GridB_up_colE.Width = GridB_up_colF.Width = new GridLength(colWidth / 6);
             //this.KeyDown += WorkView_KeyDown;
             
         }

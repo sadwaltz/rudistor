@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="yes"?>
+<BrokerData>
+  <brokers>
+    <brokerName>Name 0</brokerName>
+    <brokerId>0</brokerId>
+    <host>192.168.0.1</host>
+    <port>60000</port>
+  </brokers>
+  <brokers>
+    <brokerName>Name 1</brokerName>
+    <brokerId>1</brokerId>
+    <host>192.168.0.1</host>
+    <port>60001</port>
+  </brokers>
+  <brokers>
+    <brokerName>Name 2</brokerName>
+    <brokerId>2</brokerId>
+    <host>192.168.0.1</host>
+    <port>60002</port>
+  </brokers>
+  <brokers>
+    <brokerName>Name 3</brokerName>
+    <brokerId>3</brokerId>
+    <host>192.168.0.1</host>
+    <port>60003</port>
+  </brokers>
+  <brokers>
+    <brokerName>Name 4</brokerName>
+    <brokerId>4</brokerId>
+    <host>192.168.0.1</host>
+    <port>60004</port>
+  </brokers>
+</BrokerData>
