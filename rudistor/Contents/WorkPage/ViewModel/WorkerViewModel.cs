@@ -40,7 +40,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
         /// Initializes a new instance of the WorkerViewModel class.
         /// </summary>
         /// 
-        private static Logger logger = LogManager.GetCurrentClassLogger();  
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private User _currentUser;
         private String _currentCompany;
@@ -50,7 +50,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
         private Strategy _strategyD;
         private Strategy _strategyE;
         private Strategy _strategyF;
-        
+
         private ObservableCollection<Position> _positions;
 
         public ObservableCollection<Position> Positions
@@ -73,10 +73,10 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 RaisePropertyChanged("Canceled");
             }
         }
-        
-        private Dictionary<int,string> _instrument;
 
-        public Dictionary<int,string> Instrument
+        private Dictionary<int, string> _instrument;
+
+        public Dictionary<int, string> Instrument
         {
             get { return _instrument; }
             set
@@ -145,12 +145,49 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 RaisePropertyChanged("GridFIncre");
             }
         }
+
+        public string GridAFormatString
+        {
+            get;
+            set;
+        }
+
+        public string GridBFormatString
+        {
+            get;
+            set;
+        }
+
+        public string GridCFormatString
+        {
+            get;
+            set;
+        }
+
+        public string GridDFormatString
+        {
+            get;
+            set;
+        }
+
+        public string GridEFormatString
+        {
+            get;
+            set;
+        }
+
+        public string GridFFormatString
+        {
+            get;
+            set;
+        }
+
         #region combobox init
         private ObservableCollection<ComboboxItem> _T2ComboboxItems;
         private ObservableCollection<ComboboxItem> _ClComboboxItems;
         public ObservableCollection<ComboboxItem> T2ComboboxItems
         {
-            get 
+            get
             {
                 if (_T2ComboboxItems == null)
                 {
@@ -158,9 +195,9 @@ namespace rudistor.Contents.WorkPage.ViewModel
                     _T2ComboboxItems.Add(new ComboboxItem() { index = "0", describe = "0-直接对手价报单" });
                     _T2ComboboxItems.Add(new ComboboxItem() { index = "1", describe = "1-按指定价报单" });
                 }
-                return _T2ComboboxItems; 
+                return _T2ComboboxItems;
             }
-            
+
         }
 
         public ObservableCollection<ComboboxItem> ClComboboxItems
@@ -206,9 +243,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             }
         }
         //comm
-        private TcpClient client;
         private TcpConnection tcpConnection;
-        private byte[] byteData;
 
         // ManualResetEvent instances signal completion.     
         private static ManualResetEvent connectDone = new ManualResetEvent(false);
@@ -248,7 +283,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             get;
             private set;
         }
-        
+
 
         public Strategy StrategyA
         {
@@ -328,10 +363,11 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 }
             }
         }
+
         private List<string> _wantedInstrument;
         public WorkerViewModel()
         {
-            
+
             //生效所有策略
             ActivateAll = new RelayCommand(() => activateAll());
             //生效或者关闭一个策略
@@ -341,29 +377,57 @@ namespace rudistor.Contents.WorkPage.ViewModel
             //生效并发送一个策略
             SendWithActivate = new RelayCommand<string>((s) => sendWithActivate(s));
             //打开修改策略窗口
-            ModifyStage =  new RelayCommand<string>((s) => modifyStage(s));
+            ModifyStage = new RelayCommand<string>((s) => modifyStage(s));
             //打开重置仓位窗口
             ResetPosition = new RelayCommand<string>((s) => resetPosition(s));
             init();
-            
 
-         }
 
-        
+        }
+
+
         private void init()
         {
             //initComm();
             _wantedInstrument = getInstrumentsFromINI();
             initGUI();
-
-
-            
         }
+
         private List<string> getInstrumentsFromINI()
         {
-            INIManager ini = new INIManager("config.ini");
-            return new List<string>(ini.IniReadValue("InstrumentList", "list").Split(','));
+            try
+            {
+                INIManager ini = new INIManager("config.ini");
+                return new List<string>(ini.IniReadValue("InstrumentList", "list").Split(','));
+            }
+            catch (Exception e)
+            {
+                logger.Error(e);
+                return new List<string>();
+            }
         }
+
+        private void addInstrument(int i, string inst)
+        {
+            if (Instrument.ContainsValue(inst))
+            {
+                return;
+            }
+
+            if (_wantedInstrument.Count > 0)
+            {
+                if (!_wantedInstrument.Contains(inst))
+                {
+                    return;
+                }
+            }
+
+            Instrument.Add(i, inst);
+        }
+
+
+
+
         public void workviewLoaded()
         {
 
@@ -374,12 +438,12 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
             tcpConnection.OnDataReceivedCompleted += tcpConnection_OnDataReceivedCompleted;
             tcpConnection.OnDisconnected += tcpConnection_OnDisconnected;
-            
-            
+
+
             queryInstrument();
-            
+
             startTimer();
-            
+
         }
 
         void tcpConnection_OnDisconnected(TcpConnection obj)
@@ -428,7 +492,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             try
             {
                 //Console.WriteLine(Encoding.UTF8.GetString(receivedData));
-                
+
                 Newtonsoft.Json.Linq.JObject response = JObject.Parse(Encoding.UTF8.GetString(receivedData));
                 //Accordingly process the message received
                 switch (response["cmd"].ToString())
@@ -457,13 +521,14 @@ namespace rudistor.Contents.WorkPage.ViewModel
                             //System.Windows.Forms.MessageBox.Show(response["response"]["Payload"][1].ToString());
                             if (response["response"]["errorid"].ToString() == "0" && response["response"]["payload"] != null)
                             {
+                                // 清理
+                                Instrument.Clear();
+
                                 JArray jar = JArray.Parse(response["response"]["payload"].ToString());
                                 for (var i = 0; i < jar.Count; i++)
                                 {
-                                    if (_wantedInstrument.Contains(jar[i].ToString()))
-                                    {
-                                    Instrument.Add(i, jar[i].ToString());
-                                    }
+                                    // 添加合约
+                                    addInstrument(i, jar[i].ToString());
                                 }
                             }
                         }
@@ -512,7 +577,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                     });
                             }
                         }
-                        catch (NullReferenceException )
+                        catch (NullReferenceException)
                         {
                             logger.Debug("not expected message:" + Encoding.UTF8.GetString(receivedData));
                         }
@@ -530,10 +595,10 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                         //TODO:关闭所有策略状态
                                         StrategyA.IsActivate = StrategyB.IsActivate = StrategyC.IsActivate = StrategyD.IsActivate = StrategyE.IsActivate = StrategyF.IsActivate = false;
                                     });
-                                
+
                             }
                         }
-                        catch (NullReferenceException )
+                        catch (NullReferenceException)
                         {
                             logger.Debug("not expected message:" + Encoding.UTF8.GetString(receivedData));
                         }
@@ -577,7 +642,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
                                        });
                         }
-                        catch (NullReferenceException )
+                        catch (NullReferenceException)
                         {
                             logger.Debug("not expected message:" + Encoding.UTF8.GetString(receivedData));
                         }
@@ -636,28 +701,28 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 case "GridA":
 
                     return StrategyA;
-                    //RaisePropertyChanged("StrategyA");
-                    
+                //RaisePropertyChanged("StrategyA");
+
 
                 case "GridB":
                     return StrategyB;
-                    
+
 
                 case "GridC":
                     return StrategyC;
-                    
+
 
                 case "GridD":
                     return StrategyD;
-                    
+
 
                 case "GridE":
                     return StrategyE;
-                    
+
 
                 case "GridF":
                     return StrategyF;
-                default :
+                default:
                     return null;
             }
         }
@@ -669,9 +734,9 @@ namespace rudistor.Contents.WorkPage.ViewModel
             if (Instrument.Count == 0)
             {
                 //查询无结果,测试代码
-                Instrument.Add(0,"Rb0000");
-                Instrument.Add(1,"ru0001");
-                Instrument.Add(2,"ih0002");
+                Instrument.Add(0, "Rb0000");
+                Instrument.Add(1, "ru0001");
+                Instrument.Add(2, "ih0002");
                 Instrument.Add(3, "zn0003");
                 Instrument.Add(4, "au0004");
                 Instrument.Add(5, "OI0005");
@@ -686,10 +751,10 @@ namespace rudistor.Contents.WorkPage.ViewModel
             dialog.ShowDialog();
             if (dialog.DialogResult == true)
             {
-               //todo
+                //todo
                 //System.Windows.MessageBox.Show((dialog.DataContext as ModifyModalViewModel).SelectedStageA);
                 selectedStage = (dialog.DataContext as ModifyModalViewModel).SelectedStageA + "-" + (dialog.DataContext as ModifyModalViewModel).SelectedStageB;
-                updateGridStage(GridName,selectedStage);
+                updateGridStage(GridName, selectedStage);
                 updateGridIncre(GridName, (dialog.DataContext as ModifyModalViewModel).SelectedStageA);
             }
             /*
@@ -710,33 +775,45 @@ namespace rudistor.Contents.WorkPage.ViewModel
             switch (GridName)
             {
                 case "GridA":
-                    GridAIncre = getIncre(Stage);                  
+                    GridAIncre = getIncre(Stage);
+                    GridAFormatString = FormatStringGet(GridAIncre);
+                    RaisePropertyChanged("GridAFormatString");
                     break;
 
                 case "GridB":
-                    GridBIncre = getIncre(Stage);  
+                    GridBIncre = getIncre(Stage);
+                    GridBFormatString = FormatStringGet(GridBIncre);
+                    RaisePropertyChanged("GridBFormatString");
                     break;
                 case "GridC":
                     GridCIncre = getIncre(Stage);
+                    GridCFormatString = FormatStringGet(GridCIncre);
+                    RaisePropertyChanged("GridCFormatString");
                     break;
 
                 case "GridD":
                     GridDIncre = getIncre(Stage);
+                    GridDFormatString = FormatStringGet(GridDIncre);
+                    RaisePropertyChanged("GridDFormatString");
                     break;
 
                 case "GridE":
                     GridEIncre = getIncre(Stage);
+                    GridEFormatString = FormatStringGet(GridEIncre);
+                    RaisePropertyChanged("GridEFormatString");
                     break;
 
                 case "GridF":
                     GridFIncre = getIncre(Stage);
+                    GridFFormatString = FormatStringGet(GridFIncre);
+                    RaisePropertyChanged("GridFFormatString");
                     break;
 
             }
         }
         private string getIncre(string stage)
         {
-            
+
             string header = stage.Substring(0, 2).ToUpper();
             string index = header + "Incre";
             try
@@ -745,12 +822,25 @@ namespace rudistor.Contents.WorkPage.ViewModel
             }
             catch (ConfigurationErrorsException)
             {
-                
+
                 return ConfigurationManager.AppSettings["StockIncre"];
             }
-            
-            
-            
+
+
+
+        }
+
+        private string FormatStringGet(string incr)
+        {
+            int pos;
+            pos = incr.IndexOf('.');
+
+            if (pos < 0)
+            {
+                return "F0";
+            }
+
+            return string.Format("F{0}", incr.Length - pos);
         }
 
         private void updateGridStage(string GridName, string selectedStage)
@@ -798,7 +888,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
         private object activateAll()
         {
 
-            if (IsAllActivated==true)
+            if (IsAllActivated == true)
             {
                 /*
                 List<Strategy> strategies = new List<Strategy>();
@@ -840,7 +930,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
         }
         private object activate(String s)
         {
-            
+
             //TODO 补充通知服务器的步骤
             //s 表示从哪个grid发起的更新动作
             //System.Windows.MessageBox.Show(s);
@@ -848,46 +938,46 @@ namespace rudistor.Contents.WorkPage.ViewModel
             //TEST CODE
             //StrategyA.IsActivate = !StrategyA.IsActivate;
             Strategy temp;
-            
+
             switch (s)
             {
                 case "GridA":
                     temp = new Strategy(StrategyA);
                     temp.IsActivate = !temp.IsActivate;
                     sendStrategy(temp);
-                    
+
                     break;
 
                 case "GridB":
-                    temp =  new Strategy(StrategyB);
+                    temp = new Strategy(StrategyB);
                     temp.IsActivate = !temp.IsActivate;
                     sendStrategy(temp);
                     break;
 
                 case "GridC":
-                    temp =  new Strategy(StrategyC);
+                    temp = new Strategy(StrategyC);
                     temp.IsActivate = !temp.IsActivate;
                     sendStrategy(temp);
                     break;
 
                 case "GridD":
-                    temp =  new Strategy(StrategyD);
+                    temp = new Strategy(StrategyD);
                     temp.IsActivate = !temp.IsActivate;
                     sendStrategy(temp);
                     break;
 
                 case "GridE":
-                    temp =  new Strategy(StrategyE);
+                    temp = new Strategy(StrategyE);
                     temp.IsActivate = !temp.IsActivate;
                     sendStrategy(temp);
                     break;
 
                 case "GridF":
-                    temp =  new Strategy(StrategyF);
+                    temp = new Strategy(StrategyF);
                     temp.IsActivate = !temp.IsActivate;
                     sendStrategy(temp);
                     break;
-                
+
             }
             return null;
         }
@@ -932,37 +1022,37 @@ namespace rudistor.Contents.WorkPage.ViewModel
             switch (s)
             {
                 case "GridA":
-                    temp =  new Strategy(StrategyA);
+                    temp = new Strategy(StrategyA);
                     temp.IsActivate = true;
                     sendStrategy(temp);
                     break;
 
                 case "GridB":
-                    temp =  new Strategy(StrategyB);
+                    temp = new Strategy(StrategyB);
                     temp.IsActivate = true;
                     sendStrategy(temp);
                     break;
 
                 case "GridC":
-                    temp =  new Strategy(StrategyC);
+                    temp = new Strategy(StrategyC);
                     temp.IsActivate = true;
                     sendStrategy(temp);
                     break;
 
                 case "GridD":
-                    temp =  new Strategy(StrategyD);
+                    temp = new Strategy(StrategyD);
                     temp.IsActivate = true;
                     sendStrategy(temp);
                     break;
 
                 case "GridE":
-                    temp =  new Strategy(StrategyE);
+                    temp = new Strategy(StrategyE);
                     temp.IsActivate = true;
                     sendStrategy(temp);
                     break;
 
                 case "GridF":
-                    temp =  new Strategy(StrategyF);
+                    temp = new Strategy(StrategyF);
                     temp.IsActivate = true;
                     sendStrategy(temp);
                     break;
@@ -990,7 +1080,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 if (!strategy.IsActivate)
                 {
                     sendFlag = true;
-                }  
+                }
                 else
                 {
                     if (checkInput(strategy))
@@ -1002,7 +1092,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                         System.Windows.MessageBox.Show(strategy.whichGrid + ":多开、多平或者空开、空平输入有误");
                     }
                 }
-                
+
 
                 if (sendFlag)
                 {
@@ -1047,9 +1137,9 @@ namespace rudistor.Contents.WorkPage.ViewModel
             queryRes.Payload.Add("xxxx-xxxx");
             queryRes.Payload.Add("yyyy-xxxx");
             Message<String, String> queryMessage = new Message<string, string>(null, queryRes, "QueryInstrument", Guid.NewGuid().ToString());*/
-            
-            
-            
+
+
+
             Response<Position> queryRes = new Response<Position>();
             //queryRes.ErrorID = "0";
             //queryRes.ErrorMsg = null;
@@ -1063,7 +1153,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             String queryStr = JsonConvert.SerializeObject(queryMessage);
             SendMessage(queryStr);
             //System.Windows.MessageBox.Show("Navigate to Page 2!");
-            
+
 
         }
         public void queryInstrument()
@@ -1086,9 +1176,9 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 sendWithActivate(gridName);
                 e.Handled = true;
             }
-             
+
         }
-        private bool  checkInput( Strategy strategy)
+        private bool checkInput(Strategy strategy)
         {
             decimal dk = decimal.Parse(strategy.dkjc);
             decimal dp = decimal.Parse(strategy.dp);

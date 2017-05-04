@@ -43,7 +43,7 @@ namespace Communication
         Socket clientSocket;
         byte[] receiveBuffer;
         bool closeGraceful;
-        Thread heartbeater;
+        //public Thread heartbeater;
 
         int onDisconnectedRaised;
 
@@ -247,6 +247,7 @@ namespace Communication
 
             this.receiveBuffer = null;
 
+            /*
             if (this.heartbeater != null && this.heartbeater.IsAlive)
             {
                 try
@@ -256,6 +257,7 @@ namespace Communication
                 }
                 catch { }
             }
+            */
         }
 
         public bool Start(string serverIPAddress, int port)
