@@ -99,9 +99,17 @@ namespace rudistor.Model
         private void AddDefaultStrategy()
         {
             int total = 32;
-            for (int i = 0; i < total; ++i)
+            for (int i = 1; i <= total; ++i)
             {
-                String whichGrid = "Grid" + i;
+                String whichGrid;
+                if (i < 10)
+                {
+                    whichGrid = "Grid0" + i;
+                }
+                else
+                {
+                    whichGrid = "Grid" + i;
+                }
                 bool isActivate = true;
                 String stageId = "aaa-bbbb";
                 String limit = "5";
