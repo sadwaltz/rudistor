@@ -832,6 +832,11 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
         private string FormatStringGet(string incr)
         {
+            //增强稳定性 18/01/2018
+            if (incr == null)
+            {
+                return "F0";
+            }
             int pos;
             pos = incr.IndexOf('.');
 
