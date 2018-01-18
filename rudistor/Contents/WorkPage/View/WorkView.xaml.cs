@@ -64,7 +64,7 @@ namespace rudistor.Contents.WorkPage.View
 
         void WorkView_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            ((WorkerViewModel)this.DataContext).enterEventHandler(sender, e);
+            ((WorkerViewModel1)this.DataContext).enterEventHandler(sender, e);
         }
 
         private void xc_A_ValueChanged_1(object sender, EventArgs e)
@@ -79,14 +79,14 @@ namespace rudistor.Contents.WorkPage.View
             window.WindowState = System.Windows.WindowState.Maximized;
             //window.KeyDown += WorkView_KeyDown;
             window.PreviewKeyDown += WorkView_KeyDown;
-            ((WorkerViewModel)this.DataContext).IsAllActivated = false;
-            ((WorkerViewModel)this.DataContext).StrategyA.IsActivate = false;
-            ((WorkerViewModel)this.DataContext).StrategyB.IsActivate = false;
-            ((WorkerViewModel)this.DataContext).StrategyC.IsActivate = false;
-            ((WorkerViewModel)this.DataContext).StrategyD.IsActivate = false;
-            ((WorkerViewModel)this.DataContext).StrategyE.IsActivate = false;
-            ((WorkerViewModel)this.DataContext).StrategyF.IsActivate = false;
-            ((WorkerViewModel)this.DataContext).workviewLoaded();
+            ((WorkerViewModel1)this.DataContext).IsAllActivated = false;
+            ((WorkerViewModel1)this.DataContext).StrategyA.IsActivate = false;
+            ((WorkerViewModel1)this.DataContext).StrategyB.IsActivate = false;
+            ((WorkerViewModel1)this.DataContext).StrategyC.IsActivate = false;
+            ((WorkerViewModel1)this.DataContext).StrategyD.IsActivate = false;
+            ((WorkerViewModel1)this.DataContext).StrategyE.IsActivate = false;
+            ((WorkerViewModel1)this.DataContext).StrategyF.IsActivate = false;
+            ((WorkerViewModel1)this.DataContext).workviewLoaded();
             
         }
 

@@ -82,12 +82,23 @@ namespace rudistor.Model
             strategies.Columns.Add(Strategy.t2clPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.t2volPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.clPropertyName, typeof(string));
+            //新版本 added
+            strategies.Columns.Add(Strategy.autoCallPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.jjkkPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.jjkpPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.jjdkPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.jjdpPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.t2WeightPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.t2MethodPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.zdjcPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.zkjcPropertyName, typeof(string));
+            
             strategies.PrimaryKey =new DataColumn[] { strategies.Columns[Strategy.whichGridPropertyName]};
             _data.Tables.Add(strategies);
         }
         private void AddDefaultStrategy()
         {
-            int total = 6;
+            int total = 32;
             for (int i = 0; i < total; ++i)
             {
                 String whichGrid = "Grid" + i;
@@ -98,8 +109,8 @@ namespace rudistor.Model
                 String vol = "1";
                 String kkjc = "-160.0";
                 String kp = "-170.0";
-
-                Strategy strategy = new Strategy() {whichGrid=whichGrid,IsActivate=isActivate,StageId=stageId,limit=limit,lockNum=lockNum,vol=vol,kkjc=kkjc,kp=kp,dkjc="-1000.0",dp="-201.0",t1cj="0",t1dd="0",t2cj="0",t2dd="0",t2cl="1",t2vol="2",cl="4" };
+                
+                Strategy strategy = new Strategy() {whichGrid=whichGrid,IsActivate=isActivate,StageId=stageId,limit=limit,lockNum=lockNum,vol=vol,kkjc=kkjc,kp=kp,dkjc="-1000.0",dp="-201.0",t1cj="0",t1dd="0",t2cj="0",t2dd="0",t2cl="1",t2vol="2",cl="4",autoCall="0",jjkk="999",jjkp="999",jjdk="999",jjdp="999",t2Weight="1",t2Method="0",zdjc="999",zkjc="999" };
 
                 this.AddStrategy(strategy);
             }
@@ -124,7 +135,17 @@ namespace rudistor.Model
                     strategy.t2dd,
                     strategy.t2cl,
                     strategy.t2vol,
-                    strategy.cl
+                    strategy.cl,
+                    //新版本
+                    strategy.autoCall,
+                    strategy.jjkk,
+                    strategy.jjkp,
+                    strategy.jjdk,
+                    strategy.jjdp,
+                    strategy.t2Weight,
+                    strategy.t2Method,
+                    strategy.zdjc,
+                    strategy.zkjc
                 });
         }
         private DataTable Strategies
@@ -142,6 +163,7 @@ namespace rudistor.Model
                 yield return Strategy.FromDataRow(dataRow);
             }
         }
+        
         public Strategy getStrategyByGridName(String gridName)
         {
             DataRow foundRow = Strategies.Rows.Find(gridName);

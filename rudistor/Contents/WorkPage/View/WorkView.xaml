@@ -9,7 +9,7 @@
         xmlns:cmd="http://www.galasoft.ch/mvvmlight"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:localConverter="clr-namespace:rudistor.Model.converter"
-        DataContext="{Binding WorkerViewModel, Source={StaticResource Locator}}"
+        DataContext="{Binding WorkerViewModel1, Source={StaticResource Locator}}"
         Loaded="UserControl_Loaded"
          >
     <i:Interaction.Triggers>

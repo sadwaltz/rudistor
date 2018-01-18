@@ -34,7 +34,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class WorkerViewModel : ViewModelBase
+    public class WorkerViewModel1 : ViewModelBase
     {
         /// <summary>
         /// Initializes a new instance of the WorkerViewModel class.
@@ -44,17 +44,12 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
         private User _currentUser;
         private String _currentCompany;
-
-        private SortableObservableCollection<Strategy> _strategies;
-        public SortableObservableCollection<Strategy> Strategis
-        {
-            get { return _strategies; }
-            set
-            {
-                _strategies = value;
-                RaisePropertyChanged("Strategis");
-            }
-        }
+        private Strategy _strategyA;
+        private Strategy _strategyB;
+        private Strategy _strategyC;
+        private Strategy _strategyD;
+        private Strategy _strategyE;
+        private Strategy _strategyF;
 
         private ObservableCollection<Position> _positions;
 
@@ -90,7 +85,102 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 RaisePropertyChanged("Instrument");
             }
         }
-        
+        private string _gridAIncre;
+        public string GridAIncre
+        {
+            get { return _gridAIncre; }
+            set
+            {
+                _gridAIncre = value;
+                RaisePropertyChanged("GridAIncre");
+            }
+        }
+        private string _gridBIncre;
+        public string GridBIncre
+        {
+            get { return _gridBIncre; }
+            set
+            {
+                _gridBIncre = value;
+                RaisePropertyChanged("GridBIncre");
+            }
+        }
+        private string _gridCIncre;
+        public string GridCIncre
+        {
+            get { return _gridCIncre; }
+            set
+            {
+                _gridCIncre = value;
+                RaisePropertyChanged("GridCIncre");
+            }
+        }
+        private string _gridDIncre;
+        public string GridDIncre
+        {
+            get { return _gridDIncre; }
+            set
+            {
+                _gridDIncre = value;
+                RaisePropertyChanged("GridDIncre");
+            }
+        }
+        private string _gridEIncre;
+        public string GridEIncre
+        {
+            get { return _gridEIncre; }
+            set
+            {
+                _gridEIncre = value;
+                RaisePropertyChanged("GridEIncre");
+            }
+        }
+        private string _gridFIncre;
+        public string GridFIncre
+        {
+            get { return _gridFIncre; }
+            set
+            {
+                _gridFIncre = value;
+                RaisePropertyChanged("GridFIncre");
+            }
+        }
+
+        public string GridAFormatString
+        {
+            get;
+            set;
+        }
+
+        public string GridBFormatString
+        {
+            get;
+            set;
+        }
+
+        public string GridCFormatString
+        {
+            get;
+            set;
+        }
+
+        public string GridDFormatString
+        {
+            get;
+            set;
+        }
+
+        public string GridEFormatString
+        {
+            get;
+            set;
+        }
+
+        public string GridFFormatString
+        {
+            get;
+            set;
+        }
 
         #region combobox init
         private ObservableCollection<ComboboxItem> _T2ComboboxItems;
@@ -195,10 +285,87 @@ namespace rudistor.Contents.WorkPage.ViewModel
         }
 
 
-        
+        public Strategy StrategyA
+        {
+            get { return _strategyA; }
+            set
+            {
+                if (value != _strategyA)
+                {
+
+                    _strategyA = value;
+                    RaisePropertyChanged("StrategyA");
+                }
+            }
+        }
+        public Strategy StrategyB
+        {
+            get { return _strategyB; }
+            set
+            {
+                if (value != _strategyB)
+                {
+
+                    _strategyB = value;
+                    RaisePropertyChanged("StrategyB");
+                }
+            }
+        }
+        public Strategy StrategyC
+        {
+            get { return _strategyC; }
+            set
+            {
+                if (value != _strategyC)
+                {
+
+                    _strategyC = value;
+                    RaisePropertyChanged("StrategyC");
+                }
+            }
+        }
+        public Strategy StrategyD
+        {
+            get { return _strategyD; }
+            set
+            {
+                if (value != _strategyD)
+                {
+
+                    _strategyD = value;
+                    RaisePropertyChanged("StrategyD");
+                }
+            }
+        }
+        public Strategy StrategyE
+        {
+            get { return _strategyE; }
+            set
+            {
+                if (value != _strategyE)
+                {
+
+                    _strategyE = value;
+                    RaisePropertyChanged("StrategyE");
+                }
+            }
+        }
+        public Strategy StrategyF
+        {
+            get { return _strategyF; }
+            set
+            {
+                if (value != _strategyF)
+                {
+
+                    _strategyF = value;
+                    RaisePropertyChanged("StrategyF");
+                }
+            }
+        }
 
         private List<string> _wantedInstrument;
-        public WorkerViewModel()
+        public WorkerViewModel1()
         {
 
             //生效所有策略
@@ -265,10 +432,6 @@ namespace rudistor.Contents.WorkPage.ViewModel
         {
 
             saveLoginInfo();
-            var temp = StrategyRepository.GetInstance().GetStrategies();
-
-            Strategis = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
-            Strategis.Sort(c => c.whichGrid);
             tcpConnection = SimpleIoc.Default.GetInstance<LoginControlViewModel>().tcpConnection;
             //tcpConnection.OnDataReceivedCompleted += tcpConnection_OnDataReceivedCompleted;
             //client = SimpleIoc.Default.GetInstance<TcpClient>();
@@ -295,14 +458,22 @@ namespace rudistor.Contents.WorkPage.ViewModel
         private void initGUI()
         {
             IsAllActivated = false;
-           
+            StrategyA = StrategyRepository.GetInstance().getStrategyByGridName("GridA");
+            StrategyB = StrategyRepository.GetInstance().getStrategyByGridName("GridB");
+            StrategyC = StrategyRepository.GetInstance().getStrategyByGridName("GridC");
+            StrategyD = StrategyRepository.GetInstance().getStrategyByGridName("GridD");
+            StrategyE = StrategyRepository.GetInstance().getStrategyByGridName("GridE");
+            StrategyF = StrategyRepository.GetInstance().getStrategyByGridName("GridF");
             //StrategyA = new Strategy("GridA",true,"aaaa-bbbb","5","2","1");
             Positions = new ObservableCollection<Position>();
             CanceledOrder = new ObservableCollection<Canceled>();
             Instrument = new Dictionary<int, string>();
-            
-            
-            
+            updateGridIncre("GridA", StrategyA.StageId);
+            updateGridIncre("GridB", StrategyB.StageId);
+            updateGridIncre("GridC", StrategyC.StageId);
+            updateGridIncre("GridD", StrategyD.StageId);
+            updateGridIncre("GridE", StrategyE.StageId);
+            updateGridIncre("GridF", StrategyF.StageId);
         }
 
         private void saveLoginInfo()
@@ -422,7 +593,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                         //IsAllActivated = StrategyA.IsActivate = StrategyB.IsActivate = StrategyC.IsActivate = StrategyD.IsActivate = StrategyE.IsActivate = StrategyF.IsActivate = !IsAllActivated;
                                         IsAllActivated = !IsAllActivated;
                                         //TODO:关闭所有策略状态
-                                        //StrategyA.IsActivate = StrategyB.IsActivate = StrategyC.IsActivate = StrategyD.IsActivate = StrategyE.IsActivate = StrategyF.IsActivate = false;
+                                        StrategyA.IsActivate = StrategyB.IsActivate = StrategyC.IsActivate = StrategyD.IsActivate = StrategyE.IsActivate = StrategyF.IsActivate = false;
                                     });
 
                             }
@@ -441,7 +612,33 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                        {
                                            String whichGrid = response["request"]["whichGrid"].ToString();
 
-                                           
+                                           switch (whichGrid)
+                                           {
+                                               case "GridA":
+                                                   StrategyA = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString());
+                                                   StrategyRepository.GetInstance().updateStrategy(StrategyA);
+                                                   break;
+                                               case "GridB":
+                                                   StrategyB = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString());
+                                                   StrategyRepository.GetInstance().updateStrategy(StrategyB);
+                                                   break;
+                                               case "GridC":
+                                                   StrategyC = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString());
+                                                   StrategyRepository.GetInstance().updateStrategy(StrategyC);
+                                                   break;
+                                               case "GridD":
+                                                   StrategyD = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString());
+                                                   StrategyRepository.GetInstance().updateStrategy(StrategyD);
+                                                   break;
+                                               case "GridE":
+                                                   StrategyE = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString());
+                                                   StrategyRepository.GetInstance().updateStrategy(StrategyE);
+                                                   break;
+                                               case "GridF":
+                                                   StrategyF = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString());
+                                                   StrategyRepository.GetInstance().updateStrategy(StrategyF);
+                                                   break;
+                                           }
 
                                        });
                         }
@@ -499,9 +696,35 @@ namespace rudistor.Contents.WorkPage.ViewModel
         }
         private Strategy getStrategyByName(String gridName)
         {
-            
+            switch (gridName)
+            {
+                case "GridA":
+
+                    return StrategyA;
+                //RaisePropertyChanged("StrategyA");
+
+
+                case "GridB":
+                    return StrategyB;
+
+
+                case "GridC":
+                    return StrategyC;
+
+
+                case "GridD":
+                    return StrategyD;
+
+
+                case "GridE":
+                    return StrategyE;
+
+
+                case "GridF":
+                    return StrategyF;
+                default:
                     return null;
-            
+            }
         }
 
         private object modifyStage(String GridName)
@@ -549,7 +772,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
         }
         private void updateGridIncre(string GridName, string Stage)
         {
-            /*switch (GridName)
+            switch (GridName)
             {
                 case "GridA":
                     GridAIncre = getIncre(Stage);
@@ -586,18 +809,84 @@ namespace rudistor.Contents.WorkPage.ViewModel
                     RaisePropertyChanged("GridFFormatString");
                     break;
 
-            }*/
+            }
         }
-        
+        private string getIncre(string stage)
+        {
 
-        
+            string header = stage.Substring(0, 2).ToUpper();
+            string index = header + "Incre";
+            try
+            {
+                if (null != ConfigurationManager.AppSettings[index])
+                {
+                    return ConfigurationManager.AppSettings[index];
+                }
+                return ConfigurationManager.AppSettings["StockIncre"];
+            }
+            catch (ConfigurationErrorsException)
+            {
+
+                return ConfigurationManager.AppSettings[index];
+            }
+            
+
+
+
+        }
+
+        private string FormatStringGet(string incr)
+        {
+            int pos;
+            pos = incr.IndexOf('.');
+
+            if (pos < 0)
+            {
+                return "F0";
+            }
+
+            return string.Format("F{0}", incr.Length - pos);
+        }
 
         private void updateGridStage(string GridName, string selectedStage)
         {
             DispatcherHelper.CheckBeginInvokeOnUI(
             () =>
             {
-                
+                switch (GridName)
+                {
+                    case "GridA":
+
+                        StrategyA.StageId = selectedStage;
+                        //RaisePropertyChanged("StrategyA");
+                        break;
+
+                    case "GridB":
+                        StrategyB.StageId = selectedStage;
+                        RaisePropertyChanged("StrategyB");
+                        break;
+
+                    case "GridC":
+                        StrategyC.StageId = selectedStage;
+                        RaisePropertyChanged("StrategyC");
+                        break;
+
+                    case "GridD":
+                        StrategyD.StageId = selectedStage;
+                        RaisePropertyChanged("StrategyD");
+                        break;
+
+                    case "GridE":
+                        StrategyE.StageId = selectedStage;
+                        RaisePropertyChanged("StrategyE");
+                        break;
+
+                    case "GridF":
+                        StrategyF.StageId = selectedStage;
+                        RaisePropertyChanged("StrategyF");
+                        break;
+
+                }
             });
         }
 
@@ -653,13 +942,81 @@ namespace rudistor.Contents.WorkPage.ViewModel
             //System.Windows.MessageBox.Show(StrategyA.t2cl);
             //TEST CODE
             //StrategyA.IsActivate = !StrategyA.IsActivate;
-            
+            Strategy temp;
+
+            switch (s)
+            {
+                case "GridA":
+                    temp = new Strategy(StrategyA);
+                    temp.IsActivate = !temp.IsActivate;
+                    sendStrategy(temp);
+
+                    break;
+
+                case "GridB":
+                    temp = new Strategy(StrategyB);
+                    temp.IsActivate = !temp.IsActivate;
+                    sendStrategy(temp);
+                    break;
+
+                case "GridC":
+                    temp = new Strategy(StrategyC);
+                    temp.IsActivate = !temp.IsActivate;
+                    sendStrategy(temp);
+                    break;
+
+                case "GridD":
+                    temp = new Strategy(StrategyD);
+                    temp.IsActivate = !temp.IsActivate;
+                    sendStrategy(temp);
+                    break;
+
+                case "GridE":
+                    temp = new Strategy(StrategyE);
+                    temp.IsActivate = !temp.IsActivate;
+                    sendStrategy(temp);
+                    break;
+
+                case "GridF":
+                    temp = new Strategy(StrategyF);
+                    temp.IsActivate = !temp.IsActivate;
+                    sendStrategy(temp);
+                    break;
+
+            }
             return null;
         }
         private object send(String s)
         {
             //todo、
-            
+            switch (s)
+            {
+                case "GridA":
+
+                    sendStrategyWithoutActive(StrategyA);
+                    break;
+
+                case "GridB":
+
+                    sendStrategyWithoutActive(StrategyB);
+                    break;
+
+                case "GridC":
+                    sendStrategyWithoutActive(StrategyC);
+                    break;
+
+                case "GridD":
+                    sendStrategyWithoutActive(StrategyD);
+                    break;
+
+                case "GridE":
+                    sendStrategyWithoutActive(StrategyE);
+                    break;
+
+                case "GridF":
+                    sendStrategyWithoutActive(StrategyF);
+                    break;
+            }
             return null;
         }
 
@@ -667,7 +1024,44 @@ namespace rudistor.Contents.WorkPage.ViewModel
         {
             //todo、
             Strategy temp;
-            
+            switch (s)
+            {
+                case "GridA":
+                    temp = new Strategy(StrategyA);
+                    temp.IsActivate = true;
+                    sendStrategy(temp);
+                    break;
+
+                case "GridB":
+                    temp = new Strategy(StrategyB);
+                    temp.IsActivate = true;
+                    sendStrategy(temp);
+                    break;
+
+                case "GridC":
+                    temp = new Strategy(StrategyC);
+                    temp.IsActivate = true;
+                    sendStrategy(temp);
+                    break;
+
+                case "GridD":
+                    temp = new Strategy(StrategyD);
+                    temp.IsActivate = true;
+                    sendStrategy(temp);
+                    break;
+
+                case "GridE":
+                    temp = new Strategy(StrategyE);
+                    temp.IsActivate = true;
+                    sendStrategy(temp);
+                    break;
+
+                case "GridF":
+                    temp = new Strategy(StrategyF);
+                    temp.IsActivate = true;
+                    sendStrategy(temp);
+                    break;
+            }
             return null;
         }
         private void sendStrategyWithoutActive(Strategy strategy)

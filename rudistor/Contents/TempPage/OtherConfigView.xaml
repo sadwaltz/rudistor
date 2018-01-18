@@ -3,14 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="修改" Height="410" Width="240">
     <Canvas>
+        <Canvas.Resources>
+            <XmlDataProvider x:Key="StaticsData" Source="Config\tactics.xml" XPath="Config" />
+        </Canvas.Resources>
         <Label Content="腿一" Canvas.Left="10" Canvas.Top="10"/>
         <ComboBox Canvas.Left="100" Canvas.Top="10" Width="120"/>
         <Label Content="腿二" Canvas.Left="10" Canvas.Top="40"/>
         <ComboBox Canvas.Left="100" Canvas.Top="40" Width="120"/>
         <Label Content="策略" Canvas.Left="10" Canvas.Top="70"/>
-        <ComboBox Canvas.Left="100" Canvas.Top="70" Width="120"/>
+        <ComboBox Canvas.Left="100" Canvas.Top="70" Width="120"   DisplayMemberPath="name" SelectedValuePath="value">
+            <ComboBox.ItemsSource>
+                <Binding Source="{StaticResource StaticsData}" XPath="*[@type=T1]"></Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
         <Label Content="腿二策略" Canvas.Left="10" Canvas.Top="100"/>
-        <ComboBox Canvas.Left="100" Canvas.Top="100" Width="120"/>
+        <ComboBox Canvas.Left="100" Canvas.Top="100" Width="120"  DisplayMemberPath="name" SelectedValuePath="value">
+            <ComboBox.ItemsSource>
+                <Binding Source="{StaticResource StaticsData}" XPath="*[@type=T2]"></Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
         <Label Content="腿二配比" Canvas.Left="10" Canvas.Top="130"/>
         <TextBox Height="24" TextWrapping="Wrap" Text="1" Canvas.Left="100" Canvas.Top="130" Width="120"/>
         <Label Content="减/除" Canvas.Left="10" Canvas.Top="160"/>

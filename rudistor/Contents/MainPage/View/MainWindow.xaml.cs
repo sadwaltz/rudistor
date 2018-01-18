@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Messaging;
 using MvvmControlChange;
 using rudistor.Contents.LoginPage.View;
 using rudistor.Contents.WorkPage.View;
+using rudistor.Contents.TempPage;
 
 namespace rudistor
 {
@@ -47,6 +48,16 @@ namespace rudistor
                 return _workView;
             }
         }
+        private StrategyWorkView _strategyWorkView;
+        private StrategyWorkView strategyWorkView
+        {
+            get
+            {
+                if (_strategyWorkView == null)
+                    _strategyWorkView = new StrategyWorkView();
+                return _strategyWorkView;
+            }
+        }
         private object ReceiveMessage(GoToPageMessage action)
         {
             //            this.contentControl1.Content = this.Page2View;
@@ -60,6 +71,10 @@ namespace rudistor
                 case "WorkView":
                     if (this.contentControl1.Content != this.workView)
                         this.contentControl1.Content = this.workView;
+                    break;
+                case "StrategyWorkView":
+                    if (this.contentControl1.Content != this.strategyWorkView)
+                        this.contentControl1.Content = this.strategyWorkView;
                     break;
                 default:
                     break;
