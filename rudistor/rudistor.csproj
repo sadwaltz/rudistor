@@ -121,6 +121,8 @@
     <Compile Include="Model\Broker.cs" />
     <Compile Include="Model\BrokersRepository.cs" />
     <Compile Include="Model\ComboboxItem.cs" />
+    <Compile Include="Model\converter\GridBottomConverter.cs" />
+    <Compile Include="Model\converter\GridHeaderConverter.cs" />
     <Compile Include="Model\converter\LabelConverter.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />

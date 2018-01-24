@@ -157,7 +157,7 @@ namespace rudistor.Model
         public string zdjc { get; set; }
         //做空价差--实际空开价差
         public string zkjc { get; set; }
-        #region Fields
+        #region Config file fields
         public const string whichGridPropertyName = "whichGrid";
         public const string IsActivatePropertyName = "IsActivate";
         public const string StageIdPropertyName = "StageId";
@@ -187,6 +187,7 @@ namespace rudistor.Model
         public const string zkjcPropertyName = "zkjc";
 
         #endregion // Fields
+        #region create from config file
         public static Strategy FromDataRow(DataRow dataRow)
         {
             Strategy temp =  new Strategy()
@@ -225,7 +226,8 @@ namespace rudistor.Model
             temp.incre = temp.getIncre(temp.t1);
             return temp;
         }
-
+        #endregion
+        #region private method
         private string getIncre(string stage)
         {
 
@@ -271,5 +273,6 @@ namespace rudistor.Model
 
             return string.Format("F{0}", incr.Length - pos);
         }
+        #endregion
     }
 }

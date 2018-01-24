@@ -1,6 +1,7 @@
 ﻿<UserControl xmlns:TempPage="clr-namespace:rudistor.Contents.TempPage"  x:Class="rudistor.Contents.TempPage.StrategyWorkView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         DataContext="{Binding WorkerViewModel, Source={StaticResource Locator}}"
         xmlns:localConverter="clr-namespace:rudistor.Model.converter"
         Loaded="UserControl_Loaded"
@@ -26,7 +27,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <TabControl HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" DataContext="{Binding Source={StaticResource StrategyData}}">
+        <TabControl HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
             <TabItem Header="TabItem1">
                 <Grid VerticalAlignment="Top" ShowGridLines="True">
                     <Grid.RowDefinitions>
@@ -40,46 +41,15 @@
                         <ColumnDefinition Width="235"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="0">
-                        <TempPage:StrategyGridView.DataContext>
-                            <Binding XPath="//strategy[@name='Grid01']"/>
-                        </TempPage:StrategyGridView.DataContext>
-                    </TempPage:StrategyGridView>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="0">
-                        <TempPage:StrategyGridView.DataContext>
-                            <Binding XPath="//strategy[@name='Grid02']"/>
-                        </TempPage:StrategyGridView.DataContext>
-                    </TempPage:StrategyGridView>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="1">
-                        <TempPage:StrategyGridView.DataContext>
-                            <Binding XPath="//strategy[@name='Grid03']"/>
-                        </TempPage:StrategyGridView.DataContext>
-                    </TempPage:StrategyGridView>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="1">
-                        <TempPage:StrategyGridView.DataContext>
-                            <Binding XPath="//strategy[@name='Grid04']"/>
-                        </TempPage:StrategyGridView.DataContext>
-                    </TempPage:StrategyGridView>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="2">
-                        <TempPage:StrategyGridView.DataContext>
-                            <Binding XPath="//strategy[@name='Grid05']"/>
-                        </TempPage:StrategyGridView.DataContext>
-                    </TempPage:StrategyGridView>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="2">
-                        <TempPage:StrategyGridView.DataContext>
-                            <Binding XPath="//strategy[@name='Grid06']"/>
-                        </TempPage:StrategyGridView.DataContext>
-                    </TempPage:StrategyGridView>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="3">
-                        <TempPage:StrategyGridView.DataContext>
-                            <Binding XPath="//strategy[@name='Grid07']"/>
-                        </TempPage:StrategyGridView.DataContext>
-                    </TempPage:StrategyGridView>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3">
-                        <TempPage:StrategyGridView.DataContext>
-                            <Binding XPath="//strategy[@name='Grid08']"/>
-                        </TempPage:StrategyGridView.DataContext>
-                    </TempPage:StrategyGridView>
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="0" DataContext="{Binding Path=Strategis[0],diag:PresentationTraceSources.TraceLevel=High}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="0" DataContext="{Binding Path=Strategis[1]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="1" DataContext="{Binding Path=Strategis[2]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="1" DataContext="{Binding Path=Strategis[3]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="2" DataContext="{Binding Path=Strategis[4]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="2" DataContext="{Binding Path=Strategis[5]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="3" DataContext="{Binding Path=Strategis[6]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3" DataContext="{Binding Path=Strategis[7]}" />
+                        
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem2">
@@ -95,14 +65,14 @@
                         <ColumnDefinition Width="235"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="0"/>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="0" />
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="1"/>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="1"/>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="2"/>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="2"/>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="3"/>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3"/>
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="0" DataContext="{Binding Path=Strategis[8]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="0" DataContext="{Binding Path=Strategis[9]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="1" DataContext="{Binding Path=Strategis[10]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="1" DataContext="{Binding Path=Strategis[11]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="2" DataContext="{Binding Path=Strategis[12]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="2" DataContext="{Binding Path=Strategis[13]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="3" DataContext="{Binding Path=Strategis[14]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3" DataContext="{Binding Path=Strategis[15]}" />
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem3">
@@ -118,14 +88,14 @@
                         <ColumnDefinition Width="235"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="0" />
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="0" />
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="1"/>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="1"/>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="2"/>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="2"/>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="3"/>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3"/>
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="0" DataContext="{Binding Path=Strategis[16]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="0" DataContext="{Binding Path=Strategis[17]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="1" DataContext="{Binding Path=Strategis[18]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="1" DataContext="{Binding Path=Strategis[19]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="2" DataContext="{Binding Path=Strategis[20]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="2" DataContext="{Binding Path=Strategis[21]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="3" DataContext="{Binding Path=Strategis[22]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3" DataContext="{Binding Path=Strategis[23]}" />
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem4">
@@ -141,14 +111,14 @@
                         <ColumnDefinition Width="235"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="0" />
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="0" />
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="1"/>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="1"/>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="2"/>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="2"/>
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="3"/>
-                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3"/>
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="0" DataContext="{Binding Path=Strategis[24]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="0" DataContext="{Binding Path=Strategis[25]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="1" DataContext="{Binding Path=Strategis[26]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="1" DataContext="{Binding Path=Strategis[27]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="2" DataContext="{Binding Path=Strategis[28]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="2" DataContext="{Binding Path=Strategis[29]}" />
+                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="3" DataContext="{Binding Path=Strategis[30]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3" DataContext="{Binding Path=Strategis[31]}" />
                 </Grid>
             </TabItem>
         </TabControl>

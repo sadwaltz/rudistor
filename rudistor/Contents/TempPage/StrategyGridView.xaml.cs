@@ -1,4 +1,5 @@
-﻿using System;
+﻿using rudistor.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace rudistor.Contents.TempPage
         public StrategyGridView()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            //Strategy datacontext = (Strategy)this.DataContext;
+            //var temp = datacontext.lockNum;
         }
     }
 }

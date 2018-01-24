@@ -269,6 +269,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
             Strategis = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
             Strategis.Sort(c => c.whichGrid);
+            
             tcpConnection = SimpleIoc.Default.GetInstance<LoginControlViewModel>().tcpConnection;
             //tcpConnection.OnDataReceivedCompleted += tcpConnection_OnDataReceivedCompleted;
             //client = SimpleIoc.Default.GetInstance<TcpClient>();
