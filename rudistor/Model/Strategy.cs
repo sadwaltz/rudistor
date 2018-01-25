@@ -23,15 +23,17 @@ namespace rudistor.Model
             this.limit = limit;
             this.lockNum = lockNum;
             this.vol =  vol;
+            this.autoCall = "0";
+            this.formatString = FormatStringGet(this.incre);
         }
         public Strategy(Strategy s)
         {
             this.whichGrid = s.whichGrid;
             this.IsActivate = s.IsActivate;
             this.StageId = s.StageId;
-            this.t1 = StageId.Split('-').ToArray()[0];
-            this.t2 = StageId.Split('-').ToArray()[1];
-            this.incre = getIncre(t1);
+            this.t1 = s.t1;
+            this.t2 = s.t2;
+            this.incre = s.incre;
             this.limit = s.limit;
             this.lockNum = s.lockNum;
             this.vol = s.vol;
@@ -55,6 +57,7 @@ namespace rudistor.Model
             this.t2Method = s.t2Method;
             this.zdjc = s.zdjc;
             this.zkjc = s.zkjc;
+            this.formatString = s.formatString;
         }
         public Strategy()
         {
@@ -157,6 +160,8 @@ namespace rudistor.Model
         public string zdjc { get; set; }
         //做空价差--实际空开价差
         public string zkjc { get; set; }
+        //Format String 
+        public string formatString { get; set; }
         #region Config file fields
         public const string whichGridPropertyName = "whichGrid";
         public const string IsActivatePropertyName = "IsActivate";
@@ -212,7 +217,7 @@ namespace rudistor.Model
                 t2vol=dataRow.Field<string>(Strategy.t2volPropertyName),
                 cl=dataRow.Field<string>(Strategy.clPropertyName),
                 //新版本 added
-                autoCall=dataRow.Field<string>(Strategy.autoCallPropertyName),
+                //autoCall=dataRow.Field<string>(Strategy.autoCallPropertyName),
                 jjkk=dataRow.Field<string>(Strategy.jjkkPropertyName),
                 jjkp = dataRow.Field<string>(Strategy.jjkpPropertyName),
                 jjdk = dataRow.Field<string>(Strategy.jjdkPropertyName),
@@ -224,6 +229,9 @@ namespace rudistor.Model
             };
             //获得品种步进值
             temp.incre = temp.getIncre(temp.t1);
+            temp.formatString = temp.FormatStringGet(temp.incre);
+            //默认关闭自动报单
+            temp.autoCall = "0";
             return temp;
         }
         #endregion
@@ -233,7 +241,7 @@ namespace rudistor.Model
 
             if (stage == null)
             {
-                return FormatStringGet(ConfigurationManager.AppSettings["StockIncre"]);
+                return ConfigurationManager.AppSettings["StockIncre"];
             }
 
             string header = stage.Substring(0, 2).ToUpper();
@@ -242,14 +250,14 @@ namespace rudistor.Model
             {
                 if (null != ConfigurationManager.AppSettings[index])
                 {
-                    return FormatStringGet(ConfigurationManager.AppSettings[index]);
+                    return ConfigurationManager.AppSettings[index];
                 }
-                return FormatStringGet(ConfigurationManager.AppSettings["StockIncre"]);
+                return ConfigurationManager.AppSettings["StockIncre"];
             }
             catch (ConfigurationErrorsException)
             {
 
-                return FormatStringGet(ConfigurationManager.AppSettings[index]);
+                return ConfigurationManager.AppSettings[index];
             }
 
 
@@ -271,7 +279,7 @@ namespace rudistor.Model
                 return "F0";
             }
 
-            return string.Format("F{0}", incr.Length - pos);
+            return string.Format("F{0}", incr.Length - pos - 1);
         }
         #endregion
     }

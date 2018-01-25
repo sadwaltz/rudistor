@@ -221,6 +221,10 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
         private void init()
         {
+            //从文件中读取所有策略
+            var temp = StrategyRepository.GetInstance().GetStrategies();
+            Strategis = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
+            Strategis.Sort(c => c.whichGrid);
             //initComm();
             _wantedInstrument = getInstrumentsFromINI();
             initGUI();
@@ -265,10 +269,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
         {
 
             saveLoginInfo();
-            var temp = StrategyRepository.GetInstance().GetStrategies();
-
-            Strategis = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
-            Strategis.Sort(c => c.whichGrid);
+            
             
             tcpConnection = SimpleIoc.Default.GetInstance<LoginControlViewModel>().tcpConnection;
             //tcpConnection.OnDataReceivedCompleted += tcpConnection_OnDataReceivedCompleted;
@@ -548,49 +549,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
              * */
             return null;
         }
-        private void updateGridIncre(string GridName, string Stage)
-        {
-            /*switch (GridName)
-            {
-                case "GridA":
-                    GridAIncre = getIncre(Stage);
-                    GridAFormatString = FormatStringGet(GridAIncre);
-                    RaisePropertyChanged("GridAFormatString");
-                    break;
-
-                case "GridB":
-                    GridBIncre = getIncre(Stage);
-                    GridBFormatString = FormatStringGet(GridBIncre);
-                    RaisePropertyChanged("GridBFormatString");
-                    break;
-                case "GridC":
-                    GridCIncre = getIncre(Stage);
-                    GridCFormatString = FormatStringGet(GridCIncre);
-                    RaisePropertyChanged("GridCFormatString");
-                    break;
-
-                case "GridD":
-                    GridDIncre = getIncre(Stage);
-                    GridDFormatString = FormatStringGet(GridDIncre);
-                    RaisePropertyChanged("GridDFormatString");
-                    break;
-
-                case "GridE":
-                    GridEIncre = getIncre(Stage);
-                    GridEFormatString = FormatStringGet(GridEIncre);
-                    RaisePropertyChanged("GridEFormatString");
-                    break;
-
-                case "GridF":
-                    GridFIncre = getIncre(Stage);
-                    GridFFormatString = FormatStringGet(GridFIncre);
-                    RaisePropertyChanged("GridFFormatString");
-                    break;
-
-            }*/
-        }
         
-
         
 
         private void updateGridStage(string GridName, string selectedStage)

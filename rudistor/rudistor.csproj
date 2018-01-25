@@ -118,9 +118,11 @@
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="GoToPageMessage.cs" />
     <Compile Include="INIManager.cs" />
+    <Compile Include="Model\AutoCallStatus.cs" />
     <Compile Include="Model\Broker.cs" />
     <Compile Include="Model\BrokersRepository.cs" />
     <Compile Include="Model\ComboboxItem.cs" />
+    <Compile Include="Model\converter\EnumMatchToBooleanConverter.cs" />
     <Compile Include="Model\converter\GridBottomConverter.cs" />
     <Compile Include="Model\converter\GridHeaderConverter.cs" />
     <Compile Include="Model\converter\LabelConverter.cs" />
