@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace rudistor.Model
 {
-    public enum AutoCallStatus { Close = 0, Time1 = 1, Time2 = 2 };
+    public enum AutoCallStatus { Close , Time1, Time2 };
 }

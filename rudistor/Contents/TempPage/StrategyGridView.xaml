@@ -6,6 +6,8 @@
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:View="clr-namespace:rudistor.Contents.TempPage" 
     xmlns:localConverter="clr-namespace:rudistor.Model.converter"
+    xmlns:local="clr-namespace:rudistor.Model"
+    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
     x:Class="rudistor.Contents.TempPage.StrategyGridView" 
     mc:Ignorable="d" 
     d:DesignHeight="330" d:DesignWidth="235" Loaded="UserControl_Loaded_1"
@@ -55,9 +57,9 @@
         <Label Content="{Binding dp, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=多平}" Canvas.Left="150" Canvas.Top="135" Style="{StaticResource ResourceKey=EditLabel}"/>
         <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding dp}" Increment="{Binding incre}" Maximum="10000" Minimum="-10000" Canvas.Left="150" Text="999" Canvas.Top="160" Width="60"/>
         <Label Content="自动报单" Canvas.Left="5" Canvas.Top="190"/>
-        <RadioButton GroupName="AutoCall" Content="关闭" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter=0}" Canvas.Left="5" Canvas.Top="215"/>
-        <RadioButton GroupName="AutoCall" Content="时间1" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter=1}" Canvas.Left="5" Canvas.Top="235"/>
-        <RadioButton GroupName="AutoCall" Content="时间2" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter=2}" Canvas.Left="5" Canvas.Top="255"/>
+        <RadioButton GroupName="{Binding whichGrid}" Content="关闭" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter={x:Static local:AutoCallStatus.Close}}" Canvas.Left="5" Canvas.Top="215"/>
+        <RadioButton GroupName="{Binding whichGrid}" Content="时间1" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter={x:Static local:AutoCallStatus.Time1}}" Canvas.Left="5" Canvas.Top="235"/>
+        <RadioButton GroupName="{Binding whichGrid}" Content="时间2" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter={x:Static local:AutoCallStatus.Time2},diag:PresentationTraceSources.TraceLevel=High}" Canvas.Left="5" Canvas.Top="255"/>
         <Label Content="{Binding jjkk, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=间距空开}" Canvas.Left="75" Canvas.Top="190" Style="{StaticResource ResourceKey=EditLabel}"/>
         <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding jjkk}" Increment="{Binding incre}" Maximum="10000" Minimum="-10000" Canvas.Left="75" Text="999" Canvas.Top="215" Width="60"/>
         <Label Content="{Binding jjkp, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=空平}" Canvas.Left="150" Canvas.Top="190" Style="{StaticResource ResourceKey=EditLabel}"/>

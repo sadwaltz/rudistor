@@ -23,7 +23,7 @@ namespace rudistor.Model
             this.limit = limit;
             this.lockNum = lockNum;
             this.vol =  vol;
-            this.autoCall = "0";
+            this.autoCall = "Close";
             this.formatString = FormatStringGet(this.incre);
         }
         public Strategy(Strategy s)
@@ -231,7 +231,7 @@ namespace rudistor.Model
             temp.incre = temp.getIncre(temp.t1);
             temp.formatString = temp.FormatStringGet(temp.incre);
             //默认关闭自动报单
-            temp.autoCall = "0";
+            temp.autoCall = "Close";
             return temp;
         }
         #endregion

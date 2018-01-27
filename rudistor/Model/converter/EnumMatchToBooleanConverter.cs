@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace rudistor.Model.converter
@@ -19,9 +20,13 @@ namespace rudistor.Model.converter
                 return false;
 
             string checkValue = value.ToString();
+
+            
             string targetValue = parameter.ToString();
-            return checkValue.Equals(targetValue,
+            bool isChecked = checkValue.Equals(targetValue,
                      StringComparison.InvariantCultureIgnoreCase);
+            
+            return isChecked;
         }
 
         public object ConvertBack(object value, Type targetType,
@@ -35,7 +40,8 @@ namespace rudistor.Model.converter
             if (useValue)
                 return targetValue;
 
-            return null;
+            return DependencyProperty.UnsetValue;
+            
         }
     }
 }

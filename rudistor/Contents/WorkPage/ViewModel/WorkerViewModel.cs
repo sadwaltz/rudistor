@@ -534,7 +534,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 //System.Windows.MessageBox.Show((dialog.DataContext as ModifyModalViewModel).SelectedStageA);
                 selectedStage = (dialog.DataContext as ModifyModalViewModel).SelectedStageA + "-" + (dialog.DataContext as ModifyModalViewModel).SelectedStageB;
                 updateGridStage(GridName, selectedStage);
-                updateGridIncre(GridName, (dialog.DataContext as ModifyModalViewModel).SelectedStageA);
+                //updateGridIncre(GridName, (dialog.DataContext as ModifyModalViewModel).SelectedStageA);
             }
             /*
             var dialogServcie = new ModalDialogService();
