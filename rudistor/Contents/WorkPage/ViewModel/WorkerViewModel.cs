@@ -40,10 +40,13 @@ namespace rudistor.Contents.WorkPage.ViewModel
         /// Initializes a new instance of the WorkerViewModel class.
         /// </summary>
         /// 
+        #region define vars
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private User _currentUser;
         private String _currentCompany;
+
+        private List<string> _wantedInstrument;
 
         private SortableObservableCollection<Strategy> _strategies;
         public SortableObservableCollection<Strategy> Strategis
@@ -161,7 +164,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
         private static ManualResetEvent receiveDone = new ManualResetEvent(false);
 
         public System.Timers.Timer timer;
-
+        #endregion
+        #region define command handlers
         public RelayCommand<String> ModifyStage
         {
             get;
@@ -194,10 +198,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
             private set;
         }
 
-
-        
-
-        private List<string> _wantedInstrument;
+        #endregion
+        #region constructor
         public WorkerViewModel()
         {
 
@@ -217,9 +219,15 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
 
         }
-
+        
 
         private void init()
+        {
+            initData();
+            initGUI();
+        }
+
+        private void initData()
         {
             //从文件中读取所有策略
             var temp = StrategyRepository.GetInstance().GetStrategies();
@@ -227,42 +235,17 @@ namespace rudistor.Contents.WorkPage.ViewModel
             Strategis.Sort(c => c.whichGrid);
             //initComm();
             _wantedInstrument = getInstrumentsFromINI();
-            initGUI();
         }
-
-        private List<string> getInstrumentsFromINI()
+        private void initGUI()
         {
-            try
-            {
-                INIManager ini = new INIManager("config.ini");
-                return new List<string>(ini.IniReadValue("InstrumentList", "list").Split(','));
-            }
-            catch (Exception e)
-            {
-                logger.Error(e);
-                return new List<string>();
-            }
+            IsAllActivated = false;
+
+            //StrategyA = new Strategy("GridA",true,"aaaa-bbbb","5","2","1");
+            Positions = new ObservableCollection<Position>();
+            CanceledOrder = new ObservableCollection<Canceled>();
+            Instrument = new Dictionary<int, string>();
+
         }
-
-        private void addInstrument(int i, string inst)
-        {
-            if (Instrument.ContainsValue(inst))
-            {
-                return;
-            }
-
-            if (_wantedInstrument.Count > 0)
-            {
-                if (!_wantedInstrument.Contains(inst))
-                {
-                    return;
-                }
-            }
-
-            Instrument.Add(i, inst);
-        }
-
-
 
 
         public void workviewLoaded()
@@ -278,13 +261,13 @@ namespace rudistor.Contents.WorkPage.ViewModel
             tcpConnection.OnDataReceivedCompleted += tcpConnection_OnDataReceivedCompleted;
             tcpConnection.OnDisconnected += tcpConnection_OnDisconnected;
 
-
             queryInstrument();
 
             startTimer();
 
         }
-
+        #endregion
+        #region TODO tcp
         void tcpConnection_OnDisconnected(TcpConnection obj)
         {
             if (timer != null)
@@ -292,31 +275,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 timer.Stop();
             }
             System.Windows.Forms.MessageBox.Show("通讯连接已断开，请重新登录");
-        }
-
-        private void initGUI()
-        {
-            IsAllActivated = false;
-           
-            //StrategyA = new Strategy("GridA",true,"aaaa-bbbb","5","2","1");
-            Positions = new ObservableCollection<Position>();
-            CanceledOrder = new ObservableCollection<Canceled>();
-            Instrument = new Dictionary<int, string>();
-            
-            
-            
-        }
-
-        private void saveLoginInfo()
-        {
-            this._currentUser = SimpleIoc.Default.GetInstance<LoginControlViewModel>().CurrentUser;
-            this._currentCompany = SimpleIoc.Default.GetInstance<LoginControlViewModel>().SelectedBrokerId;
-            Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            //cfa.AppSettings.Settings.Remove("loginUsr");
-            cfa.AppSettings.Settings["loginUsr"].Value = _currentUser.UserId;
-            cfa.AppSettings.Settings["loginCompany"].Value = _currentCompany;
-            cfa.Save(ConfigurationSaveMode.Modified);
-        }
+        }        
 
         void tcpConnection_OnDataReceivedCompleted(TcpConnection conn, byte[] receivedData)
         {
@@ -471,9 +430,11 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 //receiveDone.Set();
             }
         }
+        #endregion
+        #region TODO reset position
         private object resetPosition(String GridName)
         {
-            Strategy strategy = getStrategyByName(GridName);
+            Strategy strategy = selectStrategyById(GridName);
             //modifid at 10/11/15 把仓位重置改成在策略关闭的情况下也能重置
             //if (strategy != null && strategy.IsActivate)
             if (strategy != null)
@@ -499,13 +460,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
             }
             return null;
         }
-        private Strategy getStrategyByName(String gridName)
-        {
-            
-                    return null;
-            
-        }
-
+        #endregion
+        #region TODO modify strategy config
         private object modifyStage(String GridName)
         {
             String selectedStage;
@@ -549,47 +505,15 @@ namespace rudistor.Contents.WorkPage.ViewModel
              * */
             return null;
         }
-        
-        
-
-        private void updateGridStage(string GridName, string selectedStage)
-        {
-            DispatcherHelper.CheckBeginInvokeOnUI(
-            () =>
-            {
-                
-            });
-        }
-
+        #endregion
+        #region send
+        //打开或者关闭所有策略
         private object activateAll()
         {
 
             if (IsAllActivated == true)
             {
-                /*
-                List<Strategy> strategies = new List<Strategy>();
-                Strategy temp = new Strategy(StrategyA);
-                temp.IsActivate = !IsAllActivated;
-                strategies.Add(temp);
-                temp = new Strategy(StrategyB);
-                temp.IsActivate = !IsAllActivated;
-                strategies.Add(temp);
-
-                temp = new Strategy(StrategyC);
-                temp.IsActivate = !IsAllActivated;
-                strategies.Add(temp);
-
-                temp = new Strategy(StrategyD);
-                temp.IsActivate = !IsAllActivated;
-                strategies.Add(temp);
-
-                temp = new Strategy(StrategyE);
-                temp.IsActivate = !IsAllActivated;
-                strategies.Add(temp);
-                temp = new Strategy(StrategyF);
-                temp.IsActivate = !IsAllActivated;
-                strategies.Add(temp);
-                */
+                
                 Response<String> queryRes = new Response<string>();
                 Message<String, String> closeAll = new Message<string, string>(null, queryRes, "CloseAll", Guid.NewGuid().ToString());
 
@@ -601,40 +525,41 @@ namespace rudistor.Contents.WorkPage.ViewModel
             {
                 IsAllActivated = !IsAllActivated;
             }
-            //IsAllActivated = !IsAllActivated;
+            
             return null;
         }
+        //打开或者关闭策略(状态取反)
         private object activate(String s)
         {
 
             //TODO 补充通知服务器的步骤
             //s 表示从哪个grid发起的更新动作
-            //System.Windows.MessageBox.Show(s);
-            //System.Windows.MessageBox.Show(StrategyA.t2cl);
-            //TEST CODE
-            //StrategyA.IsActivate = !StrategyA.IsActivate;
-            
+            Strategy temp = selectStrategyById(s);
+            temp.IsActivate = !temp.IsActivate;
+            sendStrategy(temp);
             return null;
+            
         }
         private object send(String s)
         {
-            //todo、
-            
+            //直接发送策略
+            sendStrategyWithoutActive(selectStrategyById(s));
             return null;
         }
-
+        //打开并发送策略
         private object sendWithActivate(String s)
         {
-            //todo、
-            Strategy temp;
-            
+           
+            Strategy temp = selectStrategyById(s);
+            temp.IsActivate = true;
+            sendStrategy(temp);
             return null;
         }
         private void sendStrategyWithoutActive(Strategy strategy)
         {
             if (checkInput(strategy))
             {
-                Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "update", Guid.NewGuid().ToString());
+                Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "inform", Guid.NewGuid().ToString());
                 String updateString = JsonConvert.SerializeObject(updateMessage);
                 SendMessage(updateString);
             }
@@ -643,6 +568,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 System.Windows.MessageBox.Show(strategy.whichGrid + ":多开、多平或者空开、空平输入有误");
             }
         }
+        //发送策略
         private void sendStrategy(Strategy strategy)
         {
             if (_IsAllActivated)
@@ -667,7 +593,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
                 if (sendFlag)
                 {
-                    Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "update", Guid.NewGuid().ToString());
+                    Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "inform", Guid.NewGuid().ToString());
                     String updateString = JsonConvert.SerializeObject(updateMessage);
                     SendMessage(updateString);
                 }
@@ -683,20 +609,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
             tcpConnection.SendMessageWithPrefixLengthAsync(updateData);
             //tcpConnection.StartReceive();
         }
-        public void startTimer()
-        {
-            if (timer == null)
-            {
-                timer = new System.Timers.Timer(2000);
-                timer.Elapsed += new ElapsedEventHandler(queryPosition);
-                timer.Start();
-            }
-            else
-            {
-                timer.Start();
-            }
-            //timer.Start();
-        }
+        #endregion
+        #region querys
         private void queryPosition(object sender, ElapsedEventArgs e)
         {
             //todo ,获取已成订单
@@ -734,7 +648,9 @@ namespace rudistor.Contents.WorkPage.ViewModel
             String queryStr = JsonConvert.SerializeObject(queryMessage);
             SendMessage(queryStr);
         }
-
+        #endregion
+        #region TODO keyboard event handler
+        //TODO 获取回车事件对应的策略，并打开、发送到服务端
         internal void enterEventHandler(object sender, System.Windows.Input.KeyEventArgs e)
         {
             var pressedKey = (e != null) ? (System.Windows.Input.KeyEventArgs)e : null;
@@ -748,6 +664,76 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 e.Handled = true;
             }
 
+        }
+        #endregion
+        #region helper method
+        private void addInstrument(int i, string inst)
+        {
+            if (Instrument.ContainsValue(inst))
+            {
+                return;
+            }
+
+            if (_wantedInstrument.Count > 0)
+            {
+                if (!_wantedInstrument.Contains(inst))
+                {
+                    return;
+                }
+            }
+
+            Instrument.Add(i, inst);
+        }
+        //保存最后一次成功登录信息
+        private void saveLoginInfo()
+        {
+            this._currentUser = SimpleIoc.Default.GetInstance<LoginControlViewModel>().CurrentUser;
+            this._currentCompany = SimpleIoc.Default.GetInstance<LoginControlViewModel>().SelectedBrokerId;
+            Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //cfa.AppSettings.Settings.Remove("loginUsr");
+            cfa.AppSettings.Settings["loginUsr"].Value = _currentUser.UserId;
+            cfa.AppSettings.Settings["loginCompany"].Value = _currentCompany;
+            cfa.Save(ConfigurationSaveMode.Modified);
+        }
+        //从配置文件读取关注的品种类型
+        private List<string> getInstrumentsFromINI()
+        {
+            try
+            {
+                INIManager ini = new INIManager("config.ini");
+                return new List<string>(ini.IniReadValue("InstrumentList", "list").Split(','));
+            }
+            catch (Exception e)
+            {
+                logger.Error(e);
+                return new List<string>();
+            }
+        }
+
+        //查询定时器
+        public void startTimer()
+        {
+            if (timer == null)
+            {
+                timer = new System.Timers.Timer(2000);
+                timer.Elapsed += new ElapsedEventHandler(queryPosition);
+                timer.Start();
+            }
+            else
+            {
+                timer.Start();
+            }
+            //timer.Start();
+        }
+        //根据选择，更新策略中的品种组合
+        private void updateGridStage(string GridName, string selectedStage)
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(
+            () =>
+            {
+                Strategy temp = selectStrategyById(GridName);
+                temp.StageId = selectedStage;
+            });
         }
         private bool checkInput(Strategy strategy)
         {
@@ -778,5 +764,20 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
             return true;
         }
+        private Strategy selectStrategyById(string whichGrid)
+        {
+            foreach (Strategy temp in Strategis)
+            {
+                if (whichGrid == temp.whichGrid)
+                {
+                    return temp;
+                }
+
+            }
+            logger.Error("cannot find Strategy by id!");
+            return null;
+
+        }
+        #endregion
     }
 }
