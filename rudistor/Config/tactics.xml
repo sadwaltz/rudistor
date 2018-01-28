@@ -32,4 +32,12 @@
     <name>1-按指定价报单</name>
     <value>1</value>
   </Tactics>
+  <Tactics type="T2Method">
+    <name>0-减</name>
+    <value>0</value>
+  </Tactics>
+  <Tactics type="T2Method">
+    <name>1-除</name>
+    <value>1</value>
+  </Tactics>
 </Config>
