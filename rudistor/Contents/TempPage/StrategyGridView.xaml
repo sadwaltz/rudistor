@@ -13,6 +13,7 @@
     d:DesignHeight="330" d:DesignWidth="235" Loaded="UserControl_Loaded_1"
     x:Name="parent">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/>
         <localConverter:LabelConverter x:Key="LabelConverter"/>
         <localConverter:GridHeaderConverter x:Key="GridHeaderConverter"/>
         <localConverter:GridBottomConverter x:Key="GridBottomConverter"/>
@@ -34,9 +35,10 @@
                 <Binding Converter="{StaticResource GridHeaderConverter}"></Binding>
             </Label.Content>
         </Label>
-        <Button Content="修改" Canvas.Left="170" Canvas.Top="11" Width="60"/>
-        <Button Content="重置仓位" Canvas.Left="5" Canvas.Top="275" Width="60"/>
-        <Button Content="关闭" Command="{Binding WorkerViewModel.Activate,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="35" Width="60" Background="Green"/>
+        <Button Content="修改" Command="{Binding WorkerViewModel.ModifyStage,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="11" Width="60"/>
+        <Button Content="重置仓位" Command="{Binding WorkerViewModel.ResetPosition,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="5" Canvas.Top="275" Width="60"/>
+        <Button Content="关闭" Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Command="{Binding WorkerViewModel.Activate,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="35" Width="60" Background="Green"/>
+        <Button Content="打开" Visibility="{Binding !IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Command="{Binding WorkerViewModel.Activate,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="35" Width="60" Background="Red"/>
         <Button Content="发送参数" Canvas.Left="170" Canvas.Top="56" Width="60"/>
         <Label Content="{Binding limit, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=限仓}" Canvas.Left="5" Canvas.Top="35"/>
         <xctk:IntegerUpDown Height="20" Canvas.Left="5"  Text="10" Canvas.Top="55" Width="40" FormatString="N0" Value="{Binding limit}" Increment="1" Maximum="1000" Minimum="0"/>

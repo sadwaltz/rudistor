@@ -11,6 +11,7 @@ using rudistor.Contents.ModifyModal.View;
 using rudistor.Contents.ModifyModal.ViewModel;
 using rudistor.Contents.ResetModal.View;
 using rudistor.Contents.ResetModal.ViewModel;
+using rudistor.Contents.TempPage;
 using rudistor.Model;
 using rudistor.Services;
 using System;
@@ -212,7 +213,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             //生效并发送一个策略
             SendWithActivate = new RelayCommand<string>((s) => sendWithActivate(s));
             //打开修改策略窗口
-            ModifyStage = new RelayCommand<string>((s) => modifyStage(s));
+            ModifyStage = new RelayCommand<string>((s) => newModifyStage(s));
             //打开重置仓位窗口
             ResetPosition = new RelayCommand<string>((s) => resetPosition(s));
             init();
@@ -267,7 +268,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
         }
         #endregion
-        #region TODO tcp
+        #region tcp
         void tcpConnection_OnDisconnected(TcpConnection obj)
         {
             if (timer != null)
@@ -380,10 +381,11 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                 DispatcherHelper.CheckBeginInvokeOnUI(
                                     () =>
                                     {
-                                        //IsAllActivated = StrategyA.IsActivate = StrategyB.IsActivate = StrategyC.IsActivate = StrategyD.IsActivate = StrategyE.IsActivate = StrategyF.IsActivate = !IsAllActivated;
+                                        
                                         IsAllActivated = !IsAllActivated;
-                                        //TODO:关闭所有策略状态
-                                        //StrategyA.IsActivate = StrategyB.IsActivate = StrategyC.IsActivate = StrategyD.IsActivate = StrategyE.IsActivate = StrategyF.IsActivate = false;
+                                        //关闭所有策略状态
+                                        closeAllStrategy();
+                                        
                                     });
 
                             }
@@ -393,6 +395,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
                             logger.Debug("not expected message:" + Encoding.UTF8.GetString(receivedData));
                         }
                         break;
+                    // inform update share handler
+                    case "inform":
                     case "update":
                         try
                         {
@@ -401,9 +405,10 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                        () =>
                                        {
                                            String whichGrid = response["request"]["whichGrid"].ToString();
-
-                                           
-
+                                           //Strategy temp = selectStrategyById(whichGrid);
+                                           //从应答中获取更为安全
+                                           Strategy temp = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString()); 
+                                           StrategyRepository.GetInstance().updateStrategy(temp);                                          
                                        });
                         }
                         catch (NullReferenceException)
@@ -431,7 +436,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             }
         }
         #endregion
-        #region TODO reset position
+        #region reset position
         private object resetPosition(String GridName)
         {
             Strategy strategy = selectStrategyById(GridName);
@@ -462,6 +467,26 @@ namespace rudistor.Contents.WorkPage.ViewModel
         }
         #endregion
         #region TODO modify strategy config
+        private object newModifyStage(String GridName)
+        {
+            //for debug
+            if (Instrument.Count == 0)
+            {
+                //查询无结果,测试代码
+                Instrument.Add(0, "Rb0000");
+                Instrument.Add(1, "ru0001");
+                Instrument.Add(2, "ih0002");
+                Instrument.Add(3, "zn0003");
+                Instrument.Add(4, "au0004");
+                Instrument.Add(5, "OI0005");
+                Instrument.Add(6, "Y0006");
+            }
+            Strategy modified = selectStrategyById(GridName);
+            OtherConfigView dialog = new OtherConfigView();
+            dialog.DataContext = modified;
+            dialog.ShowDialog();
+            return null;
+        }
         private object modifyStage(String GridName)
         {
             String selectedStage;
@@ -777,6 +802,13 @@ namespace rudistor.Contents.WorkPage.ViewModel
             logger.Error("cannot find Strategy by id!");
             return null;
 
+        }
+        private void closeAllStrategy()
+        {
+            foreach (Strategy temp in Strategis)
+            {
+                temp.IsActivate = false;
+            }
         }
         #endregion
     }
