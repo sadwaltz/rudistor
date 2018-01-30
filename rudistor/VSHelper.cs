@@ -25,6 +25,19 @@ namespace rudistor
             }
             return null;
         }
+        public static T GetParentView<T>(DependencyObject obj, Type typename) where T : FrameworkElement
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(obj);
+            while (parent != null)
+            {
+                if (parent is T)
+                {
+                    return (T)parent;
+                }
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            return null;
+        }
         public static T FindVisualParent<T>(UIElement element) where T : UIElement
         {
             UIElement parent = element;

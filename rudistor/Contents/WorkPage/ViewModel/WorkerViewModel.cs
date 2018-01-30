@@ -652,7 +652,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             if (pressedKey.Key == Key.Enter && pressedKey != null)
             {
                 UIElement element = VSHelper.GetElementUnderMouse<UIElement>();
-                StrategyGridView grid = (StrategyGridView)VSHelper.GetParent<System.Windows.Controls.UserControl>(element, typeof(System.Windows.Controls.UserControl));
+                StrategyGridView grid = VSHelper.GetParentView<StrategyGridView>(element, typeof(StrategyGridView));
                 String gridName = ((Strategy)grid.DataContext).whichGrid;
                 sendWithActivate(gridName);
                 e.Handled = true;
