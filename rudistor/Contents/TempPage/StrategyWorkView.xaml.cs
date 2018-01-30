@@ -28,9 +28,14 @@ namespace rudistor.Contents.TempPage
         {
             var window = Window.GetWindow(this);
             window.WindowState = System.Windows.WindowState.Maximized;
-           
+            window.PreviewKeyDown += WorkView_KeyDown;
             ((WorkerViewModel)this.DataContext).workviewLoaded();
 
         }
+        void WorkView_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            ((WorkerViewModel)this.DataContext).enterEventHandler(sender, e);
+        }
+
     }
 }

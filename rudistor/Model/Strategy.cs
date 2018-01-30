@@ -11,6 +11,7 @@ namespace rudistor.Model
 {
     public class Strategy : ViewModelBase
     {
+        #region constructors
         public Strategy(string whichGrid,bool IsActivate,string StageId,string limit,string lockNum,string vol)
         {
             this.whichGrid = whichGrid;
@@ -63,6 +64,7 @@ namespace rudistor.Model
         {
             // TODO: Complete member initialization
         }
+        #endregion
         //所属grid
         public string whichGrid { get; set; }
         //策略状态 生效与否
@@ -101,10 +103,12 @@ namespace rudistor.Model
                     t1 = _stageId.Split('-').ToArray()[0];
                     t2 = _stageId.Split('-').ToArray()[1];
                     incre = getIncre(t1);
+                    formatString = FormatStringGet(incre);
                     RaisePropertyChanged("StageId");
                     RaisePropertyChanged("t1");
                     RaisePropertyChanged("t2");
                     RaisePropertyChanged("incre");
+                    RaisePropertyChanged("formatString");
                 }
             }
         }
@@ -115,9 +119,42 @@ namespace rudistor.Model
         //每笔
         public string vol { get; set; }    
         //T1合约
-        public string t1 { get; set; }
+        private string _t1;
+        public string t1
+        {
+            get
+            {
+                return _t1;
+            }
+            set
+            {
+                if (value != _t1)
+                {
+                    _t1 = value;                    
+                    StageId = _t1 + "-" + _t2;
+                    
+                   
+                    
+                }
+            }
+        }
         //T2合约
-        public string t2 { get; set; }
+        private string _t2;
+        public string t2 {
+            get
+            {
+                return _t2;
+            }
+            set
+            {
+                if (value != _t2)
+                {
+                    _t2 = value;
+                    StageId = _t1 + "-" + _t2;
+                    
+                }
+            }
+        }
         //步进值
         public string incre { get; set; }
         //空开价差
@@ -129,19 +166,124 @@ namespace rudistor.Model
         //多平
         public string dp { get; set; }
         //腿1超价
-        public string t1cj { get; set; }
+        private string _t1cj;
+        public string t1cj
+        {
+            get
+            {
+                return _t1cj;
+            }
+            set
+            {
+                if (value != _t1cj)
+                {
+                    _t1cj = value;
+                    RaisePropertyChanged("t1cj");
+                }
+            }
+        }
         //腿1等待
-        public string t1dd { get; set; }
+        private string _t1dd;
+        public string t1dd
+        {
+            get
+            {
+                return _t1dd;
+            }
+            set
+            {
+                if (value != _t1dd)
+                {
+                    _t1dd = value;
+                    RaisePropertyChanged("t1dd");
+                }
+            }
+        }
         //腿2超价
-        public string t2cj { get; set; }
+        private string _t2cj;
+        public string t2cj
+        {
+            get
+            {
+                return _t2cj;
+            }
+            set
+            {
+                if (value != _t2cj)
+                {
+                    _t2cj = value;
+                    RaisePropertyChanged("t2cj");
+                }
+            }
+        }
         //腿2等待
-        public string t2dd { get; set; }
+        private string _t2dd;
+        public string t2dd
+        {
+            get
+            {
+                return _t2dd;
+            }
+            set
+            {
+                if (value != _t2dd)
+                {
+                    _t2dd = value;
+                    RaisePropertyChanged("t2dd");
+                }
+            }
+        }
         //腿2策略，取值：中间价、对手价
-        public string t2cl { get; set; }
+        private string _t2cl;
+        public string t2cl 
+        {
+            get 
+            {
+                return _t2cl;
+            }
+            set
+            {
+                if (value != _t2cl)
+                {
+                    _t2cl = value;
+                    RaisePropertyChanged("t2cl");
+                }
+            }
+        }
         //permitVol
-        public string t2vol { get; set; }
+        private string _t2vol;
+        public string t2vol
+        {
+            get
+            {
+                return _t2vol;
+            }
+            set
+            {
+                if (value != _t2vol)
+                {
+                    _t2vol = value;
+                    RaisePropertyChanged("t2vol");
+                }
+            }
+        }
         //策略
-        public string cl { get; set; }
+        private string _cl;
+        public string cl 
+        {
+            get
+            {
+                return _cl;
+            }
+            set
+            {
+                if (value != _cl)
+                {
+                    _cl = value;
+                    RaisePropertyChanged("cl");
+                }
+            }
+        }
         //自动报单
         public string autoCall { get; set; }
         //间距空开

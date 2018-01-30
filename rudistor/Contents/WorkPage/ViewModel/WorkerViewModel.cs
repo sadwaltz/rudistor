@@ -83,9 +83,9 @@ namespace rudistor.Contents.WorkPage.ViewModel
             }
         }
 
-        private Dictionary<int, string> _instrument;
+        private ObservableCollection<string> _instrument;
 
-        public Dictionary<int, string> Instrument
+        public ObservableCollection<string> Instrument
         {
             get { return _instrument; }
             set
@@ -244,7 +244,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             //StrategyA = new Strategy("GridA",true,"aaaa-bbbb","5","2","1");
             Positions = new ObservableCollection<Position>();
             CanceledOrder = new ObservableCollection<Canceled>();
-            Instrument = new Dictionary<int, string>();
+            Instrument = new ObservableCollection<string>();
 
         }
 
@@ -408,6 +408,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                            //Strategy temp = selectStrategyById(whichGrid);
                                            //从应答中获取更为安全
                                            Strategy temp = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString()); 
+                                           //TODO 存在应答过程中用户修改了参数的可能性，考虑是否使用temp更新strategy全集
                                            StrategyRepository.GetInstance().updateStrategy(temp);                                          
                                        });
                         }
@@ -466,70 +467,38 @@ namespace rudistor.Contents.WorkPage.ViewModel
             return null;
         }
         #endregion
-        #region TODO modify strategy config
+        #region modify strategy config
         private object newModifyStage(String GridName)
         {
             //for debug
             if (Instrument.Count == 0)
             {
                 //查询无结果,测试代码
-                Instrument.Add(0, "Rb0000");
-                Instrument.Add(1, "ru0001");
-                Instrument.Add(2, "ih0002");
-                Instrument.Add(3, "zn0003");
-                Instrument.Add(4, "au0004");
-                Instrument.Add(5, "OI0005");
-                Instrument.Add(6, "Y0006");
+                Instrument.Add("Rb0000");
+                Instrument.Add("ru0001");
+                Instrument.Add("ih0002");
+                Instrument.Add("zn0003");
+                Instrument.Add("au0004");
+                Instrument.Add("OI0005");
+                Instrument.Add("Y0006");
             }
             Strategy modified = selectStrategyById(GridName);
+            Strategy backup = new Strategy(modified);
             OtherConfigView dialog = new OtherConfigView();
             dialog.DataContext = modified;
             dialog.ShowDialog();
-            return null;
-        }
-        private object modifyStage(String GridName)
-        {
-            String selectedStage;
-            //List<string> stages = new List<string>();
-            if (Instrument.Count == 0)
-            {
-                //查询无结果,测试代码
-                Instrument.Add(0, "Rb0000");
-                Instrument.Add(1, "ru0001");
-                Instrument.Add(2, "ih0002");
-                Instrument.Add(3, "zn0003");
-                Instrument.Add(4, "au0004");
-                Instrument.Add(5, "OI0005");
-                Instrument.Add(6, "Y0006");
-            }
-            ModifyModalViewModel modifyModalViewModel = SimpleIoc.Default.GetInstance<ModifyModalViewModel>();
-            modifyModalViewModel.Stages = Instrument;
-            ModifyModalView dialog = new ModifyModalView();
-            //ModifyModalViewModel modalViewModel = new ModifyModalViewModel(Instrument);
-            //dialog.DataContext = modalViewModel;
-            //(dialog.DataContext as ModifyModalViewModel).Stages = Instrument;
-            dialog.ShowDialog();
             if (dialog.DialogResult == true)
             {
-                //todo
-                //System.Windows.MessageBox.Show((dialog.DataContext as ModifyModalViewModel).SelectedStageA);
-                selectedStage = (dialog.DataContext as ModifyModalViewModel).SelectedStageA + "-" + (dialog.DataContext as ModifyModalViewModel).SelectedStageB;
-                updateGridStage(GridName, selectedStage);
-                //updateGridIncre(GridName, (dialog.DataContext as ModifyModalViewModel).SelectedStageA);
+                logger.Debug(modified.whichGrid + "config changed");
             }
-            /*
-            var dialogServcie = new ModalDialogService();
-            dialogServcie.ShowDialog(dialog, new ModifyModalViewModel(),
-                returnedViewModelInstance =>
-                {
-                    if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
-                    {
-                        selectedStage = returnedViewModelInstance.SelectedStage;
-                    }
-                }); 
-             * */
+            else
+            {
+                rollback(backup);
+            }
             return null;
         }
+        
+        
         #endregion
         #region send
         //打开或者关闭所有策略
@@ -683,8 +652,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
             if (pressedKey.Key == Key.Enter && pressedKey != null)
             {
                 UIElement element = VSHelper.GetElementUnderMouse<UIElement>();
-                Border border = VSHelper.GetParent<Border>(element, typeof(Border));
-                String gridName = border.Name;
+                StrategyGridView grid = (StrategyGridView)VSHelper.GetParent<System.Windows.Controls.UserControl>(element, typeof(System.Windows.Controls.UserControl));
+                String gridName = ((Strategy)grid.DataContext).whichGrid;
                 sendWithActivate(gridName);
                 e.Handled = true;
             }
@@ -694,7 +663,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
         #region helper method
         private void addInstrument(int i, string inst)
         {
-            if (Instrument.ContainsValue(inst))
+            if (Instrument.Contains(inst))
             {
                 return;
             }
@@ -707,7 +676,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 }
             }
 
-            Instrument.Add(i, inst);
+            Instrument.Add(inst);
         }
         //保存最后一次成功登录信息
         private void saveLoginInfo()
@@ -808,6 +777,17 @@ namespace rudistor.Contents.WorkPage.ViewModel
             foreach (Strategy temp in Strategis)
             {
                 temp.IsActivate = false;
+            }
+        }
+        private void rollback(Strategy backup)
+        {
+            for (var i = 0; i < Strategis.Count; i++)
+            {
+                if (Strategis[i].whichGrid == backup.whichGrid)
+                {
+                    Strategis[i] = backup;
+                    break;
+                }
             }
         }
         #endregion

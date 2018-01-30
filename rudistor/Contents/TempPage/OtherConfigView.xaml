@@ -8,10 +8,10 @@
             <XmlDataProvider x:Key="StaticsData" Source="pack://application:,,,/Config/tactics.xml" XPath="/Config" />
         </Canvas.Resources>
         <Label Content="腿一" Canvas.Left="10" Canvas.Top="10"/>
-        <ComboBox  ItemsSource="{Binding WorkerViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}" DisplayMemberPath="Value" SelectedValuePath="Key"  Canvas.Left="100" Canvas.Top="10" Width="120"/>
+        <ComboBox  ItemsSource="{Binding WorkerViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t1,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="10" Width="120"/>
             
         <Label Content="腿二" Canvas.Left="10" Canvas.Top="40"/>
-        <ComboBox  ItemsSource="{Binding WorkerViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}" DisplayMemberPath="Value" SelectedValuePath="Key"  Canvas.Left="100" Canvas.Top="40" Width="120"/>
+        <ComboBox  ItemsSource="{Binding WorkerViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t2,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="40" Width="120"/>
         <Label Content="策略" Canvas.Left="10" Canvas.Top="70"/>
         <ComboBox Canvas.Left="100" Canvas.Top="70" Width="120"   DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding cl,Mode=TwoWay,diag:PresentationTraceSources.TraceLevel=High}" >
             <ComboBox.ItemsSource>
@@ -25,7 +25,7 @@
             </ComboBox.ItemsSource>
         </ComboBox>
         <Label Content="腿二配比" Canvas.Left="10" Canvas.Top="130"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2Weight,Mode=OneTime}" Canvas.Left="100" Canvas.Top="130" Width="120"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2Weight,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="130" Width="120"/>
         <Label Content="减/除" Canvas.Left="10" Canvas.Top="160"/>
         <ComboBox Canvas.Left="100"  DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding t2Method,Mode=TwoWay}" Canvas.Top="160" Width="120">
             <ComboBox.ItemsSource>
@@ -33,15 +33,15 @@
             </ComboBox.ItemsSource>
         </ComboBox>
         <Label Content="腿一超价" Canvas.Left="10" Canvas.Top="190"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t1cj,Mode=OneTime}" Canvas.Left="100" Canvas.Top="190" Width="120"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t1cj,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="190" Width="120"/>
         <Label Content="腿一等待" Canvas.Left="10" Canvas.Top="220"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t1dd,Mode=OneTime}" Canvas.Left="100" Canvas.Top="220" Width="120"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t1dd,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="220" Width="120"/>
         <Label Content="腿二超价" Canvas.Left="10" Canvas.Top="250"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2cj,Mode=OneTime}" Canvas.Left="100" Canvas.Top="250" Width="120"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2cj,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="250" Width="120"/>
         <Label Content="腿二等待" Canvas.Left="10" Canvas.Top="280"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2dd,Mode=OneTime}" Canvas.Left="100" Canvas.Top="280" Width="120"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2dd,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="280" Width="120"/>
         <Label Content="Permit Vol" Canvas.Left="10" Canvas.Top="310"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2vol,Mode=OneTime}" Canvas.Left="100" Canvas.Top="310" Width="120"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2vol,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="310" Width="120"/>
         <Button Content="确定" x:Name="confirm" Canvas.Left="75" Canvas.Top="350" Width="60" Click="confirm_Click"/>
         <Button Content="取消" x:Name="cancel" Canvas.Left="150" Canvas.Top="350" Width="60" Click="cancel_Click"/>
     </Canvas>
