@@ -29,7 +29,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Canvas HorizontalAlignment="Left" Height="330" VerticalAlignment="Top" Width="235">
+    <Canvas Background="Transparent"  HorizontalAlignment="Left" Height="330" VerticalAlignment="Top" Width="235">
         <Label  Canvas.Left="0" Canvas.Top="10">
             <Label.Content>
                 

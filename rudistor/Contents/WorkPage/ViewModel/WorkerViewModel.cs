@@ -653,9 +653,17 @@ namespace rudistor.Contents.WorkPage.ViewModel
             {
                 UIElement element = VSHelper.GetElementUnderMouse<UIElement>();
                 StrategyGridView grid = VSHelper.GetParentView<StrategyGridView>(element, typeof(StrategyGridView));
-                String gridName = ((Strategy)grid.DataContext).whichGrid;
-                sendWithActivate(gridName);
-                e.Handled = true;
+                if (grid != null)
+                {
+                    String gridName = ((Strategy)grid.DataContext).whichGrid;
+                    sendWithActivate(gridName);
+                    e.Handled = true;
+                }
+                else
+                {
+                    logger.Error("cannot find parent strategy!");
+                    System.Windows.Forms.MessageBox.Show("发送策略失败");
+                }
             }
 
         }
