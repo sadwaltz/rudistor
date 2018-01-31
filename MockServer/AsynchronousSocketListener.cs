@@ -34,7 +34,7 @@ public class AsynchronousSocketListener
         //IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
         //IPAddress ipAddress = ipHostInfo.AddressList[0];
         IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
-        IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 60000);
+        IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 61002);
         // Create a TCP/IP socket.     
         Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         // Bind the socket to the local     
@@ -97,13 +97,20 @@ public class AsynchronousSocketListener
                 byte[] data = Encoding.UTF8.GetBytes(temp);
                 handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
             }
-            if (content.Contains("QueryInstrument"))
+            else if (content.Contains("inform"))
+            {
+                String temp = "0587{\"cmd\":\"inform\",\"traceNo\":\"2ec197a7-392e-4e85-afa6-09ff2aecf95c\",\"request\":{\"whichGrid\":\"Grid01\",\"IsActivate\":false,\"IsNotActivate\":true,\"StageId\":\"Rb0000-ru0001\",\"limit\":\"5\",\"lockNum\":\"3\",\"vol\":\"1\",\"t1\":\"Rb0000\",\"t2\":\"ru0001\",\"incre\":\"1.0\",\"kkjc\":\"-120.0\",\"kp\":\"-170.0\",\"dkjc\":\"-900.0\",\"dp\":\"-201.0\",\"t1cj\":\"0\",\"t1dd\":\"0\",\"t2cj\":\"0\",\"t2dd\":\"0\",\"t2cl\":\"1\",\"t2vol\":\"2\",\"cl\":\"4\",\"autoCall\":\"Close\",\"jjkk\":\"555\",\"jjkp\":\"666\",\"jjdk\":\"777\",\"jjdp\":\"888\",\"t2Weight\":\"1\",\"t2Method\":\"0\",\"zdjc\":\"111\",\"zkjc\":\"222\",\"formatString\":\"F1\",\"IsInDesignMode\":false},\"response\":{\"errorid\":0,\"errormsg\":\"\"}}";
+
+                byte[] data = Encoding.UTF8.GetBytes(temp);
+                handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
+            }
+            else if (content.Contains("QueryInstrument"))
             {
                 String temp = "0161{\"traceNo\":\"5902a541-4910-4cac-b31b-10d031c8e6f0\",\"response\":{\"errorid\":0,\"errormsg\":\"\",\"payload\":[\"IF1508\",\"IF1509\",\"IF1512\",\"IF1603\"]},\"cmd\":\"QueryInstrument\"}";
                 byte[] data = Encoding.UTF8.GetBytes(temp);
                 handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
             }
-            if (content.Contains("QueryPosition"))
+            else if (content.Contains("QueryPosition"))
             {
 
                 byte[] data;

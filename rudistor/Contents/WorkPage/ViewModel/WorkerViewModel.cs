@@ -401,16 +401,19 @@ namespace rudistor.Contents.WorkPage.ViewModel
                         try
                         {
                             if (response["response"]["errorid"].ToString() == "0")
+                            {
+                                String whichGrid = response["request"]["whichGrid"].ToString();
+                                //Strategy temp = selectStrategyById(whichGrid);
+                                //从应答中获取更为安全
+                                Strategy temp = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString());
                                 DispatcherHelper.CheckBeginInvokeOnUI(
                                        () =>
                                        {
-                                           String whichGrid = response["request"]["whichGrid"].ToString();
-                                           //Strategy temp = selectStrategyById(whichGrid);
-                                           //从应答中获取更为安全
-                                           Strategy temp = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString()); 
+
                                            //TODO 存在应答过程中用户修改了参数的可能性，考虑是否使用temp更新strategy全集
-                                           StrategyRepository.GetInstance().updateStrategy(temp);                                          
+                                           StrategyRepository.GetInstance().updateStrategy(temp);
                                        });
+                            }
                         }
                         catch (NullReferenceException)
                         {

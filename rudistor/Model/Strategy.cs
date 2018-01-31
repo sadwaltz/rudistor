@@ -31,6 +31,7 @@ namespace rudistor.Model
         {
             this.whichGrid = s.whichGrid;
             this.IsActivate = s.IsActivate;
+            this.IsNotActivate = !s.IsActivate;
             this.StageId = s.StageId;
             this.t1 = s.t1;
             this.t2 = s.t2;
@@ -340,7 +341,7 @@ namespace rudistor.Model
             Strategy temp =  new Strategy()
             {
                 whichGrid = dataRow.Field<string>(Strategy.whichGridPropertyName),
-                IsActivate = dataRow.Field<bool>(Strategy.IsActivatePropertyName),
+                //IsActivate = dataRow.Field<bool>(Strategy.IsActivatePropertyName),
                 StageId = dataRow.Field<string>(Strategy.StageIdPropertyName),
                 t1 = dataRow.Field<string>(Strategy.StageIdPropertyName).Split('-').ToArray()[0],
                 t2 = dataRow.Field<string>(Strategy.StageIdPropertyName).Split('-').ToArray()[1],               
@@ -369,6 +370,8 @@ namespace rudistor.Model
                 zdjc = dataRow.Field<string>(Strategy.zdjcPropertyName),
                 zkjc = dataRow.Field<string>(Strategy.zkjcPropertyName)
             };
+            temp.IsActivate = false;
+            temp.IsNotActivate = !temp.IsActivate;
             //获得品种步进值
             temp.incre = temp.getIncre(temp.t1);
             temp.formatString = temp.FormatStringGet(temp.incre);
