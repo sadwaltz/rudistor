@@ -15,10 +15,9 @@ namespace rudistor.Model.converter
         private static Logger logger = LogManager.GetCurrentClassLogger();
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            String stageID = values[0].ToString();
-            String clToQ = values[1].ToString();
-            String t2clToQ = values[2].ToString();
-            String t2vol = values[3].ToString();
+            String clToQ = values[0].ToString();
+            String t2clToQ = values[1].ToString();
+            String t2vol = values[2].ToString();
             String xc = null;
 
             try
@@ -31,7 +30,7 @@ namespace rudistor.Model.converter
                                              where (string)el.Attribute("type") == "T2" && (string)el.Element("value") == t2clToQ
                                              select el;
 
-                xc = stageID + " " + cl.ElementAt(0).Element("name").Value.Split('-')[1] + " " + t2cl.ElementAt(0).Element("name").Value.Split('-')[1] + " PVOL " + t2vol;
+                xc = cl.ElementAt(0).Element("name").Value.Split('-')[1] + " " + t2cl.ElementAt(0).Element("name").Value.Split('-')[1] + " PVOL " + t2vol;
             }
             catch (Exception e)
             {

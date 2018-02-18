@@ -510,6 +510,15 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
             if (IsAllActivated == true)
             {
+                // 关闭所有策略
+                foreach (Strategy temp in Strategis)
+                {
+                    if (temp.IsActivate)
+                    {
+                        temp.IsActivate = false;
+                    }
+
+                }
                 
                 Response<String> queryRes = new Response<string>();
                 Message<String, String> closeAll = new Message<string, string>(null, queryRes, "CloseAll", Guid.NewGuid().ToString());
@@ -518,10 +527,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 String closeAllString = JsonConvert.SerializeObject(closeAll);
                 SendMessage(closeAllString);
             }
-            else
-            {
-                IsAllActivated = !IsAllActivated;
-            }
+
+            IsAllActivated = !IsAllActivated;
             
             return null;
         }
@@ -531,6 +538,12 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
             //TODO 补充通知服务器的步骤
             //s 表示从哪个grid发起的更新动作
+            if (!_IsAllActivated)
+            {
+                System.Windows.MessageBox.Show("全部关闭状态下无法更新参数");
+                return null;
+            }
+
             Strategy temp = selectStrategyById(s);
             temp.IsActivate = !temp.IsActivate;
             sendStrategy(temp);
