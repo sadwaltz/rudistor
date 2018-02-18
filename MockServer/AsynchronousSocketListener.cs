@@ -89,6 +89,7 @@ public class AsynchronousSocketListener
             // Check for end-of-file tag. If it is not there, read     
             // more data.     
             content = state.sb.ToString();
+            Console.WriteLine("Read {0} bytes from socket. \n Data : {1}", content.Length, content);
             if (content.Contains("update"))
             {
                 //String temp = "0397{\"traceNo\":\"0b78d2df-f5f8-45f0-ae42-2c4dfe30a9d6\",\"response\":{\"errorid\":0,\"errormsg\":\"\"},\"cmd\":\"update\",\"request\":{\"whichGrid\":\"GridB\",\"IsActivate\":false,\"IsNotActivate\":true,\"StageId\":\"IF1506-IF1505\",\"limit\":\"1\",\"lockNum\":\"0\",\"vol\":\"1\",\"kkjc\":\"-160.0\",\"kp\":\"170.0\",\"dkjc\":\"-201.0\",\"dp\":\"-1000.0\",\"t1cj\":\"2\",\"t1dd\":\"5\",\"t2cj\":\"3\",\"t2dd\":\"4\",\"t2cl\":\"1\",\"t2vol\":\"2\",\"cl\":\"2\",\"IsInDesignMode\":false}}";
