@@ -382,7 +382,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                     () =>
                                     {
                                         
-                                        IsAllActivated = !IsAllActivated;
+                                        IsAllActivated = false;
                                         //关闭所有策略状态
                                         closeAllStrategy();
                                         
@@ -603,7 +603,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
                 if (sendFlag)
                 {
-                    Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "inform", Guid.NewGuid().ToString());
+                    //Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "inform", Guid.NewGuid().ToString());
+                    Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "update", Guid.NewGuid().ToString());
                     String updateString = JsonConvert.SerializeObject(updateMessage);
                     SendMessage(updateString);
                 }
