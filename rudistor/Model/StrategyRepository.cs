@@ -88,8 +88,9 @@ namespace rudistor.Model
             strategies.Columns.Add(Strategy.jjkpPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.jjdkPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.jjdpPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.t1WeightPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.t2WeightPropertyName, typeof(string));
-            strategies.Columns.Add(Strategy.t2MethodPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.t2RatioPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.zdjcPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.zkjcPropertyName, typeof(string));
             
@@ -118,7 +119,35 @@ namespace rudistor.Model
                 String kkjc = "-160.0";
                 String kp = "-170.0";
                 
-                Strategy strategy = new Strategy() {whichGrid=whichGrid,IsActivate=isActivate,StageId=stageId,limit=limit,lockNum=lockNum,vol=vol,kkjc=kkjc,kp=kp,dkjc="-1000.0",dp="-201.0",t1cj="0",t1dd="0",t2cj="0",t2dd="0",t2cl="1",t2vol="2",cl="4",autoCall="0",jjkk="999",jjkp="999",jjdk="999",jjdp="999",t2Weight="1",t2Method="0",zdjc="999",zkjc="999" };
+                Strategy strategy = new Strategy() {
+                    whichGrid=whichGrid,
+                    IsActivate=isActivate,
+                    StageId=stageId,
+                    limit=limit,
+                    lockNum=lockNum,
+                    vol=vol,
+                    kkjc=kkjc,
+                    kp=kp,
+                    dkjc="-1000.0",
+                    dp="-201.0",
+                    t1cj="0",
+                    t1dd="0",
+                    t2cj="0",
+                    t2dd="0",
+                    t2cl="1",
+                    t2vol="2",
+                    cl="4",
+                    autoCall="0",
+                    jjkk="999",
+                    jjkp="999",
+                    jjdk="999",
+                    jjdp="999",
+                    t1Weight = "1",
+                    t2Weight = "1",
+                    t2Ratio="1",
+                    zdjc="999",
+                    zkjc="999" 
+                };
 
                 this.AddStrategy(strategy);
             }
@@ -150,8 +179,9 @@ namespace rudistor.Model
                     strategy.jjkp,
                     strategy.jjdk,
                     strategy.jjdp,
+                    strategy.t1Weight,
                     strategy.t2Weight,
-                    strategy.t2Method,
+                    strategy.t2Ratio,
                     strategy.zdjc,
                     strategy.zkjc
                 });

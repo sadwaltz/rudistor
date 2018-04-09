@@ -55,8 +55,9 @@ namespace rudistor.Model
             this.jjkp = s.jjkp;
             this.jjdk = s.jjdk;
             this.jjdp = s.jjdp;
+            this.t1Weight = s.t1Weight;
             this.t2Weight = s.t2Weight;
-            this.t2Method = s.t2Method;
+            this.t2Ratio = s.t2Ratio;
             this.zdjc = s.zdjc;
             this.zkjc = s.zkjc;
             this.formatString = s.formatString;
@@ -295,10 +296,12 @@ namespace rudistor.Model
         public string jjdk { get; set; }
         //间距多平
         public string jjdp { get; set; }
+        //腿1配比
+        public string t1Weight { get; set; }
         //腿2配比
         public string t2Weight { get; set; }
-        //减、除
-        public string t2Method { get; set; }
+        //腿2系数
+        public string t2Ratio { get; set; }
         //做多价差--实际多开价差
         public string zdjc { get; set; }
         //做空价差--实际空开价差
@@ -329,8 +332,9 @@ namespace rudistor.Model
         public const string jjkpPropertyName = "jjkp";
         public const string jjdkPropertyName = "jjdk";
         public const string jjdpPropertyName = "jjdp";
+        public const string t1WeightPropertyName = "t1Weight";
         public const string t2WeightPropertyName = "t2Weight";
-        public const string t2MethodPropertyName = "t2Method";
+        public const string t2RatioPropertyName = "t2Ratio";
         public const string zdjcPropertyName = "zdjc";
         public const string zkjcPropertyName = "zkjc";
 
@@ -365,8 +369,9 @@ namespace rudistor.Model
                 jjkp = dataRow.Field<string>(Strategy.jjkpPropertyName),
                 jjdk = dataRow.Field<string>(Strategy.jjdkPropertyName),
                 jjdp = dataRow.Field<string>(Strategy.jjdpPropertyName),
+                t1Weight = dataRow.Field<string>(Strategy.t1WeightPropertyName),
                 t2Weight = dataRow.Field<string>(Strategy.t2WeightPropertyName),
-                t2Method = dataRow.Field<string>(Strategy.t2MethodPropertyName),
+                t2Ratio = dataRow.Field<string>(Strategy.t2RatioPropertyName),
                 zdjc = dataRow.Field<string>(Strategy.zdjcPropertyName),
                 zkjc = dataRow.Field<string>(Strategy.zkjcPropertyName)
             };
