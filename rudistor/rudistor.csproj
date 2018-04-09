@@ -212,12 +212,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Config\tactics.xml">
+    <Resource Include="Config\tactics.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Config\strategies.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Resource>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
