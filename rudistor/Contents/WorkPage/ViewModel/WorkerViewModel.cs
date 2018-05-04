@@ -488,6 +488,10 @@ namespace rudistor.Contents.WorkPage.ViewModel
             Strategy modified = selectStrategyById(GridName);
             Strategy backup = new Strategy(modified);
             OtherConfigView dialog = new OtherConfigView();
+            //将修改窗口定位到主窗口中心位置
+            dialog.Owner = System.Windows.Application.Current.MainWindow; // We must also set the owner for this to work.
+            dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
             dialog.DataContext = modified;
             dialog.ShowDialog();
             if (dialog.DialogResult == true)
