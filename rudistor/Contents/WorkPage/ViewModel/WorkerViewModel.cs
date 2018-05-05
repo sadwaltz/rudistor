@@ -412,6 +412,9 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
                                            //TODO 存在应答过程中用户修改了参数的可能性，考虑是否使用temp更新strategy全集
                                            StrategyRepository.GetInstance().updateStrategy(temp);
+                                           Strategis = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
+                                           Strategis.Sort(c => c.whichGrid);
+                                          
                                        });
                             }
                         }

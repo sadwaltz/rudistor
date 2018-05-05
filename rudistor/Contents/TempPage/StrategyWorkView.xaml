@@ -7,7 +7,7 @@
         Loaded="UserControl_Loaded"
          Height="1000" Width="960">
     <UserControl.Resources>
-        <XmlDataProvider x:Key="StrategyData" Source="Config\strategis.xml" XPath="StrategyData" />
+        <XmlDataProvider x:Key="StrategyData" Source="pack://application:,,,/Config/strategis.xml" XPath="StrategyData" />
         <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/>
         <localConverter:LabelConverter x:Key="LabelConverter"/>
     </UserControl.Resources>

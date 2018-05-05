@@ -160,73 +160,14 @@ namespace rudistor.Model
         //步进值
         public string incre { get; set; }
         //空开价差
-        private string _kkjc;
-        public string kkjc
-        {
-            get
-            {
-                return _kkjc;
-            }
-            set
-            {
-                if (value != _kkjc)
-                {
-                    _kkjc = value;
-                    RaisePropertyChanged("kkjc");
-                }
-            }
-        }
+        public string kkjc { get; set; }       
         //空平
-        private string _kp;
-        public string kp
-        {
-            get
-            {
-                return _kp;
-            }
-            set
-            {
-                if (value != _kp)
-                {
-                    _kp = value;
-                    RaisePropertyChanged("kp");
-                }
-            }
-        }
+        public string kp { get; set; }      
         //多开价差
-        private string _dkjc;
-        public string dkjc
-        {
-            get
-            {
-                return _dkjc;
-            }
-            set
-            {
-                if (value != _dkjc)
-                {
-                    _dkjc = value;
-                    RaisePropertyChanged("dkjc");
-                }
-            }
-        }
+        public string dkjc { get; set; }        
         //多平
-        private string _dp;
-        public string dp
-        {
-            get
-            {
-                return _dp;
-            }
-            set
-            {
-                if (value != _dp)
-                {
-                    _dp = value;
-                    RaisePropertyChanged("dp");
-                }
-            }
-        }
+        public string dp { get; set; }
+        
         //腿1超价
         private string _t1cj;
         public string t1cj

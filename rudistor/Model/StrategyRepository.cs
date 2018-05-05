@@ -17,7 +17,7 @@ namespace rudistor.Model
         /// <summary>
         /// The file path that we use to store XML file which holds all the app data we need
         /// </summary>
-        public static readonly string PhysicalFilePath = Path.Combine(Environment.CurrentDirectory, "Strategy.rep");
+        public static readonly string PhysicalFilePath = Path.Combine(Environment.CurrentDirectory, "Config", "strategis.xml");
         /// <summary>
         /// Name of [Broker] table
         /// </summary>
@@ -136,17 +136,17 @@ namespace rudistor.Model
                     t2dd="0",
                     t2cl="1",
                     t2vol="2",
-                    cl="4",
+                    cl="2",
                     autoCall="0",
-                    jjkk="999",
-                    jjkp="999",
-                    jjdk="999",
-                    jjdp="999",
+                    jjkk="1",
+                    jjkp="2",
+                    jjdk="55",
+                    jjdp="88",
                     t1Weight = "1",
                     t2Weight = "1",
                     t2Ratio="1",
-                    zdjc="999",
-                    zkjc="999" 
+                    zdjc="66",
+                    zkjc="77" 
                 };
 
                 this.AddStrategy(strategy);
@@ -214,9 +214,41 @@ namespace rudistor.Model
             logger.Debug("开始更新生效参数："+strategy.whichGrid);
             try
             {
-                DataRow rowToDelete = Strategies.Rows.Find(strategy.whichGrid);
-                rowToDelete.Delete();
-                this.AddStrategy(strategy);
+                Strategies.BeginLoadData();
+                Strategies.LoadDataRow(new object[]
+                {
+                    strategy.whichGrid,
+                    strategy.IsActivate,
+                    strategy.StageId,
+                    strategy.limit,
+                    strategy.lockNum,
+                    strategy.vol,                    
+                    strategy.kkjc,
+                    strategy.kp,
+                    strategy.dkjc,
+                    strategy.dp,
+                    strategy.t1cj,
+                    strategy.t1dd,
+                    strategy.t2cj,
+                    strategy.t2dd,
+                    strategy.t2cl,
+                    strategy.t2vol,
+                    strategy.cl,
+                    //新版本
+                    strategy.autoCall,
+                    strategy.jjkk,
+                    strategy.jjkp,
+                    strategy.jjdk,
+                    strategy.jjdp,
+                    strategy.t1Weight,
+                    strategy.t2Weight,
+                    strategy.t2Ratio,
+                    strategy.zdjc,
+                    strategy.zkjc
+                },
+                true);
+
+                Strategies.EndLoadData();
                 this.Save();
             }
             catch (Exception e)
