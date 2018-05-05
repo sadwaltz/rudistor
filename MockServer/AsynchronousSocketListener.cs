@@ -20,7 +20,7 @@ public class AsynchronousSocketListener
     // Thread signal.     
     public static ManualResetEvent allDone = new ManualResetEvent(false);
 
-    public static bool flag = false;
+    //public static bool flag = false;
     public AsynchronousSocketListener()
     {
     }
@@ -76,6 +76,7 @@ public class AsynchronousSocketListener
     public static void ReadCallback(IAsyncResult ar)
     {
         String content = String.Empty;
+        bool flag = false;
         // Retrieve the state object and the handler socket     
         // from the asynchronous state object.     
         StateObject state = (StateObject)ar.AsyncState;
@@ -116,7 +117,7 @@ public class AsynchronousSocketListener
             {
 
                 byte[] data;
-                String temp = "0911{\"traceNo\":\"58999ff5-6ac5-473f-a92f-f4d6b84e5f98\",\"response\":{\"errorid\":0,\"errormsg\":\"\",\"payload\":[{\"StageId\":0,\"T1\":\"al1603\",\"T2\":\"al1604\",\"Direction\":\"SELL\",\"RealPrice\":60,\"ExpPrice\":60,\"Volume\":1}],\"payload1\":[{\"name\":\"al1601\",\"cnt\":0},{\"name\":\"al1602\",\"cnt\":0},{\"name\":\"al1603\",\"cnt\":0},{\"name\":\"al1604\",\"cnt\":0},{\"name\":\"al1605\",\"cnt\":0},{\"name\":\"al1606\",\"cnt\":0},{\"name\":\"al1607\",\"cnt\":0},{\"name\":\"al1608\",\"cnt\":0},{\"name\":\"al1609\",\"cnt\":0},{\"name\":\"al1610\",\"cnt\":0},{\"name\":\"al1611\",\"cnt\":0},{\"name\":\"al1612\",\"cnt\":0},{\"name\":\"alefp\",\"cnt\":0},{\"name\":\"ni1601\",\"cnt\":0},{\"name\":\"ni1602\",\"cnt\":0},{\"name\":\"ni1603\",\"cnt\":0},{\"name\":\"ni1604\",\"cnt\":0},{\"name\":\"ni1605\",\"cnt\":0},{\"name\":\"ni1606\",\"cnt\":0},{\"name\":\"ni1607\",\"cnt\":0},{\"name\":\"ni1608\",\"cnt\":0},{\"name\":\"ni1609\",\"cnt\":0},{\"name\":\"ni1610\",\"cnt\":0},{\"name\":\"ni1611\",\"cnt\":0},{\"name\":\"ni1612\",\"cnt\":0},{\"name\":\"niefp\",\"cnt\":0}]},\"cmd\":\"QueryPosition\"}";
+                String temp = "0911{\"traceNo\":\"58999ff5-6ac5-473f-a92f-f4d6b84e5f98\",\"response\":{\"errorid\":0,\"errormsg\":\"\",\"payload\":[{\"StageId\":7,\"T1\":\"al1603\",\"T2\":\"al1604\",\"Direction\":\"SELL\",\"RealPrice\":60,\"ExpPrice\":60,\"Volume\":1}],\"payload1\":[{\"name\":\"al1601\",\"cnt\":0},{\"name\":\"al1602\",\"cnt\":0},{\"name\":\"al1603\",\"cnt\":0},{\"name\":\"al1604\",\"cnt\":0},{\"name\":\"al1605\",\"cnt\":0},{\"name\":\"al1606\",\"cnt\":0},{\"name\":\"al1607\",\"cnt\":0},{\"name\":\"al1608\",\"cnt\":0},{\"name\":\"al1609\",\"cnt\":0},{\"name\":\"al1610\",\"cnt\":0},{\"name\":\"al1611\",\"cnt\":0},{\"name\":\"al1612\",\"cnt\":0},{\"name\":\"alefp\",\"cnt\":0},{\"name\":\"ni1601\",\"cnt\":0},{\"name\":\"ni1602\",\"cnt\":0},{\"name\":\"ni1603\",\"cnt\":0},{\"name\":\"ni1604\",\"cnt\":0},{\"name\":\"ni1605\",\"cnt\":0},{\"name\":\"ni1606\",\"cnt\":0},{\"name\":\"ni1607\",\"cnt\":0},{\"name\":\"ni1608\",\"cnt\":0},{\"name\":\"ni1609\",\"cnt\":0},{\"name\":\"ni1610\",\"cnt\":0},{\"name\":\"ni1611\",\"cnt\":0},{\"name\":\"ni1612\",\"cnt\":0},{\"name\":\"niefp\",\"cnt\":0}]},\"cmd\":\"QueryPosition\"}";
                 String temp1 = "0811{\"traceNo\":\"58999ff5-6ac5-473f-a92f-f4d6b84e5f98\",\"response\":{\"errorid\":0,\"errormsg\":\"\",\"payload\":[],\"payload1\":[{\"name\":\"al1601\",\"cnt\":0},{\"name\":\"al1602\",\"cnt\":0},{\"name\":\"al1603\",\"cnt\":0},{\"name\":\"al1604\",\"cnt\":0},{\"name\":\"al1605\",\"cnt\":0},{\"name\":\"al1606\",\"cnt\":0},{\"name\":\"al1607\",\"cnt\":0},{\"name\":\"al1608\",\"cnt\":0},{\"name\":\"al1609\",\"cnt\":0},{\"name\":\"al1610\",\"cnt\":0},{\"name\":\"al1611\",\"cnt\":0},{\"name\":\"al1612\",\"cnt\":0},{\"name\":\"alefp\",\"cnt\":0},{\"name\":\"ni1601\",\"cnt\":0},{\"name\":\"ni1602\",\"cnt\":0},{\"name\":\"ni1603\",\"cnt\":0},{\"name\":\"ni1604\",\"cnt\":0},{\"name\":\"ni1605\",\"cnt\":0},{\"name\":\"ni1606\",\"cnt\":0},{\"name\":\"ni1607\",\"cnt\":0},{\"name\":\"ni1608\",\"cnt\":0},{\"name\":\"ni1609\",\"cnt\":0},{\"name\":\"ni1610\",\"cnt\":0},{\"name\":\"ni1611\",\"cnt\":0},{\"name\":\"ni1612\",\"cnt\":0},{\"name\":\"niefp\",\"cnt\":0}]},\"cmd\":\"QueryPosition\"}";
                 if (!flag)
                 {
