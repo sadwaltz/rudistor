@@ -32,15 +32,17 @@ namespace rudistor.Model.converter
         public object ConvertBack(object value, Type targetType,
                                   object parameter, CultureInfo culture)
         {
+
+            // return Binding.DoNothing instead of null when uncheck radiobuttion
             if (value == null || parameter == null)
-                return null;
+                return Binding.DoNothing;
 
             bool useValue = (bool)value;
             string targetValue = parameter.ToString();
             if (useValue)
                 return targetValue;
 
-            return DependencyProperty.UnsetValue;
+            return Binding.DoNothing;
             
         }
     }
