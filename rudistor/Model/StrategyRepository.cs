@@ -206,7 +206,6 @@ namespace rudistor.Model
         {
             DataRow foundRow = Strategies.Rows.Find(gridName);
             Strategy temp =  Strategy.FromDataRow(foundRow);
-            temp.IsNotActivate = !temp.IsActivate;
             return temp;
         }
         public void updateStrategy(Strategy strategy)
@@ -214,11 +213,9 @@ namespace rudistor.Model
             logger.Debug("开始更新生效参数："+strategy.whichGrid);
             try
             {
-                //DataRow foundRow = Strategies.Rows.Find(strategy.whichGrid);
+                DataRow foundRow = Strategies.Rows.Find(strategy.whichGrid);
                 //Strategies.Rows.Remove(foundRow);
-
-                Strategies.BeginLoadData();
-                Strategies.LoadDataRow(new object[]
+                object[] tmp = new object[]
                 {
                     strategy.whichGrid,
                     strategy.IsActivate,
@@ -248,10 +245,12 @@ namespace rudistor.Model
                     strategy.t2Ratio,
                     strategy.zdjc,
                     strategy.zkjc
-                },
-                true);
+                };
 
-                Strategies.EndLoadData();
+                for(int i = 0; i < tmp.Length; i++){
+                    foundRow[i] = tmp[i];
+                }
+
                 this.Save();
             }
             catch (Exception e)
