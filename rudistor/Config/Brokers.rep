@@ -3,14 +3,14 @@
   <brokers>
     <brokerName>Name 0</brokerName>
     <brokerId>0</brokerId>
-    <host>192.168.0.1</host>
-    <port>60000</port>
+    <host>127.0.0.1</host>
+    <port>61002</port>
   </brokers>
   <brokers>
-    <brokerName>Name 1</brokerName>
+    <brokerName>test1</brokerName>
     <brokerId>1</brokerId>
-    <host>192.168.0.1</host>
-    <port>60001</port>
+    <host>139.196.107.106</host>
+    <port>25701</port>
   </brokers>
   <brokers>
     <brokerName>Name 2</brokerName>

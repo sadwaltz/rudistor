@@ -94,7 +94,7 @@ namespace rudistor.Model
             strategies.Columns.Add(Strategy.zdjcPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.zkjcPropertyName, typeof(string));
             
-            strategies.PrimaryKey =new DataColumn[] { strategies.Columns[Strategy.whichGridPropertyName]};
+            strategies.PrimaryKey = new DataColumn[] { strategies.Columns[Strategy.whichGridPropertyName]};
             _data.Tables.Add(strategies);
         }
         private void AddDefaultStrategy()
@@ -214,6 +214,9 @@ namespace rudistor.Model
             logger.Debug("开始更新生效参数："+strategy.whichGrid);
             try
             {
+                //DataRow foundRow = Strategies.Rows.Find(strategy.whichGrid);
+                //Strategies.Rows.Remove(foundRow);
+
                 Strategies.BeginLoadData();
                 Strategies.LoadDataRow(new object[]
                 {
@@ -253,7 +256,7 @@ namespace rudistor.Model
             }
             catch (Exception e)
             {
-                logger.Debug("更新生效参数发生异常：" + e.ToString());
+                logger.Debug(e, "更新生效参数发生异常:" + e.Message);
             }
         }
     }

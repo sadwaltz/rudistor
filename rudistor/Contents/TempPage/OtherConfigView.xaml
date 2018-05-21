@@ -5,7 +5,7 @@
         Title="修改" Height="455" Width="240">
     <Canvas Margin="0,0,0,20">
         <Canvas.Resources>
-            <XmlDataProvider x:Key="StaticsData" Source="pack://application:,,,/Config/tactics.xml" XPath="/Config" />
+            <XmlDataProvider x:Key="StaticsData" Source="pack://siteoforigin:,,,/Config/tactics.xml" XPath="/Config" />
         </Canvas.Resources>
         <Label Content="腿一" Canvas.Left="10" Canvas.Top="10"/>
         <ComboBox  ItemsSource="{Binding WorkerViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t1,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="10" Width="120"/>            

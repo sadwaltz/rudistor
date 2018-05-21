@@ -15,7 +15,7 @@ namespace rudistor.Model
         /// <summary>
         /// The file path that we use to store XML file which holds all the app data we need
         /// </summary>
-        public static readonly string PhysicalFilePath = Path.Combine(Environment.CurrentDirectory, "Brokers.rep");
+        public static readonly string PhysicalFilePath = Path.Combine(Environment.CurrentDirectory, "Config", "Brokers.rep");
         /// <summary>
         /// Name of [Broker] table
         /// </summary>

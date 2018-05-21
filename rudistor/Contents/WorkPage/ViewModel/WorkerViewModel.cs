@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Text;
 using System.Threading;
 using System.Timers;
@@ -94,7 +95,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 RaisePropertyChanged("Instrument");
             }
         }
-        
+
+        public static readonly string IniFilePath = Path.Combine(Environment.CurrentDirectory, "Config", "config.ini");
 
         #region combobox init
         private ObservableCollection<ComboboxItem> _T2ComboboxItems;
@@ -576,7 +578,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
         {
             if (checkInput(strategy))
             {
-                Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "inform", Guid.NewGuid().ToString());
+                //Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "inform", Guid.NewGuid().ToString());
+                Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "update", Guid.NewGuid().ToString());
                 String updateString = JsonConvert.SerializeObject(updateMessage);
                 SendMessage(updateString);
             }
@@ -700,7 +703,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 return;
             }
 
-            if (_wantedInstrument.Count > 0)
+            if (_wantedInstrument.Count > 1)
             {
                 if (!_wantedInstrument.Contains(inst))
                 {
@@ -726,7 +729,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
         {
             try
             {
-                INIManager ini = new INIManager("config.ini");
+                INIManager ini = new INIManager(IniFilePath);
                 return new List<string>(ini.IniReadValue("InstrumentList", "list").Split(','));
             }
             catch (Exception e)
