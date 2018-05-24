@@ -16,7 +16,6 @@ namespace rudistor.Model
         {
             this.whichGrid = whichGrid;
             this.IsActivate = IsActivate;
-            this.IsNotActivate = !IsActivate;
             this.StageId = StageId;
             this.t1 = StageId.Split('-').ToArray()[0];
             this.t2 = StageId.Split('-').ToArray()[1];
@@ -31,7 +30,6 @@ namespace rudistor.Model
         {
             this.whichGrid = s.whichGrid;
             this.IsActivate = s.IsActivate;
-            this.IsNotActivate = !s.IsActivate;
             this.StageId = s.StageId;
             this.t1 = s.t1;
             this.t2 = s.t2;
@@ -82,13 +80,17 @@ namespace rudistor.Model
                 if (value != _IsActivate)
                 {
                     _IsActivate = value;
-                    IsNotActivate = !IsActivate;
                     RaisePropertyChanged("IsNotActivate");
                     RaisePropertyChanged("IsActivate");
                 }
             }
         }
-        public bool IsNotActivate { get; set; }
+        public bool IsNotActivate { 
+            get
+            {
+                return !_IsActivate;
+            }
+        }
         //策略种类 xxxx-xxxx
         private string _stageId;
         public string StageId 
@@ -377,7 +379,6 @@ namespace rudistor.Model
                 zkjc = dataRow.Field<string>(Strategy.zkjcPropertyName)
             };
             temp.IsActivate = false;
-            temp.IsNotActivate = !temp.IsActivate;
             //获得品种步进值
             temp.incre = temp.getIncre(temp.t1);
             temp.formatString = temp.FormatStringGet(temp.incre);

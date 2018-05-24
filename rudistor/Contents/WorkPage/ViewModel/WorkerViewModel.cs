@@ -416,6 +416,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                            StrategyRepository.GetInstance().updateStrategy(temp);
                                            Strategis = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
                                            Strategis.Sort(c => c.whichGrid);
+                                           //更新策略打开关闭状态
+                                           UpdateStrategyActiveStatus(temp);
                                           
                                        });
                             }
@@ -444,6 +446,17 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 //receiveDone.Set();
             }
         }
+
+        public void UpdateStrategyActiveStatus(Strategy strategy)
+        {
+            foreach (Strategy st in Strategis) {
+                if (st.whichGrid.Equals(strategy.whichGrid)) {
+                    st.IsActivate = strategy.IsActivate;
+                }
+            }
+            return;
+        }
+
         #endregion
         #region reset position
         private object resetPosition(String GridName)

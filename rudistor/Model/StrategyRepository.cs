@@ -208,6 +208,7 @@ namespace rudistor.Model
             Strategy temp =  Strategy.FromDataRow(foundRow);
             return temp;
         }
+
         public void updateStrategy(Strategy strategy)
         {
             logger.Debug("开始更新生效参数："+strategy.whichGrid);
