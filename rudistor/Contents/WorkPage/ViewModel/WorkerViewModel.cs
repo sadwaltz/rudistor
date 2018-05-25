@@ -84,9 +84,9 @@ namespace rudistor.Contents.WorkPage.ViewModel
             }
         }
 
-        private ObservableCollection<string> _instrument;
+        private SortableObservableCollection<string> _instrument;
 
-        public ObservableCollection<string> Instrument
+        public SortableObservableCollection<string> Instrument
         {
             get { return _instrument; }
             set
@@ -246,7 +246,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             //StrategyA = new Strategy("GridA",true,"aaaa-bbbb","5","2","1");
             Positions = new ObservableCollection<Position>();
             CanceledOrder = new ObservableCollection<Canceled>();
-            Instrument = new ObservableCollection<string>();
+            Instrument = new SortableObservableCollection<string>();
 
         }
 
@@ -723,8 +723,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
                     return;
                 }
             }
-
             Instrument.Add(inst);
+            Instrument.Sort(c => c);
         }
         //保存最后一次成功登录信息
         private void saveLoginInfo()
