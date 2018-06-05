@@ -50,6 +50,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
         private List<string> _wantedInstrument;
 
+        private Dictionary<string, bool> currentStrategyStatus;
+
         private SortableObservableCollection<Strategy> _strategies;
         public SortableObservableCollection<Strategy> Strategis
         {
@@ -236,6 +238,12 @@ namespace rudistor.Contents.WorkPage.ViewModel
             var temp = StrategyRepository.GetInstance().GetStrategies();
             Strategis = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
             Strategis.Sort(c => c.whichGrid);
+
+            currentStrategyStatus = new Dictionary<string, bool>();
+            foreach(Strategy i in Strategis) {
+                currentStrategyStatus.Add(i.whichGrid, i.IsActivate);
+            }
+
             //initComm();
             _wantedInstrument = getInstrumentsFromINI();
         }
@@ -412,12 +420,18 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                        () =>
                                        {
 
-                                           //TODO 存在应答过程中用户修改了参数的可能性，考虑是否使用temp更新strategy全集
+                                           //存在应答过程中用户修改了参数的可能性，考虑是否使用temp更新strategy全集
                                            StrategyRepository.GetInstance().updateStrategy(temp);
                                            Strategis = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
                                            Strategis.Sort(c => c.whichGrid);
-                                           //更新策略打开关闭状态
-                                           UpdateStrategyActiveStatus(temp);
+
+                                           // 更新策略打开关闭状态
+                                           currentStrategyStatus[temp.whichGrid] = temp.IsActivate;
+                                           // 复制打开关闭状态
+                                           foreach (Strategy st1 in Strategis)
+                                           {
+                                               st1.IsActivate = currentStrategyStatus[st1.whichGrid];
+                                           }
                                           
                                        });
                             }
@@ -445,16 +459,6 @@ namespace rudistor.Contents.WorkPage.ViewModel
             {
                 //receiveDone.Set();
             }
-        }
-
-        public void UpdateStrategyActiveStatus(Strategy strategy)
-        {
-            foreach (Strategy st in Strategis) {
-                if (st.whichGrid.Equals(strategy.whichGrid)) {
-                    st.IsActivate = strategy.IsActivate;
-                }
-            }
-            return;
         }
 
         #endregion
