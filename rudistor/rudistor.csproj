@@ -143,6 +143,7 @@
     <Compile Include="Model\converter\LabelConverter.cs" />
     <Compile Include="Model\converter\MultiGridBottomConverter.cs" />
     <Compile Include="Model\converter\MultiGridHeaderConverter.cs" />
+    <Compile Include="Model\converter\RadioButtonColorConverter.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />

@@ -290,7 +290,21 @@ namespace rudistor.Model
             }
         }
         //自动报单
-        public string autoCall { get; set; }
+        private string _autoCall;
+        public string autoCall { 
+            get
+            {
+                return _autoCall;
+            }
+            set
+            {
+                if (value != _autoCall)
+                {
+                    _autoCall = value;
+                    RaisePropertyChanged("autoCall");
+                }
+            }
+        }
         //间距空开
         public string jjkk { get; set; }
         //间距空平
