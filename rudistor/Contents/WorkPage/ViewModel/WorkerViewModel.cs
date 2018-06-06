@@ -542,9 +542,14 @@ namespace rudistor.Contents.WorkPage.ViewModel
                     if (temp.IsActivate)
                     {
                         temp.IsActivate = false;
+
+                        // 关闭界面
+                        currentStrategyStatus[temp.whichGrid] = false;
                     }
 
                 }
+
+                
                 
                 Response<String> queryRes = new Response<string>();
                 Message<String, String> closeAll = new Message<string, string>(null, queryRes, "CloseAll", Guid.NewGuid().ToString());
