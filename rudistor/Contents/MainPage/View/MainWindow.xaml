@@ -18,7 +18,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <ScrollViewer Grid.Column="1" Name="scrollViewer1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid x:Name="LayoutRoot">
+        <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top">
 
             <ContentControl  Name="contentControl1"/>
 

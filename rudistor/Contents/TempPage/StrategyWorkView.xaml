@@ -11,7 +11,7 @@
         <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/>
         <localConverter:LabelConverter x:Key="LabelConverter"/>
     </UserControl.Resources>
-        <StackPanel>
+    <StackPanel Background="#FFF0F0F0">
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
             <Button Content="打开" Command="{Binding ActivateAll, Mode=OneWay}" Visibility="{Binding IsNotAllActivated, Converter={StaticResource BoolVisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Red" Width="50" Height="40" />
             <Button Content="关闭" Command="{Binding ActivateAll, Mode=OneWay}" Visibility="{Binding IsAllActivated, Converter={StaticResource BoolVisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Green" Width="50" Height="40" />
@@ -115,10 +115,10 @@
                     <TempPage:StrategyGridView Grid.Row="0" Grid.Column="1" DataContext="{Binding Path=Strategis[25]}" />
                     <TempPage:StrategyGridView Grid.Row="0" Grid.Column="2" DataContext="{Binding Path=Strategis[26]}" />
                     <TempPage:StrategyGridView Grid.Row="0" Grid.Column="3" DataContext="{Binding Path=Strategis[27]}" />
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="0" DataContext="{Binding Path=Strategis[28]}" />
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="1" DataContext="{Binding Path=Strategis[29]}" />
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="2" DataContext="{Binding Path=Strategis[30]}" />
-                    <TempPage:StrategyGridView Grid.Row="0" Grid.Column="3" DataContext="{Binding Path=Strategis[31]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="0" DataContext="{Binding Path=Strategis[28]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="1" DataContext="{Binding Path=Strategis[29]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="2" DataContext="{Binding Path=Strategis[30]}" />
+                    <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3" DataContext="{Binding Path=Strategis[31]}" />
                 </Grid>
             </TabItem>
         </TabControl>
