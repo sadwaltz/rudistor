@@ -95,7 +95,9 @@ public class AsynchronousSocketListener
             if (content.Contains("update"))
             {
                 //String temp = "0397{\"traceNo\":\"0b78d2df-f5f8-45f0-ae42-2c4dfe30a9d6\",\"response\":{\"errorid\":0,\"errormsg\":\"\"},\"cmd\":\"update\",\"request\":{\"whichGrid\":\"GridB\",\"IsActivate\":false,\"IsNotActivate\":true,\"StageId\":\"IF1506-IF1505\",\"limit\":\"1\",\"lockNum\":\"0\",\"vol\":\"1\",\"kkjc\":\"-160.0\",\"kp\":\"170.0\",\"dkjc\":\"-201.0\",\"dp\":\"-1000.0\",\"t1cj\":\"2\",\"t1dd\":\"5\",\"t2cj\":\"3\",\"t2dd\":\"4\",\"t2cl\":\"1\",\"t2vol\":\"2\",\"cl\":\"2\",\"IsInDesignMode\":false}}";
-                String temp = "0595{\"traceNo\":\"eb19e683-2341-4d9f-9a5e-1de476c64f8d\",\"response\":{\"errorid\":0,\"errormsg\":\"\"},\"cmd\":\"update\",\"request\":{\"whichGrid\":\"Grid01\",\"IsActivate\": true,\"IsNotActivate\":true,\"StageId\":\"ni1809-ni1807\",\"limit\":\"5\",\"lockNum\":\"3\",\"vol\":\"1\",\"t1\":\"ni1809\",\"t2\":\"ni1807\",\"incre\":\"10.0\",\"kkjc\":\"-100.0\",\"kp\":\"-170.0\",\"dkjc\":\"-1000.0\",\"dp\":\"-201.0\",\"t1cj\":\"0\",\"t1dd\":\"0\",\"t2cj\":\"0\",\"t2dd\":\"0\",\"t2cl\":\"1\",\"t2vol\":\"2\",\"cl\":\"2\",\"autoCall\":\"Close\",\"jjkk\":\"1\",\"jjkp\":\"2\",\"jjdk\":\"55\",\"jjdp\":\"88\",\"t1Weight\":\"1\",\"t2Weight\":\"1\",\"t2Ratio\":\"1\",\"zdjc\":\"99\",\"zkjc\":\"99\",\"formatString\":\"F1\",\"IsInDesignMode\":false}}";
+                //String temp = "0595{\"traceNo\":\"eb19e683-2341-4d9f-9a5e-1de476c64f8d\",\"response\":{\"errorid\":0,\"errormsg\":\"\"},\"cmd\":\"update\",\"request\":{\"whichGrid\":\"Grid01\",\"IsActivate\": true,\"IsNotActivate\":true,\"StageId\":\"ni1809-ni1807\",\"limit\":\"5\",\"lockNum\":\"3\",\"vol\":\"1\",\"t1\":\"ni1809\",\"t2\":\"ni1807\",\"incre\":\"10.0\",\"kkjc\":\"-100.0\",\"kp\":\"-170.0\",\"dkjc\":\"-1000.0\",\"dp\":\"-201.0\",\"t1cj\":\"0\",\"t1dd\":\"0\",\"t2cj\":\"0\",\"t2dd\":\"0\",\"t2cl\":\"1\",\"t2vol\":\"2\",\"cl\":\"2\",\"autoCall\":\"Time2\",\"jjkk\":\"2\",\"jjkp\":\"2\",\"jjdk\":\"55\",\"jjdp\":\"88\",\"t1Weight\":\"1\",\"t2Weight\":\"1\",\"t2Ratio\":\"1\",\"zdjc\":\"99\",\"zkjc\":\"99\",\"formatString\":\"F1\",\"IsInDesignMode\":false}}";
+                String temp = ResponseCmdUpdate(content);
+                //temp = "0595{\"traceNo\":\"eb19e683-2341-4d9f-9a5e-1de476c64f8d\",\"response\":{\"errorid\":0,\"errormsg\":\"\"},\"cmd\":\"update\",\"request\":{\"whichGrid\":\"Grid01\",\"IsActivate\": true,\"IsNotActivate\":true,\"StageId\":\"ni1809-ni1807\",\"limit\":\"5\",\"lockNum\":\"3\",\"vol\":\"1\",\"t1\":\"ni1809\",\"t2\":\"ni1807\",\"incre\":\"10.0\",\"kkjc\":\"-100.0\",\"kp\":\"-170.0\",\"dkjc\":\"-1000.0\",\"dp\":\"-201.0\",\"t1cj\":\"0\",\"t1dd\":\"0\",\"t2cj\":\"0\",\"t2dd\":\"0\",\"t2cl\":\"1\",\"t2vol\":\"2\",\"cl\":\"2\",\"autoCall\":\"Time2\",\"jjkk\":\"2\",\"jjkp\":\"2\",\"jjdk\":\"55\",\"jjdp\":\"88\",\"t1Weight\":\"1\",\"t2Weight\":\"1\",\"t2Ratio\":\"1\",\"zdjc\":\"99\",\"zkjc\":\"99\",\"formatString\":\"F1\",\"IsInDesignMode\":false}}";
 
                 byte[] data = Encoding.UTF8.GetBytes(temp);
                 handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
@@ -113,6 +115,13 @@ public class AsynchronousSocketListener
                 byte[] data = Encoding.UTF8.GetBytes(temp);
                 handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
             }
+            else if (content.Contains("CloseAll"))
+            {
+                String cmd = "{\"traceNo\":\"5902a541-4910-4cac-b31b-10d031c8e6f0\",\"response\":{\"errorid\":0,\"errormsg\":\"\"},\"cmd\":\"CloseAll\"}";
+                String temp = String.Format("{0:D4}{1}", cmd.Length, cmd);
+                byte[] data = Encoding.UTF8.GetBytes(temp);
+                handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
+            }                
             else if (content.Contains("QueryPosition"))
             {
 
@@ -146,6 +155,21 @@ public class AsynchronousSocketListener
             //handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state);
         }
     }
+
+    private static string ResponseCmdUpdate(string request)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{\"traceNo\":\"eb19e683-2341-4d9f-9a5e-1de476c64f8d\",\"response\":{\"errorid\":0,\"errormsg\":\"\"},\"cmd\":\"update\",");
+
+        int i = request.IndexOf("\"request\":{");
+        int j = request.IndexOf("}", i);
+
+        sb.Append(request.Substring(i, j - i + 1));
+        sb.Append("}");
+
+        return String.Format("{0:D4}{1}", sb.Length, sb.ToString());
+    }
+
     private static void Send(Socket handler, String data)
     {
         // Convert the string data to byte data using ASCII encoding.     

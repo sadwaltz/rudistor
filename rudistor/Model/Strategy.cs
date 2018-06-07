@@ -290,21 +290,7 @@ namespace rudistor.Model
             }
         }
         //自动报单
-        private string _autoCall;
-        public string autoCall { 
-            get
-            {
-                return _autoCall;
-            }
-            set
-            {
-                if (value != _autoCall)
-                {
-                    _autoCall = value;
-                    RaisePropertyChanged("autoCall");
-                }
-            }
-        }
+        public string autoCall { get; set;}
         //间距空开
         public string jjkk { get; set; }
         //间距空平
@@ -325,6 +311,14 @@ namespace rudistor.Model
         public string zkjc { get; set; }
         //Format String 
         public string formatString { get; set; }
+
+        public void RefreshRunningStatus()
+        {
+            RaisePropertyChanged("IsNotActivate");
+            RaisePropertyChanged("IsActivate");
+            RaisePropertyChanged("autoCall");
+        }
+
         #region Config file fields
         public const string whichGridPropertyName = "whichGrid";
         public const string IsActivatePropertyName = "IsActivate";
@@ -392,12 +386,13 @@ namespace rudistor.Model
                 zdjc = dataRow.Field<string>(Strategy.zdjcPropertyName),
                 zkjc = dataRow.Field<string>(Strategy.zkjcPropertyName)
             };
-            temp.IsActivate = false;
             //获得品种步进值
             temp.incre = temp.getIncre(temp.t1);
             temp.formatString = temp.FormatStringGet(temp.incre);
             //默认关闭自动报单
-            temp.autoCall = "Close";
+            temp.IsActivate = false;
+            temp.autoCall = AutoCallStatus.Close.ToString();
+            //temp.autoCall = AutoCallStatus.Time2.ToString();
             return temp;
         }
         #endregion

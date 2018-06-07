@@ -38,6 +38,11 @@ namespace rudistor.Contents.WorkPage.ViewModel
     /// </summary>
     public class WorkerViewModel : ViewModelBase
     {
+        private class StrategyRunningStatus 
+        {
+            public bool IsActivate { get; set; }
+            public string AutoCallType { get; set; }
+        }
         /// <summary>
         /// Initializes a new instance of the WorkerViewModel class.
         /// </summary>
@@ -50,7 +55,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
         private List<string> _wantedInstrument;
 
-        private Dictionary<string, bool> currentStrategyStatus;
+        private Dictionary<string, StrategyRunningStatus> currentStrategyStatus;
 
         private SortableObservableCollection<Strategy> _strategies;
         public SortableObservableCollection<Strategy> Strategis
@@ -239,9 +244,12 @@ namespace rudistor.Contents.WorkPage.ViewModel
             Strategis = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
             Strategis.Sort(c => c.whichGrid);
 
-            currentStrategyStatus = new Dictionary<string, bool>();
+            currentStrategyStatus = new Dictionary<string, StrategyRunningStatus>();
             foreach(Strategy i in Strategis) {
-                currentStrategyStatus.Add(i.whichGrid, i.IsActivate);
+                StrategyRunningStatus st = new StrategyRunningStatus();
+                st.IsActivate = i.IsActivate;
+                st.AutoCallType = i.autoCall;
+                currentStrategyStatus.Add(i.whichGrid, st);
             }
 
             //initComm();
@@ -415,24 +423,30 @@ namespace rudistor.Contents.WorkPage.ViewModel
                                 String whichGrid = response["request"]["whichGrid"].ToString();
                                 //Strategy temp = selectStrategyById(whichGrid);
                                 //从应答中获取更为安全
-                                Strategy temp = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString());
+                                Strategy resp = JsonConvert.DeserializeObject<Strategy>(response["request"].ToString());
                                 DispatcherHelper.CheckBeginInvokeOnUI(
                                        () =>
                                        {
 
                                            //存在应答过程中用户修改了参数的可能性，考虑是否使用temp更新strategy全集
-                                           StrategyRepository.GetInstance().updateStrategy(temp);
-                                           Strategis = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
-                                           Strategis.Sort(c => c.whichGrid);
+                                           StrategyRepository.GetInstance().updateStrategy(resp);
+
+                                           // 生成临时VM
+                                           SortableObservableCollection<Strategy> tempStrategies = new SortableObservableCollection<Strategy>(StrategyRepository.GetInstance().GetStrategies());
 
                                            // 更新策略打开关闭状态
-                                           currentStrategyStatus[temp.whichGrid] = temp.IsActivate;
+                                           currentStrategyStatus[resp.whichGrid].IsActivate = resp.IsActivate;
+                                           currentStrategyStatus[resp.whichGrid].AutoCallType = resp.autoCall;
                                            // 复制打开关闭状态
-                                           foreach (Strategy st1 in Strategis)
+                                           foreach (Strategy st1 in tempStrategies)
                                            {
-                                               st1.IsActivate = currentStrategyStatus[st1.whichGrid];
+                                               st1.IsActivate = currentStrategyStatus[st1.whichGrid].IsActivate;
+                                               st1.autoCall = currentStrategyStatus[st1.whichGrid].AutoCallType;
                                            }
-                                          
+
+                                           tempStrategies.Sort(c => c.whichGrid);
+                                           this.Strategis = tempStrategies;
+
                                        });
                             }
                         }
@@ -544,7 +558,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
                         temp.IsActivate = false;
 
                         // 关闭界面
-                        currentStrategyStatus[temp.whichGrid] = false;
+                        currentStrategyStatus[temp.whichGrid].IsActivate = false;
+                        currentStrategyStatus[temp.whichGrid].AutoCallType = AutoCallStatus.Close.ToString();
                     }
 
                 }
@@ -579,8 +594,8 @@ namespace rudistor.Contents.WorkPage.ViewModel
             temp.IsActivate = !temp.IsActivate;
             sendStrategy(temp);
             return null;
-            
         }
+
         private object send(String s)
         {
             //直接发送策略
@@ -613,38 +628,25 @@ namespace rudistor.Contents.WorkPage.ViewModel
         //发送策略
         private void sendStrategy(Strategy strategy)
         {
-            if (_IsAllActivated)
-            {
-                bool sendFlag = false;
-                if (!strategy.IsActivate)
-                {
-                    sendFlag = true;
-                }
-                else
-                {
-                    if (checkInput(strategy))
-                    {
-                        sendFlag = true;
-                    }
-                    else
-                    {
-                        System.Windows.MessageBox.Show(strategy.whichGrid + ":多开、多平或者空开、空平输入有误");
-                    }
-                }
-
-
-                if (sendFlag)
-                {
-                    //Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "inform", Guid.NewGuid().ToString());
-                    Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "update", Guid.NewGuid().ToString());
-                    String updateString = JsonConvert.SerializeObject(updateMessage);
-                    SendMessage(updateString);
-                }
-            }
-            else
+            if (!_IsAllActivated)
             {
                 System.Windows.MessageBox.Show("全部关闭状态下无法更新参数");
+                return;
             }
+
+            if (!checkInput(strategy))
+            {
+                System.Windows.MessageBox.Show(strategy.whichGrid + ":多开、多平或者空开、空平输入有误");
+                return;
+            }
+
+            //Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "inform", Guid.NewGuid().ToString());
+            Message<Strategy, String> updateMessage = new Message<Strategy, string>(strategy, "update", Guid.NewGuid().ToString());
+            String updateString = JsonConvert.SerializeObject(updateMessage);
+            SendMessage(updateString);
+
+            return;
+                
         }
         private void SendMessage(String message)
         {
@@ -829,12 +831,23 @@ namespace rudistor.Contents.WorkPage.ViewModel
             return null;
 
         }
+
         private void closeAllStrategy()
         {
             foreach (Strategy temp in Strategis)
             {
                 temp.IsActivate = false;
+                temp.autoCall = AutoCallStatus.Close.ToString();
+                temp.RefreshRunningStatus();
             }
+
+            foreach (StrategyRunningStatus i in currentStrategyStatus.Values)
+            {
+                i.IsActivate = false;
+                i.AutoCallType = AutoCallStatus.Close.ToString();
+            }
+
+            
         }
         private void rollback(Strategy backup)
         {
