@@ -17,7 +17,7 @@
             <Setter Property="FontSize" Value="10" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Background="#FFECECEC">
+    <StackPanel Background="#FFC8C8C8">
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
             <Button Content="打开" Command="{Binding ActivateAll, Mode=OneWay}" Visibility="{Binding IsNotAllActivated, Converter={StaticResource BoolVisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Red" Width="50" Height="40" />
             <Button Content="关闭" Command="{Binding ActivateAll, Mode=OneWay}" Visibility="{Binding IsAllActivated, Converter={StaticResource BoolVisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Green" Width="50" Height="40" />
@@ -128,7 +128,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Grid>
+        <Grid Background="#FFC8C8C8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
