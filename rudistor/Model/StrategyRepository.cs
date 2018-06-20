@@ -113,11 +113,9 @@ namespace rudistor.Model
                 }
                 bool isActivate = true;
                 String stageId = "aaa-bbbb";
-                String limit = "5";
-                String lockNum = "3";
+                String limit = "1";
+                String lockNum = "0";
                 String vol = "1";
-                String kkjc = "-160.0";
-                String kp = "-170.0";
                 
                 Strategy strategy = new Strategy() {
                     whichGrid=whichGrid,
@@ -126,22 +124,22 @@ namespace rudistor.Model
                     limit=limit,
                     lockNum=lockNum,
                     vol=vol,
-                    kkjc=kkjc,
-                    kp=kp,
-                    dkjc="-1000.0",
-                    dp="-201.0",
+                    kkjc="10.0",
+                    kp="0.0",
+                    dkjc="0.0",
+                    dp="10.0",
                     t1cj="0",
-                    t1dd="0",
-                    t2cj="0",
+                    t1dd="1",
+                    t2cj="1",
                     t2dd="0",
                     t2cl="1",
-                    t2vol="2",
+                    t2vol="5",
                     cl="2",
                     autoCall="0",
-                    jjkk="1",
-                    jjkp="2",
-                    jjdk="55",
-                    jjdp="88",
+                    jjkk="10",
+                    jjkp="10",
+                    jjdk="10",
+                    jjdp="10",
                     t1Weight = "1",
                     t2Weight = "1",
                     t2Ratio="1",

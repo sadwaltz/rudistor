@@ -7,19 +7,19 @@
     <port>25701</port>
   </brokers>
   <brokers>
-    <brokerName>阿里云2（光大外网）</brokerName>
+    <brokerName>阿里云2（实盘测试）</brokerName>
     <brokerId>1</brokerId>
     <host>139.196.107.106</host>
     <port>25702</port>
   </brokers>
   <brokers>
-    <brokerName>阿里云3（光大内网备份）</brokerName>
+    <brokerName>阿里云3（光大外网备份）</brokerName>
     <brokerId>2</brokerId>
     <host>139.196.107.106</host>
     <port>25703</port>
   </brokers>
   <brokers>
-    <brokerName>阿里云4（中钢）</brokerName>
+    <brokerName>阿里云4（光大内网备份）</brokerName>
     <brokerId>3</brokerId>
     <host>139.196.107.106</host>
     <port>25704</port>
@@ -51,19 +51,25 @@
   <brokers>
     <brokerName>光大托管服务器1</brokerName>
     <brokerId>8</brokerId>
-    <host>203.156.223.165</host>
+    <host>183.194.213.19</host>
     <port>45317</port>
   </brokers>
   <brokers>
     <brokerName>光大托管服务器2</brokerName>
     <brokerId>9</brokerId>
-    <host>203.156.223.165</host>
+    <host>183.194.213.19</host>
     <port>50001</port>
   </brokers>
   <brokers>
     <brokerName>光大托管服务器3</brokerName>
     <brokerId>10</brokerId>
-    <host>203.156.223.165</host>
+    <host>183.194.213.19</host>
     <port>60001</port>
+  </brokers>
+  <brokers>
+    <brokerName>localhost</brokerName>
+    <brokerId>11</brokerId>
+	<host>127.0.0.1</host>
+	<port>61002</port>
   </brokers>
 </BrokerData>

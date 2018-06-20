@@ -9,6 +9,7 @@
     <UserControl.Resources>
         <XmlDataProvider x:Key="StrategyData" Source="pack://application:,,,/Config/strategis.xml" XPath="StrategyData" />
         <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/>
+        <localConverter:NumberAddOneConverter x:Key="NumberAddOneConverter"/>
         <localConverter:LabelConverter x:Key="LabelConverter"/>
         <Style TargetType="{x:Type Button}" >
             <Setter Property="FontSize" Value="12" />
@@ -18,12 +19,11 @@
         </Style>
     </UserControl.Resources>
     <StackPanel Background="#FFC8C8C8">
-        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
+        <StackPanel Orientation="Horizontal">
             <Button Content="打开" Command="{Binding ActivateAll, Mode=OneWay}" Visibility="{Binding IsNotAllActivated, Converter={StaticResource BoolVisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Red" Width="50" Height="40" />
             <Button Content="关闭" Command="{Binding ActivateAll, Mode=OneWay}" Visibility="{Binding IsAllActivated, Converter={StaticResource BoolVisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Green" Width="50" Height="40" />
             <Label Content="OFF" Visibility="{Binding IsNotAllActivated, Converter={StaticResource BoolVisibilityConverter}}" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"  Width="60" Height="40" Background="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="ON" Visibility="{Binding IsAllActivated, Converter={StaticResource BoolVisibilityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left"  Width="60" Height="40" Background="Green" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-
             <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" VerticalAlignment="Stretch" Height="Auto" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="平仓盈亏" Binding="{Binding StageID}"/>
@@ -32,9 +32,11 @@
                     <DataGridTextColumn Header="手续费" Binding="{Binding Direction}"/>
                 </DataGrid.Columns>
             </DataGrid>
+            <Label Content="" VerticalAlignment="Center" Width="500" Height="40" />
+            <Label Content="{Binding ElementName=StrategyTab, Path=SelectedIndex, Converter={StaticResource NumberAddOneConverter}}" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Width="60" Height="40" FontSize="28" Foreground="Red" HorizontalAlignment="Right"/>
         </StackPanel>
-        <TabControl HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-            <TabItem Header="TabItem1">
+        <TabControl HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Name="StrategyTab">
+            <TabItem Header="1" Width="235">
                 <Grid VerticalAlignment="Top" ShowGridLines="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="330" />
@@ -58,7 +60,7 @@
                         
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem2">
+            <TabItem Header="2" Width="235">
                 <Grid VerticalAlignment="Top" ShowGridLines="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="330" />
@@ -81,7 +83,7 @@
                     <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3" DataContext="{Binding Path=Strategis[15]}" />
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem3">
+            <TabItem Header="3"  Width="235">
                 <Grid VerticalAlignment="Top" ShowGridLines="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="330" />
@@ -104,7 +106,7 @@
                     <TempPage:StrategyGridView Grid.Row="1" Grid.Column="3" DataContext="{Binding Path=Strategis[23]}" />
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem4">
+            <TabItem Header="4"  Width="235">
                 <Grid VerticalAlignment="Top" ShowGridLines="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="330" />
