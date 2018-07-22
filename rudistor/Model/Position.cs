@@ -75,7 +75,8 @@ namespace rudistor.Model
         {
             if (stageID == null)
                 return null;
-            return (int.Parse(stageID)/8+1)+"-"+((int.Parse(stageID) - 1)%8+1);
+            int pos = int.Parse(stageID);
+            return string.Format("{0}-{1}", pos / 8 + 1, pos % 8 + 1);
         }
     }
     public class Canceled
