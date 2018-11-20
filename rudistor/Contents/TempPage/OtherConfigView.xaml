@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
-        Title="修改" Height="455" Width="240">
+        Title="修改" Height="485" Width="240">
     <Canvas Margin="0,0,0,20">
         <Canvas.Resources>
             <XmlDataProvider x:Key="StaticsData" Source="pack://siteoforigin:,,,/Config/tactics.xml" XPath="/Config" />
@@ -39,7 +39,13 @@
         <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2dd,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="310" Width="120"/>
         <Label Content="Permit Vol" Canvas.Left="10" Canvas.Top="340"/>
         <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2vol,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="340" Width="120"/>
-        <Button Content="确定" x:Name="confirm" Canvas.Left="75" Canvas.Top="380" Width="60" Click="confirm_Click"/>
-        <Button Content="取消" x:Name="cancel" Canvas.Left="150" Canvas.Top="380" Width="60" Click="cancel_Click"/>
+        <Label Content="夜盘收盘" Canvas.Left="10" Canvas.Top="370"/>
+        <ComboBox Canvas.Left="100" Canvas.Top="370" Width="120"  DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding nightClosingTime,Mode=TwoWay}">
+            <ComboBox.ItemsSource>
+                <Binding Source="{StaticResource StaticsData}" XPath="Tactics[@type='NightClosingTime']" Mode="OneTime"></Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <Button Content="确定" x:Name="confirm" Canvas.Left="75" Canvas.Top="410" Width="60" Click="confirm_Click"/>
+        <Button Content="取消" x:Name="cancel" Canvas.Left="150" Canvas.Top="410" Width="60" Click="cancel_Click"/>
     </Canvas>
 </Window>

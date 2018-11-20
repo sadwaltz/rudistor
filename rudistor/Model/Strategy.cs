@@ -56,6 +56,7 @@ namespace rudistor.Model
             this.t1Weight = s.t1Weight;
             this.t2Weight = s.t2Weight;
             this.t2Ratio = s.t2Ratio;
+            this.nightClosingTime = s.nightClosingTime;
             this.zdjc = s.zdjc;
             this.zkjc = s.zkjc;
             this.formatString = s.formatString;
@@ -305,6 +306,8 @@ namespace rudistor.Model
         public string t2Weight { get; set; }
         //腿2系数
         public string t2Ratio { get; set; }
+        //夜盘收盘时间
+        public string nightClosingTime { get; set; }
         //做多价差--实际多开价差
         public string zdjc { get; set; }
         //做空价差--实际空开价差
@@ -346,6 +349,7 @@ namespace rudistor.Model
         public const string t1WeightPropertyName = "t1Weight";
         public const string t2WeightPropertyName = "t2Weight";
         public const string t2RatioPropertyName = "t2Ratio";
+        public const string nightClosingTimePropertyName = "nightClosingTime";
         public const string zdjcPropertyName = "zdjc";
         public const string zkjcPropertyName = "zkjc";
 
@@ -353,6 +357,7 @@ namespace rudistor.Model
         #region create from config file
         public static Strategy FromDataRow(DataRow dataRow)
         {
+
             Strategy temp =  new Strategy()
             {
                 whichGrid = dataRow.Field<string>(Strategy.whichGridPropertyName),
@@ -383,6 +388,7 @@ namespace rudistor.Model
                 t1Weight = dataRow.Field<string>(Strategy.t1WeightPropertyName),
                 t2Weight = dataRow.Field<string>(Strategy.t2WeightPropertyName),
                 t2Ratio = dataRow.Field<string>(Strategy.t2RatioPropertyName),
+                nightClosingTime = (dataRow.Table.Columns.IndexOf(Strategy.nightClosingTimePropertyName) < 0) ? "0" : dataRow.Field<string>(Strategy.nightClosingTimePropertyName),
                 zdjc = dataRow.Field<string>(Strategy.zdjcPropertyName),
                 zkjc = dataRow.Field<string>(Strategy.zkjcPropertyName)
             };

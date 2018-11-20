@@ -40,4 +40,28 @@
     <name>\/</name>
     <value>1</value>
   </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>0-无夜盘</name>
+	<value>0</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>1-23:00:00</name>
+	<value>1</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>2-23:30:00</name>
+	<value>2</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>3-01:00:00</name>
+	<value>3</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>4-02:00:00</name>
+	<value>4</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>5-02:30:00</name>
+	<value>5</value>
+  </Tactics>
 </Config>

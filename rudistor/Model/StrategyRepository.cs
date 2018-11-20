@@ -143,7 +143,8 @@ namespace rudistor.Model
                     t1Weight = "1",
                     t2Weight = "1",
                     t2Ratio="1",
-                    zdjc="66",
+                    nightClosingTime = "0",
+                    zdjc = "66",
                     zkjc="77" 
                 };
 
@@ -180,6 +181,7 @@ namespace rudistor.Model
                     strategy.t1Weight,
                     strategy.t2Weight,
                     strategy.t2Ratio,
+                    strategy.nightClosingTime,
                     strategy.zdjc,
                     strategy.zkjc
                 });
@@ -242,6 +244,7 @@ namespace rudistor.Model
                     strategy.t1Weight,
                     strategy.t2Weight,
                     strategy.t2Ratio,
+                    strategy.nightClosingTime,
                     strategy.zdjc,
                     strategy.zkjc
                 };
