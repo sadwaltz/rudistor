@@ -51,6 +51,26 @@ namespace rudistor.Model
         private void Load()
         {
             _data.ReadXml(PhysicalFilePath);
+
+            checkStrategyFile();
+        }
+
+        private void checkStrategyFile()
+        {
+            try
+            {
+                DataTable strategies = Strategies;
+
+                if (strategies.Columns.IndexOf(Strategy.nightClosingTimePropertyName) < 0)
+                {
+                    strategies.Columns.Add(Strategy.nightClosingTimePropertyName, typeof(string));
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Debug(e, "更新生效参数发生异常:" + e.Message);
+            }
+
         }
 
         private void Save()
@@ -91,6 +111,7 @@ namespace rudistor.Model
             strategies.Columns.Add(Strategy.t1WeightPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.t2WeightPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.t2RatioPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.nightClosingTimePropertyName, typeof(string));
             strategies.Columns.Add(Strategy.zdjcPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.zkjcPropertyName, typeof(string));
             
@@ -215,6 +236,7 @@ namespace rudistor.Model
             try
             {
                 DataRow foundRow = Strategies.Rows.Find(strategy.whichGrid);
+
                 //Strategies.Rows.Remove(foundRow);
                 object[] tmp = new object[]
                 {

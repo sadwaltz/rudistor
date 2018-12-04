@@ -357,6 +357,13 @@ namespace rudistor.Model
         #region create from config file
         public static Strategy FromDataRow(DataRow dataRow)
         {
+            String defaultNightClosingTime = "0";
+
+            if(dataRow.Table.Columns.IndexOf(Strategy.nightClosingTimePropertyName) >= 0){
+                if (null != dataRow.Field<string>(Strategy.nightClosingTimePropertyName)) {
+                    defaultNightClosingTime = dataRow.Field<string>(Strategy.nightClosingTimePropertyName);
+                }
+            }
 
             Strategy temp =  new Strategy()
             {
@@ -388,7 +395,7 @@ namespace rudistor.Model
                 t1Weight = dataRow.Field<string>(Strategy.t1WeightPropertyName),
                 t2Weight = dataRow.Field<string>(Strategy.t2WeightPropertyName),
                 t2Ratio = dataRow.Field<string>(Strategy.t2RatioPropertyName),
-                nightClosingTime = (dataRow.Table.Columns.IndexOf(Strategy.nightClosingTimePropertyName) < 0) ? "0" : dataRow.Field<string>(Strategy.nightClosingTimePropertyName),
+                nightClosingTime = defaultNightClosingTime,
                 zdjc = dataRow.Field<string>(Strategy.zdjcPropertyName),
                 zkjc = dataRow.Field<string>(Strategy.zkjcPropertyName)
             };

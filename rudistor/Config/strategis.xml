@@ -2,15 +2,15 @@
 <StrategyData>
   <strategy>
     <whichGrid>Grid01</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>RM901-m1901</StageId>
+    <limit>10</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>20</vol>
+    <kkjc>-725</kkjc>
+    <kp>-736</kp>
+    <dkjc>-844.0</dkjc>
+    <dp>-822.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -18,7 +18,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -31,15 +31,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid02</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>RM905-m1905</StageId>
+    <limit>10</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>-375.0</kkjc>
+    <kp>-533.0</kp>
+    <dkjc>-560</dkjc>
+    <dp>-551.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -47,7 +47,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -61,14 +61,14 @@
   <strategy>
     <whichGrid>Grid03</whichGrid>
     <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <StageId>hc1910-rb1910</StageId>
+    <limit>40</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>5</vol>
+    <kkjc>100</kkjc>
+    <kp>-5</kp>
+    <dkjc>-70.0</dkjc>
+    <dp>-40.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -76,7 +76,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -90,14 +90,14 @@
   <strategy>
     <whichGrid>Grid04</whichGrid>
     <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <StageId>hc1905-rb1905</StageId>
+    <limit>10</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>-58.0</kkjc>
+    <kp>-63.0</kp>
+    <dkjc>-100.0</dkjc>
+    <dp>-91.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -105,7 +105,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -118,15 +118,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid05</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>bu1906-bu1812</StageId>
+    <limit>8</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>0</kkjc>
+    <kp>-120.0</kp>
+    <dkjc>-314.0</dkjc>
+    <dp>-290.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -134,7 +134,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -148,14 +148,14 @@
   <strategy>
     <whichGrid>Grid06</whichGrid>
     <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <StageId>hc1901-rb1901</StageId>
+    <limit>10</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>5</vol>
+    <kkjc>-127.0</kkjc>
+    <kp>-144.0</kp>
+    <dkjc>-173.0</dkjc>
+    <dp>-165.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -163,7 +163,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -177,14 +177,14 @@
   <strategy>
     <whichGrid>Grid07</whichGrid>
     <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
-    <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <StageId>hc1910-rb1910</StageId>
+    <limit>60</limit>
+    <lockNum>15</lockNum>
+    <vol>5</vol>
+    <kkjc>1000</kkjc>
+    <kp>100</kp>
+    <dkjc>-76.0</dkjc>
+    <dp>-55.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -192,7 +192,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -206,14 +206,14 @@
   <strategy>
     <whichGrid>Grid08</whichGrid>
     <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <StageId>hc1905-rb1905</StageId>
+    <limit>10</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>-59.0</kkjc>
+    <kp>-67.0</kp>
+    <dkjc>-105.0</dkjc>
+    <dp>-93.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -221,7 +221,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -234,23 +234,23 @@
   </strategy>
   <strategy>
     <whichGrid>Grid09</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>sc1903-sc1901</StageId>
+    <limit>2</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>2</vol>
+    <kkjc>10.5</kkjc>
+    <kp>9.8</kp>
+    <dkjc>8.4</dkjc>
+    <dp>10.1</dp>
     <t1cj>0</t1cj>
-    <t1dd>1</t1dd>
+    <t1dd>2</t1dd>
     <t2cj>1</t2cj>
     <t2dd>0</t2dd>
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -263,15 +263,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid10</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>sc1902-sc1901</StageId>
+    <limit>2</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>2</vol>
+    <kkjc>111</kkjc>
+    <kp>5</kp>
+    <dkjc>0</dkjc>
+    <dp>5.5</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -279,7 +279,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -292,15 +292,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid11</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>sc1902-sc1901</StageId>
+    <limit>2</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>2</vol>
+    <kkjc>6.0</kkjc>
+    <kp>5.5</kp>
+    <dkjc>0</dkjc>
+    <dp>5.2</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -308,7 +308,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -321,23 +321,23 @@
   </strategy>
   <strategy>
     <whichGrid>Grid12</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>sc1902-sc1901</StageId>
+    <limit>2</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>2</vol>
+    <kkjc>100</kkjc>
+    <kp>6.2</kp>
+    <dkjc>4.8</dkjc>
+    <dp>5.2</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
     <t2dd>0</t2dd>
     <t2cl>1</t2cl>
-    <t2vol>5</t2vol>
+    <t2vol>1</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -350,15 +350,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid13</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
+    <IsActivate>false</IsActivate>
+    <StageId>sc1903-sc1901</StageId>
     <limit>1</limit>
     <lockNum>0</lockNum>
     <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <kkjc>111</kkjc>
+    <kp>10.7</kp>
+    <dkjc>8.8</dkjc>
+    <dp>9.3</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -366,7 +366,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -379,15 +379,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid14</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>RM901-m1901</StageId>
+    <limit>5</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>-636.0</kkjc>
+    <kp>-726.0</kp>
+    <dkjc>-835.0</dkjc>
+    <dp>-825.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -395,7 +395,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -408,23 +408,23 @@
   </strategy>
   <strategy>
     <whichGrid>Grid15</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>sc1903-sc1901</StageId>
+    <limit>2</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>2</vol>
+    <kkjc>9.9</kkjc>
+    <kp>9.5</kp>
+    <dkjc>4.1</dkjc>
+    <dp>4.9</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
     <t2dd>0</t2dd>
     <t2cl>1</t2cl>
-    <t2vol>5</t2vol>
+    <t2vol>1</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -437,15 +437,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid16</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>sc1903-sc1901</StageId>
+    <limit>2</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>2</vol>
+    <kkjc>10.3</kkjc>
+    <kp>9.2</kp>
+    <dkjc>8.8</dkjc>
+    <dp>9.4</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -453,7 +453,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -466,15 +466,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid17</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>RM905-RM901</StageId>
+    <limit>10</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>2</vol>
+    <kkjc>1123.0</kkjc>
+    <kp>826.0</kp>
+    <dkjc>-500</dkjc>
+    <dp>694</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -482,7 +482,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -495,15 +495,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid18</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>rb1905-rb1901</StageId>
+    <limit>20</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>1035.0</kkjc>
+    <kp>845</kp>
+    <dkjc>-500</dkjc>
+    <dp>-326.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -511,7 +511,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -524,15 +524,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid19</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>rb1905-rb1901</StageId>
+    <limit>20</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>1000</kkjc>
+    <kp>13</kp>
+    <dkjc>-330</dkjc>
+    <dp>-315.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -540,7 +540,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -553,15 +553,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid20</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>hc1905-hc1901</StageId>
+    <limit>20</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>20</vol>
+    <kkjc>989.0</kkjc>
+    <kp>845</kp>
+    <dkjc>-304.0</dkjc>
+    <dp>-276.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -569,7 +569,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -582,15 +582,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid21</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>m1905-m1901</StageId>
+    <limit>20</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>20</vol>
+    <kkjc>-260.0</kkjc>
+    <kp>-277.0</kp>
+    <dkjc>-340.0</dkjc>
+    <dp>-323.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -598,7 +598,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -612,14 +612,14 @@
   <strategy>
     <whichGrid>Grid22</whichGrid>
     <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <StageId>m1905-m1901</StageId>
+    <limit>10</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>9999</kkjc>
+    <kp>100</kp>
+    <dkjc>-495.0</dkjc>
+    <dp>-351.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -627,7 +627,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -641,22 +641,22 @@
   <strategy>
     <whichGrid>Grid23</whichGrid>
     <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <StageId>rb1901-rb1905</StageId>
+    <limit>10</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>374.0</kkjc>
+    <kp>368.0</kp>
+    <dkjc>-1000</dkjc>
+    <dp>-364.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
     <t2dd>0</t2dd>
     <t2cl>1</t2cl>
-    <t2vol>5</t2vol>
+    <t2vol>2</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -669,15 +669,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid24</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>hc1905-hc1901</StageId>
+    <limit>10</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>20</vol>
+    <kkjc>9999</kkjc>
+    <kp>845</kp>
+    <dkjc>-309.0</dkjc>
+    <dp>-286.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -685,7 +685,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -698,23 +698,23 @@
   </strategy>
   <strategy>
     <whichGrid>Grid25</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>sc1903-sc1812</StageId>
+    <limit>2</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>2</vol>
+    <kkjc>14</kkjc>
+    <kp>12</kp>
+    <dkjc>-9999</dkjc>
+    <dp>0</dp>
     <t1cj>0</t1cj>
-    <t1dd>1</t1dd>
+    <t1dd>2</t1dd>
     <t2cj>1</t2cj>
     <t2dd>0</t2dd>
     <t2cl>1</t2cl>
-    <t2vol>5</t2vol>
+    <t2vol>1</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -727,15 +727,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid26</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>cu1807-cu1808</StageId>
+    <limit>0</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>5</vol>
+    <kkjc>9999</kkjc>
+    <kp>-110</kp>
+    <dkjc>-9999</dkjc>
+    <dp>-200.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -743,7 +743,7 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
@@ -756,15 +756,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid27</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>TA809-MA809</StageId>
+    <limit>0</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>9999</kkjc>
+    <kp>204.0</kp>
+    <dkjc>-9999</dkjc>
+    <dp>204.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -772,12 +772,12 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
-    <jjkk>10</jjkk>
+    <autoCall>Close</autoCall>
+    <jjkk>41</jjkk>
     <jjkp>10</jjkp>
-    <jjdk>10</jjdk>
+    <jjdk>5</jjdk>
     <jjdp>10</jjdp>
-    <t1Weight>1</t1Weight>
+    <t1Weight>0.5</t1Weight>
     <t2Weight>1</t2Weight>
     <t2Ratio>1</t2Ratio>
     <zdjc>66</zdjc>
@@ -785,15 +785,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid28</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>TA809-MA809</StageId>
+    <limit>0</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>9999</kkjc>
+    <kp>206.0</kp>
+    <dkjc>-9999</dkjc>
+    <dp>70</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -801,12 +801,12 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
     <jjdp>10</jjdp>
-    <t1Weight>1</t1Weight>
+    <t1Weight>0.5</t1Weight>
     <t2Weight>1</t2Weight>
     <t2Ratio>1</t2Ratio>
     <zdjc>66</zdjc>
@@ -815,14 +815,14 @@
   <strategy>
     <whichGrid>Grid29</whichGrid>
     <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <StageId>TA901-MA901</StageId>
+    <limit>10</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>8</vol>
+    <kkjc>9999</kkjc>
+    <kp>998.0</kp>
+    <dkjc>-9999</dkjc>
+    <dp>156</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -830,12 +830,12 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
-    <jjkk>10</jjkk>
-    <jjkp>10</jjkp>
-    <jjdk>10</jjdk>
-    <jjdp>10</jjdp>
-    <t1Weight>1</t1Weight>
+    <autoCall>Close</autoCall>
+    <jjkk>14</jjkk>
+    <jjkp>8</jjkp>
+    <jjdk>14</jjdk>
+    <jjdp>8</jjdp>
+    <t1Weight>0.5</t1Weight>
     <t2Weight>1</t2Weight>
     <t2Ratio>1</t2Ratio>
     <zdjc>66</zdjc>
@@ -843,15 +843,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid30</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>TA901-MA901</StageId>
+    <limit>5</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>5</vol>
+    <kkjc>1018.0</kkjc>
+    <kp>998</kp>
+    <dkjc>156</dkjc>
+    <dp>188.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -859,12 +859,12 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
     <jjdp>10</jjdp>
-    <t1Weight>1</t1Weight>
+    <t1Weight>0.5</t1Weight>
     <t2Weight>1</t2Weight>
     <t2Ratio>1</t2Ratio>
     <zdjc>66</zdjc>
@@ -873,14 +873,14 @@
   <strategy>
     <whichGrid>Grid31</whichGrid>
     <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <StageId>TA901-MA901</StageId>
+    <limit>0</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>10</vol>
+    <kkjc>9999</kkjc>
+    <kp>444</kp>
+    <dkjc>0</dkjc>
+    <dp>232</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -888,12 +888,12 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
     <jjdp>10</jjdp>
-    <t1Weight>1</t1Weight>
+    <t1Weight>0.5</t1Weight>
     <t2Weight>1</t2Weight>
     <t2Ratio>1</t2Ratio>
     <zdjc>66</zdjc>
@@ -901,15 +901,15 @@
   </strategy>
   <strategy>
     <whichGrid>Grid32</whichGrid>
-    <IsActivate>true</IsActivate>
-    <StageId>aaa-</StageId>
-    <limit>1</limit>
+    <IsActivate>false</IsActivate>
+    <StageId>TA901-MA901</StageId>
+    <limit>0</limit>
     <lockNum>0</lockNum>
-    <vol>1</vol>
-    <kkjc>10.0</kkjc>
-    <kp>0.0</kp>
-    <dkjc>0.0</dkjc>
-    <dp>10.0</dp>
+    <vol>5</vol>
+    <kkjc>10000</kkjc>
+    <kp>104.0</kp>
+    <dkjc>0</dkjc>
+    <dp>82.0</dp>
     <t1cj>0</t1cj>
     <t1dd>1</t1dd>
     <t2cj>1</t2cj>
@@ -917,12 +917,12 @@
     <t2cl>1</t2cl>
     <t2vol>5</t2vol>
     <cl>2</cl>
-    <autoCall>0</autoCall>
+    <autoCall>Close</autoCall>
     <jjkk>10</jjkk>
     <jjkp>10</jjkp>
     <jjdk>10</jjdk>
     <jjdp>10</jjdp>
-    <t1Weight>1</t1Weight>
+    <t1Weight>0.5</t1Weight>
     <t2Weight>1</t2Weight>
     <t2Ratio>1</t2Ratio>
     <zdjc>66</zdjc>
