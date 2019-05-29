@@ -153,7 +153,7 @@ namespace Communication
                         Thread.Sleep(1000);
                         //正式代码
                         
-#if RELEASE
+#if !DEBUG
                         if (response["response"]["errorid"].ToString() == "0")
                         {
 #endif
@@ -165,7 +165,7 @@ namespace Communication
                             {
                                 Messenger.Default.Send<GoToPageMessage>(msg);
                             });
-#if RELEASE
+#if !DEBUG
                         }
                         else
                         {
