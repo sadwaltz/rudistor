@@ -104,39 +104,43 @@ public class AsynchronousSocketListener
             }
             else if (content.Contains("inform"))
             {
-                String temp = "0587{\"cmd\":\"inform\",\"traceNo\":\"2ec197a7-392e-4e85-afa6-09ff2aecf95c\",\"request\":{\"whichGrid\":\"Grid02\",\"IsActivate\":false,\"IsNotActivate\":true,\"StageId\":\"Rb0000-ru0001\",\"limit\":\"5\",\"lockNum\":\"3\",\"vol\":\"1\",\"t1\":\"Rb0000\",\"t2\":\"ru0001\",\"incre\":\"1.0\",\"kkjc\":\"111.0\",\"kp\":\"222.0\",\"dkjc\":\"333.0\",\"dp\":\"444.0\",\"t1cj\":\"0\",\"t1dd\":\"0\",\"t2cj\":\"0\",\"t2dd\":\"0\",\"t2cl\":\"1\",\"t2vol\":\"2\",\"cl\":\"4\",\"autoCall\":\"Close\",\"jjkk\":\"555\",\"jjkp\":\"666\",\"jjdk\":\"777\",\"jjdp\":\"888\",\"t2Weight\":\"1\",\"t2Method\":\"0\",\"zdjc\":\"111\",\"zkjc\":\"222\",\"formatString\":\"F1\",\"IsInDesignMode\":false},\"response\":{\"errorid\":0,\"errormsg\":\"\"}}";
-
-                byte[] data = Encoding.UTF8.GetBytes(temp);
+                String cmd = "{\"cmd\":\"inform\",\"traceNo\":\"2ec197a7-392e-4e85-afa6-09ff2aecf95c\",\"request\":{\"whichGrid\":\"Grid02\",\"IsActivate\":false,\"IsNotActivate\":true,\"StageId\":\"Rb0000-ru0001\",\"limit\":\"5\",\"lockNum\":\"3\",\"vol\":\"1\",\"t1\":\"Rb0000\",\"t2\":\"ru0001\",\"incre\":\"1.0\",\"kkjc\":\"111.0\",\"kp\":\"222.0\",\"dkjc\":\"333.0\",\"dp\":\"444.0\",\"t1cj\":\"0\",\"t1dd\":\"0\",\"t2cj\":\"0\",\"t2dd\":\"0\",\"t2cl\":\"1\",\"t2vol\":\"2\",\"cl\":\"4\",\"autoCall\":\"Close\",\"jjkk\":\"555\",\"jjkp\":\"666\",\"jjdk\":\"777\",\"jjdp\":\"888\",\"t2Weight\":\"1\",\"t2Method\":\"0\",\"zdjc\":\"111\",\"zkjc\":\"222\",\"formatString\":\"F1\",\"IsInDesignMode\":false},\"response\":{\"errorid\":0,\"errormsg\":\"\"}}";
+                byte[] data = GenerateResponse(cmd);
                 handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
             }
             else if (content.Contains("QueryInstrument"))
             {
-                String temp = "0161{\"traceNo\":\"5902a541-4910-4cac-b31b-10d031c8e6f0\",\"response\":{\"errorid\":0,\"errormsg\":\"\",\"payload\":[\"IF1508\",\"IF1509\",\"IF1512\",\"IF1603\"]},\"cmd\":\"QueryInstrument\"}";
-                byte[] data = Encoding.UTF8.GetBytes(temp);
+                String cmd = "{\"traceNo\":\"5902a541-4910-4cac-b31b-10d031c8e6f0\",\"response\":{\"errorid\":0,\"errormsg\":\"\",\"payload\":[\"IF1508\",\"IF1509\",\"IF1512\",\"IF1603\"]},\"cmd\":\"QueryInstrument\"}";
+                byte[] data = GenerateResponse(cmd);
                 handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
             }
             else if (content.Contains("CloseAll"))
             {
                 String cmd = "{\"traceNo\":\"5902a541-4910-4cac-b31b-10d031c8e6f0\",\"response\":{\"errorid\":0,\"errormsg\":\"\"},\"cmd\":\"CloseAll\"}";
-                String temp = String.Format("{0:D4}{1}", cmd.Length, cmd);
-                byte[] data = Encoding.UTF8.GetBytes(temp);
+                byte[] data = GenerateResponse(cmd);
                 handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
-            }                
+            }
             else if (content.Contains("QueryPosition"))
             {
 
                 byte[] data;
-                String temp = "0912{\"traceNo\":\"58999ff5-6ac5-473f-a92f-f4d6b84e5f98\",\"response\":{\"errorid\":0,\"errormsg\":\"\",\"payload\":[{\"StageId\":31,\"T1\":\"al1603\",\"T2\":\"al1604\",\"Direction\":\"SELL\",\"RealPrice\":60,\"ExpPrice\":60,\"Volume\":1}],\"payload1\":[{\"name\":\"al1601\",\"cnt\":0},{\"name\":\"al1602\",\"cnt\":0},{\"name\":\"al1603\",\"cnt\":0},{\"name\":\"al1604\",\"cnt\":0},{\"name\":\"al1605\",\"cnt\":0},{\"name\":\"al1606\",\"cnt\":0},{\"name\":\"al1607\",\"cnt\":0},{\"name\":\"al1608\",\"cnt\":0},{\"name\":\"al1609\",\"cnt\":0},{\"name\":\"al1610\",\"cnt\":0},{\"name\":\"al1611\",\"cnt\":0},{\"name\":\"al1612\",\"cnt\":0},{\"name\":\"alefp\",\"cnt\":0},{\"name\":\"ni1601\",\"cnt\":0},{\"name\":\"ni1602\",\"cnt\":0},{\"name\":\"ni1603\",\"cnt\":0},{\"name\":\"ni1604\",\"cnt\":0},{\"name\":\"ni1605\",\"cnt\":0},{\"name\":\"ni1606\",\"cnt\":0},{\"name\":\"ni1607\",\"cnt\":0},{\"name\":\"ni1608\",\"cnt\":0},{\"name\":\"ni1609\",\"cnt\":0},{\"name\":\"ni1610\",\"cnt\":0},{\"name\":\"ni1611\",\"cnt\":0},{\"name\":\"ni1612\",\"cnt\":0},{\"name\":\"niefp\",\"cnt\":0}]},\"cmd\":\"QueryPosition\"}";
-                String temp1 = "0811{\"traceNo\":\"58999ff5-6ac5-473f-a92f-f4d6b84e5f98\",\"response\":{\"errorid\":0,\"errormsg\":\"\",\"payload\":[],\"payload1\":[{\"name\":\"al1601\",\"cnt\":0},{\"name\":\"al1602\",\"cnt\":0},{\"name\":\"al1603\",\"cnt\":0},{\"name\":\"al1604\",\"cnt\":0},{\"name\":\"al1605\",\"cnt\":0},{\"name\":\"al1606\",\"cnt\":0},{\"name\":\"al1607\",\"cnt\":0},{\"name\":\"al1608\",\"cnt\":0},{\"name\":\"al1609\",\"cnt\":0},{\"name\":\"al1610\",\"cnt\":0},{\"name\":\"al1611\",\"cnt\":0},{\"name\":\"al1612\",\"cnt\":0},{\"name\":\"alefp\",\"cnt\":0},{\"name\":\"ni1601\",\"cnt\":0},{\"name\":\"ni1602\",\"cnt\":0},{\"name\":\"ni1603\",\"cnt\":0},{\"name\":\"ni1604\",\"cnt\":0},{\"name\":\"ni1605\",\"cnt\":0},{\"name\":\"ni1606\",\"cnt\":0},{\"name\":\"ni1607\",\"cnt\":0},{\"name\":\"ni1608\",\"cnt\":0},{\"name\":\"ni1609\",\"cnt\":0},{\"name\":\"ni1610\",\"cnt\":0},{\"name\":\"ni1611\",\"cnt\":0},{\"name\":\"ni1612\",\"cnt\":0},{\"name\":\"niefp\",\"cnt\":0}]},\"cmd\":\"QueryPosition\"}";
+                String temp = "{\"traceNo\":\"58999ff5-6ac5-473f-a92f-f4d6b84e5f98\",\"response\":{\"errorid\":0,\"errormsg\":\"\",\"payload\":[{\"StageId\":31,\"T1\":\"al1603\",\"T2\":\"al1604\",\"Direction\":\"SELL\",\"RealPrice\":60,\"ExpPrice\":60,\"Volume\":1}],\"payload1\":[{\"name\":\"al1601\",\"cnt\":0},{\"name\":\"al1602\",\"cnt\":0},{\"name\":\"al1603\",\"cnt\":0},{\"name\":\"al1604\",\"cnt\":0},{\"name\":\"al1605\",\"cnt\":0},{\"name\":\"al1606\",\"cnt\":0},{\"name\":\"al1607\",\"cnt\":0},{\"name\":\"al1608\",\"cnt\":0},{\"name\":\"al1609\",\"cnt\":0},{\"name\":\"al1610\",\"cnt\":0},{\"name\":\"al1611\",\"cnt\":0},{\"name\":\"al1612\",\"cnt\":0},{\"name\":\"alefp\",\"cnt\":0},{\"name\":\"ni1601\",\"cnt\":0},{\"name\":\"ni1602\",\"cnt\":0},{\"name\":\"ni1603\",\"cnt\":0},{\"name\":\"ni1604\",\"cnt\":0},{\"name\":\"ni1605\",\"cnt\":0},{\"name\":\"ni1606\",\"cnt\":0},{\"name\":\"ni1607\",\"cnt\":0},{\"name\":\"ni1608\",\"cnt\":0},{\"name\":\"ni1609\",\"cnt\":0},{\"name\":\"ni1610\",\"cnt\":0},{\"name\":\"ni1611\",\"cnt\":0},{\"name\":\"ni1612\",\"cnt\":0},{\"name\":\"niefp\",\"cnt\":0}]},\"cmd\":\"QueryPosition\"}";
+                String temp1 = "{\"traceNo\":\"58999ff5-6ac5-473f-a92f-f4d6b84e5f98\",\"response\":{\"errorid\":0,\"errormsg\":\"\",\"payload\":[],\"payload1\":[{\"name\":\"al1601\",\"cnt\":0},{\"name\":\"al1602\",\"cnt\":0},{\"name\":\"al1603\",\"cnt\":0},{\"name\":\"al1604\",\"cnt\":0},{\"name\":\"al1605\",\"cnt\":0},{\"name\":\"al1606\",\"cnt\":0},{\"name\":\"al1607\",\"cnt\":0},{\"name\":\"al1608\",\"cnt\":0},{\"name\":\"al1609\",\"cnt\":0},{\"name\":\"al1610\",\"cnt\":0},{\"name\":\"al1611\",\"cnt\":0},{\"name\":\"al1612\",\"cnt\":0},{\"name\":\"alefp\",\"cnt\":0},{\"name\":\"ni1601\",\"cnt\":0},{\"name\":\"ni1602\",\"cnt\":0},{\"name\":\"ni1603\",\"cnt\":0},{\"name\":\"ni1604\",\"cnt\":0},{\"name\":\"ni1605\",\"cnt\":0},{\"name\":\"ni1606\",\"cnt\":0},{\"name\":\"ni1607\",\"cnt\":0},{\"name\":\"ni1608\",\"cnt\":0},{\"name\":\"ni1609\",\"cnt\":0},{\"name\":\"ni1610\",\"cnt\":0},{\"name\":\"ni1611\",\"cnt\":0},{\"name\":\"ni1612\",\"cnt\":0},{\"name\":\"niefp\",\"cnt\":0}]},\"cmd\":\"QueryPosition\"}";
                 if (!flag)
                 {
-                    data = Encoding.UTF8.GetBytes(temp);
+                    data = GenerateResponse(temp);
                     flag = true;
                 }
                 else
                 {
-                    data = Encoding.UTF8.GetBytes(temp1);
+                    data = GenerateResponse(temp1);
                 }
+                handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
+            }
+            else if (content.Contains("login"))
+            {
+                String cmd = "{\"traceNo\":\"b1bbfc9b-3655-4bce-ace9-c0cf438b8207\",\"response\":{\"errorid\":0,\"errormsg\":\"SUCCESS\"},\"cmd\":\"login\"}";
+                byte[] data = GenerateResponse(cmd);
                 handler.BeginSend(data, 0, data.Length, 0, new AsyncCallback(SendCallback), handler);
             }
             else
@@ -154,6 +158,13 @@ public class AsynchronousSocketListener
             handler.Close();
             //handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0, new AsyncCallback(ReadCallback), state);
         }
+    }
+
+    private static byte[] GenerateResponse(string cmd)
+    {
+        String temp = String.Format("{0:D4}{1}", cmd.Length, cmd);
+        byte[] data = Encoding.UTF8.GetBytes(temp);
+        return data;
     }
 
     private static string ResponseCmdUpdate(string request)

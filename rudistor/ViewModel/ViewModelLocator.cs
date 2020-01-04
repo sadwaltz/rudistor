@@ -17,6 +17,7 @@ using rudistor.Contents.LoginPage.ViewModel;
 using rudistor.Contents.ModifyModal.View;
 using rudistor.Contents.ModifyModal.ViewModel;
 using rudistor.Contents.ResetModal.ViewModel;
+using rudistor.Contents.TempPage;
 using rudistor.Contents.WorkPage.ViewModel;
 using rudistor.Model;
 using rudistor.Services;
@@ -49,8 +50,8 @@ namespace rudistor.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginControlViewModel>();
-            SimpleIoc.Default.Register<WorkerViewModel1>();
             SimpleIoc.Default.Register<WorkerViewModel>();
+            SimpleIoc.Default.Register<StrategyWorkViewModel>();
             SimpleIoc.Default.Register<ModifyModalViewModel>();
             SimpleIoc.Default.Register<ResetModalViewModel>();
             
@@ -86,20 +87,6 @@ namespace rudistor.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the Main property.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public WorkerViewModel1 WorkerViewModel1
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<WorkerViewModel1>();
-            }
-        }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
@@ -108,6 +95,17 @@ namespace rudistor.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<WorkerViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public StrategyWorkViewModel StrategyWorkViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<StrategyWorkViewModel>();
             }
         }
 

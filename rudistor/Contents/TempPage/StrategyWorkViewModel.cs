@@ -7,9 +7,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
 using rudistor.Contents.LoginPage.ViewModel;
+using rudistor.Contents.ModifyModal.View;
+using rudistor.Contents.ModifyModal.ViewModel;
 using rudistor.Contents.ResetModal.View;
 using rudistor.Contents.ResetModal.ViewModel;
-using rudistor.Contents.WorkPage.View;
+using rudistor.Contents.TempPage;
 using rudistor.Model;
 using rudistor.Services;
 using System;
@@ -26,7 +28,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 
-namespace rudistor.Contents.WorkPage.ViewModel
+namespace rudistor.Contents.TempPage
 {
     /// <summary>
     /// This class contains properties that a View can data bind to.
@@ -34,7 +36,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class WorkerViewModel : ViewModelBase
+    public class StrategyWorkViewModel : ViewModelBase
     {
         private class StrategyRunningStatus 
         {
@@ -208,7 +210,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
 
         #endregion
         #region constructor
-        public WorkerViewModel()
+        public StrategyWorkViewModel()
         {
 
             //生效所有策略

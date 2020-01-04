@@ -121,14 +121,20 @@
     <Compile Include="Contents\TempPage\StrategyWorkView.xaml.cs">
       <DependentUpon>StrategyWorkView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Contents\TempPage\StrategyWorkViewModel.cs" />
     <Compile Include="Contents\WorkPage\ViewModel\WorkerViewModel.cs" />
-    <Compile Include="Contents\WorkPage\ViewModel\WorkerViewModel1.cs" />
-    <Compile Include="Contents\WorkPage\View\WorkView.xaml.cs">
-      <DependentUpon>WorkView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Contents\ResetModal\ViewModel\ResetModalViewModel.cs" />
     <Compile Include="Contents\ResetModal\View\ResetModalView.xaml.cs">
       <DependentUpon>ResetModalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\WorkPage\View\OtherConfigView.xaml.cs">
+      <DependentUpon>OtherConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\WorkPage\View\StrategyGridView.xaml.cs">
+      <DependentUpon>StrategyGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\WorkPage\View\StrategyWorkView2.xaml.cs">
+      <DependentUpon>StrategyWorkView2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="GoToPageMessage.cs" />
@@ -199,13 +205,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Contents\WorkPage\View\WorkView.xaml">
-      <SubType>Form</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Contents\ResetModal\View\ResetModalView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Contents\WorkPage\View\OtherConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Contents\WorkPage\View\StrategyGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Contents\WorkPage\View\StrategyWorkView2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +296,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

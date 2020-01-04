@@ -81,11 +81,11 @@
                 </MultiBinding>
             </Label.Content>
         </Label>
-        <Button Content="修改" Command="{Binding WorkerViewModel.ModifyStage,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="5" Canvas.Top="11" Width="50"/>
-        <Button Content="重置仓位" Command="{Binding WorkerViewModel.ResetPosition,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="5" Canvas.Top="275" Width="60"/>
-        <Button Content="关闭" Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Command="{Binding WorkerViewModel.Activate,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="37" Width="60" Height="20" Background="Green"/>
-        <Button Content="打开" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Command="{Binding WorkerViewModel.Activate,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="37" Width="60" Height="20" Background="Red"/>
-        <Button Content="发送参数" Command="{Binding WorkerViewModel.Send,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="60" Width="60" Height="20" />
+        <Button Content="修改" Command="{Binding StrategyWorkViewModel.ModifyStage,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="5" Canvas.Top="11" Width="50"/>
+        <Button Content="重置仓位" Command="{Binding StrategyWorkViewModel.ResetPosition,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="5" Canvas.Top="275" Width="60"/>
+        <Button Content="关闭" Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Command="{Binding StrategyWorkViewModel.Activate,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="37" Width="60" Height="20" Background="Green"/>
+        <Button Content="打开" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Command="{Binding StrategyWorkViewModel.Activate,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="37" Width="60" Height="20" Background="Red"/>
+        <Button Content="发送参数" Command="{Binding StrategyWorkViewModel.Send,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="60" Width="60" Height="20" />
         <Label Content="{Binding limit, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=限}" Canvas.Left="5" Canvas.Top="35" Style="{StaticResource ResourceKey=EditLabel}" />
         <xctk:IntegerUpDown Height="20" Canvas.Left="5"  Text="10" Canvas.Top="55" Width="40" FormatString="N0" Value="{Binding limit}" Increment="1" Maximum="1000" Minimum="0"/>
         <Label Content="{Binding lockNum, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=锁}" Canvas.Left="50" Canvas.Top="35" Style="{StaticResource ResourceKey=EditLabel}" />

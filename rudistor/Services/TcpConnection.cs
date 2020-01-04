@@ -4,6 +4,7 @@ using MvvmControlChange;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;
+using System.Configuration;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -98,7 +99,7 @@ namespace Communication
         public event Action<TcpConnection> OnConnected, OnDisconnected;
         public event Action<SocketAsyncEventArgs, AsyncUserToken> ReportReceivedProgress, ReportSendProgress;
 
-        
+
         /*
         private static TcpConnection _instance;
 
@@ -110,12 +111,12 @@ namespace Communication
             }
             return _instance;
         }*/
-        public TcpConnection() 
+        public TcpConnection()
         {
             try
             {
                 this.clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                
+
                 this.closeGraceful = false;
                 this.onDisconnectedRaised = 0;
                 OnConnected += TcpConnection_OnConnected;
@@ -128,7 +129,7 @@ namespace Communication
 
         void TcpConnection_OnDisconnected(TcpConnection obj)
         {
-            
+
             logger.Debug("server disconnected!!!");
             var msg = new GoToPageMessage() { PageName = "LoginControl" };
             DispatcherHelper.CheckBeginInvokeOnUI(
@@ -140,8 +141,12 @@ namespace Communication
 
         void TcpConnection_OnDataReceivedCompleted(TcpConnection conn, byte[] receivedData)
         {
+
+            Boolean loginResult = false;
+            String mainWorkView = "StrategyWorkView2";
+
             //Console.WriteLine(Encoding.UTF8.GetString(receivedData));
-            logger.Debug("message received : "+Encoding.UTF8.GetString(receivedData));
+            logger.Debug("message received : " + Encoding.UTF8.GetString(receivedData));
             try
             {
 
@@ -151,29 +156,30 @@ namespace Communication
                 {
                     case "login":
                         Thread.Sleep(1000);
-                        //正式代码
-                        
-#if !DEBUG
-                        if (response["response"]["errorid"].ToString() == "0")
+                        if (null != ConfigurationManager.AppSettings["mainWorkView"])
                         {
-#endif
-                        //var msg = new GoToPageMessage() { PageName = "StrategyWorkView" };
-                        //old version
-                        var msg = new GoToPageMessage() { PageName = "StrategyWorkView" };
+                            mainWorkView = "StrategyWorkView";
+                        }
+                        //正式代码
+                        loginResult = (response["response"]["errorid"].ToString() == "0");
+                        if (loginResult)
+                        {
+                            //var msg = new GoToPageMessage() { PageName = "StrategyWorkView" };
+                            //old version
+                            var msg = new GoToPageMessage() { PageName = mainWorkView };
                             DispatcherHelper.CheckBeginInvokeOnUI(
                             () =>
                             {
                                 Messenger.Default.Send<GoToPageMessage>(msg);
                             });
-#if !DEBUG
                         }
                         else
                         {
                             System.Windows.MessageBox.Show(response["response"]["errormsg"].ToString(), "登录失败");
                         }
-#endif
+
                         //test code
-                        
+
                         /*
                         var msg = new GoToPageMessage() { PageName = "WorkView" };
                         DispatcherHelper.CheckBeginInvokeOnUI(
@@ -217,7 +223,7 @@ namespace Communication
         {
             //this.Connected = (e.SocketError == SocketError.Success);
             logger.Debug("server connected!!!");
-            
+
         }
 
         internal TcpConnection(Socket clientSocket)
@@ -242,7 +248,7 @@ namespace Communication
 
         ~TcpConnection()
         {
-            if (this.clientSocket !=null && this.clientSocket.Connected)
+            if (this.clientSocket != null && this.clientSocket.Connected)
             {
                 this.CloseConnection();
             }
@@ -370,7 +376,7 @@ namespace Communication
             {
                 switch (e.LastOperation)
                 {
-                    case  SocketAsyncOperation.Connect:
+                    case SocketAsyncOperation.Connect:
                         ProcessConnected(e);
                         break;
                     case SocketAsyncOperation.Disconnect:
@@ -432,7 +438,7 @@ namespace Communication
                     ReportReceivedProgress(e, token);
 
                 bool hasCompletedMessage = true;
-                while (hasCompletedMessage) 
+                while (hasCompletedMessage)
                 {
                     if (token.IsHead) // is head, read the prefix length
                     {
@@ -445,7 +451,7 @@ namespace Communication
                         Buffer.BlockCopy(e.Buffer, 0, lengthTemp, 0, lengthTemp.Length);
                         String len = Encoding.UTF8.GetString(lengthTemp);
                         //报文长度不包含报文头
-                        token.BytesExpected = Int32.Parse(len) +4;
+                        token.BytesExpected = Int32.Parse(len) + 4;
                         if (token.BytesExpected == 0)
                         {
                             // heartbeat message
@@ -491,7 +497,7 @@ namespace Communication
                         // reset the bytes of valid data in the buffer
                         token.BytesReceivedStatic = bytesLeftInBuffer;
                     }
-                } 
+                }
 
                 // append the following data to the buffer from offset position
                 offset = token.BytesReceivedStatic; // start position of the buffer
@@ -566,7 +572,7 @@ namespace Communication
             }
             catch { }
 
-            
+
         }
 
         public void SendMessage(byte[] data)
