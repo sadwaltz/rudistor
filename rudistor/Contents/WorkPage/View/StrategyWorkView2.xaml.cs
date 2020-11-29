@@ -13,14 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace rudistor.Contents.TempPage
+namespace rudistor.Contents.WorkPage.View
 {
     /// <summary>
     /// StrategyWorkView.xaml 的交互逻辑
     /// </summary>
-    public partial class StrategyWorkView : System.Windows.Controls.UserControl
+    public partial class StrategyWorkView2 : System.Windows.Controls.UserControl
     {
-        public StrategyWorkView()
+        public StrategyWorkView2()
         {
             InitializeComponent();
         }
@@ -29,12 +29,12 @@ namespace rudistor.Contents.TempPage
             var window = Window.GetWindow(this);
             window.WindowState = System.Windows.WindowState.Maximized;
             window.PreviewKeyDown += WorkView_KeyDown;
-            ((StrategyWorkViewModel)this.DataContext).workviewLoaded();
+            ((WorkerViewModel)this.DataContext).workviewLoaded();
 
         }
         void WorkView_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            ((StrategyWorkViewModel)this.DataContext).enterEventHandler(sender, e);
+            ((WorkerViewModel)this.DataContext).enterEventHandler(sender, e);
         }
 
     }

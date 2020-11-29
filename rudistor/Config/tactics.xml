@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <Tactics type="T1">
+    <name>0-股指策略</name>
+    <value>0</value>
+  </Tactics>
+  <Tactics type="T1">
+    <name>1-mm策略</name>
+    <value>1</value>
+  </Tactics>
+  <Tactics type="T1">
+    <name>2-商品策略</name>
+    <value>2</value>
+  </Tactics>
+  <Tactics type="T1">
+    <name>3-商品策略2</name>
+    <value>3</value>
+  </Tactics>
+  <Tactics type="T1">
+    <name>4-认购+认估</name>
+    <value>4</value>
+  </Tactics>
+  <Tactics type="T1">
+    <name>5-认购+认估MM</name>
+    <value>5</value>
+  </Tactics>
+  <Tactics type="T2">
+    <name>0-直接对手价报单</name>
+    <value>0</value>
+  </Tactics>
+  <Tactics type="T2">
+    <name>1-按指定价报单</name>
+    <value>1</value>
+  </Tactics>
+  <Tactics type="T2Method">
+    <name>\-</name>
+    <value>0</value>
+  </Tactics>
+  <Tactics type="T2Method">
+    <name>\/</name>
+    <value>1</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>0-无夜盘</name>
+	<value>0</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>1-23:00:00</name>
+	<value>1</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>2-23:30:00</name>
+	<value>2</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>3-01:00:00</name>
+	<value>3</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>4-02:00:00</name>
+	<value>4</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+	<name>5-02:30:00</name>
+	<value>5</value>
+  </Tactics>
+</Config>

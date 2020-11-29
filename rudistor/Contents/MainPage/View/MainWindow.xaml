@@ -8,7 +8,7 @@
         xmlns:ignore="http://www.ignore.com"
         mc:Ignorable="d ignore"
         Title="rudistor"
-        DataContext="{Binding Main, Source={StaticResource Locator}}" Width="600" Height="400" SizeToContent="WidthAndHeight" ResizeMode="CanResizeWithGrip">
+        DataContext="{Binding Main, Source={StaticResource Locator}}" Height="1000" Width="960" SizeToContent="WidthAndHeight" ResizeMode="CanResizeWithGrip">
     
     <Window.Resources>
         <ResourceDictionary>
@@ -17,10 +17,12 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    <ScrollViewer Grid.Column="1" Name="scrollViewer1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" VerticalAlignment="Top">
 
-    <Grid x:Name="LayoutRoot">
-        
-        <ContentControl  Name="contentControl1"/>
+            <ContentControl  Name="contentControl1"/>
 
-    </Grid>
+        </Grid>
+    </ScrollViewer>
+    
 </Window>

@@ -1,0 +1,23 @@
+﻿<Window x:Class="rudistor.Contents.WorkPage.View.OtherConfigView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        Title="修改" Height="200" Width="240">
+    <Canvas Margin="0,0,0,312">
+        <Canvas.Resources>
+            <XmlDataProvider x:Key="StaticsData" Source="pack://siteoforigin:,,,/Config/tactics.xml" XPath="/Config" />
+        </Canvas.Resources>
+        <Label Content="腿一" Canvas.Left="10" Canvas.Top="10"/>
+        <ComboBox  ItemsSource="{Binding WorkerViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t1,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="10" Width="120"/>
+        <Label Content="腿二" Canvas.Left="10" Canvas.Top="40"/>
+        <ComboBox  ItemsSource="{Binding WorkerViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t2,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="40" Width="120"/>
+        <Label Content="夜盘收盘" Canvas.Left="10" Canvas.Top="70"/>
+        <ComboBox Canvas.Left="100" Canvas.Top="70" Width="120"  DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding nightClosingTime,Mode=TwoWay}">
+            <ComboBox.ItemsSource>
+                <Binding Source="{StaticResource StaticsData}" XPath="Tactics[@type='NightClosingTime']" Mode="OneTime"></Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <Button Content="确定" x:Name="confirm" Canvas.Left="75" Canvas.Top="110" Width="60" Click="confirm_Click"/>
+        <Button Content="取消" x:Name="cancel" Canvas.Left="150" Canvas.Top="110" Width="60" Click="cancel_Click"/>
+    </Canvas>
+</Window>

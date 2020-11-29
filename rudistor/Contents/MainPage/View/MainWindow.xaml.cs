@@ -3,6 +3,7 @@ using rudistor.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 using MvvmControlChange;
 using rudistor.Contents.LoginPage.View;
+using rudistor.Contents.TempPage;
 using rudistor.Contents.WorkPage.View;
 
 namespace rudistor
@@ -26,8 +27,8 @@ namespace rudistor
                 );
             GoToLoginControl();
         }
-        private LoginControl _loginControl;
 
+        private LoginControl _loginControl;
         private LoginControl loginControl
         {
             get
@@ -37,16 +38,29 @@ namespace rudistor
                 return _loginControl;
             }
         }
-        private WorkView _workView;
-        private WorkView workView
+
+        private StrategyWorkView _strategyWorkView;
+        private StrategyWorkView strategyWorkView
         {
             get
             {
-                if (_workView == null)
-                    _workView = new WorkView();
-                return _workView;
+                if (_strategyWorkView == null)
+                    _strategyWorkView = new StrategyWorkView();
+                return _strategyWorkView;
             }
         }
+
+        private StrategyWorkView2 _strategyWorkView2;
+        private StrategyWorkView2 strategyWorkView2
+        {
+            get
+            {
+                if (_strategyWorkView2 == null)
+                    _strategyWorkView2 = new StrategyWorkView2();
+                return _strategyWorkView2;
+            }
+        }
+
         private object ReceiveMessage(GoToPageMessage action)
         {
             //            this.contentControl1.Content = this.Page2View;
@@ -57,11 +71,15 @@ namespace rudistor
                     if (this.contentControl1.Content != this.loginControl)
                         this.contentControl1.Content = this.loginControl;
                     break;
-                case "WorkView":
-                    if (this.contentControl1.Content != this.workView)
-                        this.contentControl1.Content = this.workView;
+               case "StrategyWorkView":
+                    if (this.contentControl1.Content != this.strategyWorkView)
+                        this.contentControl1.Content = this.strategyWorkView;
                     break;
-                default:
+               case "StrategyWorkView2":
+                    if (this.contentControl1.Content != this.strategyWorkView2)
+                        this.contentControl1.Content = this.strategyWorkView2;
+                    break;
+               default:
                     break;
             }
 

@@ -5,10 +5,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:View="clr-namespace:rudistor.Contents.TempPage" 
+    xmlns:localConverter="clr-namespace:rudistor.Model.converter"
+    xmlns:local="clr-namespace:rudistor.Model"
+    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
     x:Class="rudistor.Contents.TempPage.StrategyGridView" 
     mc:Ignorable="d" 
-    d:DesignHeight="330" d:DesignWidth="235">
+    d:DesignHeight="330" d:DesignWidth="235" Loaded="UserControl_Loaded_1"
+    x:Name="parent">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/>
+        <localConverter:LabelConverter x:Key="LabelConverter"/>
+        <localConverter:RadioButtonColorConverter x:Key="RadioButtonColorConverter"/>
+        <localConverter:MultiGridHeaderConverter x:Key="MultiGridHeaderConverter"/>
+        <localConverter:MultiGridBottomConverter x:Key="MultiGridBottomConverter"/>
+        <localConverter:EnumMatchToBooleanConverter x:Key="EnumMatchToBooleanConverter" />
         <Style TargetType="{x:Type Label}">
             <Setter Property="FontSize" Value="9" />
         </Style>
@@ -16,47 +26,106 @@
             <Setter Property="FontSize" Value="12" />
         </Style>
         <Style TargetType="{x:Type Button}" >
-            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontSize" Value="12" />
         </Style>
+        <Style TargetType="{x:Type Canvas}" >
+            <Setter Property="Background" Value="#FFC8C8C8" />
+        </Style>
+        <Style TargetType="{x:Type xctk:IntegerUpDown}" x:Key="AutoCallStyle">
+            <Setter Property="Background" Value="AntiqueWhite" />
+        </Style>
+        <!--
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="9" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="EditLabel">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style TargetType="{x:Type Button}" >
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#FF3F3F46" />
+        </Style>
+        <Style TargetType="{x:Type RadioButton}" >
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#FF3F3F46" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}" >
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#FF3F3F46" />
+        </Style>
+        <Style TargetType="{x:Type xctk:IntegerUpDown}" >
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#FF3F3F46" />
+        </Style>
+        <Style TargetType="{x:Type xctk:DecimalUpDown}" >
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#FF3F3F46" />
+        </Style>
+        <Style TargetType="{x:Type Canvas}" >
+            <Setter Property="Background" Value="#FFECECEC" />
+        </Style>
+        -->
     </UserControl.Resources>
 
     <Canvas HorizontalAlignment="Left" Height="330" VerticalAlignment="Top" Width="235">
-        <Label Content="T1 - T2 商品策略 对手价 PVol 10" Canvas.Left="0" Canvas.Top="10"/>
-        <Button Content="修改" Canvas.Left="170" Canvas.Top="11" Width="60"/>
-        <Button Content="重置仓位" Canvas.Left="5" Canvas.Top="275" Width="60"/>
-        <Button Content="关闭" Canvas.Left="170" Canvas.Top="35" Width="60" Background="Green"/>
-        <Button Content="发送参数" Canvas.Left="170" Canvas.Top="56" Width="60"/>
-        <Label Content="限仓 10" Canvas.Left="5" Canvas.Top="35"/>
-        <xctk:IntegerUpDown Height="20" Canvas.Left="5"  Text="10" Canvas.Top="55" Width="40"/>
-        <Label Content="锁仓 10" Canvas.Left="50" Canvas.Top="35"/>
-        <xctk:IntegerUpDown Height="20" Canvas.Left="52" Text="10" Canvas.Top="55" Width="40"/>
-        <Label Content="每笔 10" Canvas.Left="95" Canvas.Top="35"/>
-        <xctk:IntegerUpDown Height="20" Canvas.Left="98" Text="10" Canvas.Top="55" Width="40"/>
-        <Label Content="空开价差" Canvas.Left="5" Canvas.Top="85"/>
-        <TextBox Height="24" Canvas.Left="5" TextWrapping="Wrap" Text="999" Canvas.Top="110" Width="60" IsEnabled="False"/>
-        <Label Content="空开 10" Canvas.Left="75" Canvas.Top="85" Style="{StaticResource ResourceKey=EditLabel}"/>
-        <xctk:DecimalUpDown Height="24" Canvas.Left="75" Text="999" Canvas.Top="110" Width="60"/>
-        <Label Content="空平 10" Canvas.Left="150" Canvas.Top="85" Style="{StaticResource ResourceKey=EditLabel}"/>
-        <xctk:DecimalUpDown Height="24" Canvas.Left="150" Text="999" Canvas.Top="110" Width="60"/>
-        <Label Content="多开价差" Canvas.Left="5" Canvas.Top="135" IsEnabled="False"/>
-        <TextBox Height="24" Canvas.Left="5" TextWrapping="Wrap" Text="999" Canvas.Top="160" Width="60" IsEnabled="False"/>
-        <Label Content="多开 10" Canvas.Left="75" Canvas.Top="135" Style="{StaticResource ResourceKey=EditLabel}"/>
-        <xctk:DecimalUpDown Height="24" Canvas.Left="75" Text="999" Canvas.Top="160" Width="60"/>
-        <Label Content="多平 10" Canvas.Left="150" Canvas.Top="135" Style="{StaticResource ResourceKey=EditLabel}"/>
-        <xctk:DecimalUpDown Height="24" Canvas.Left="150" Text="999" Canvas.Top="160" Width="60"/>
+        <Label  Canvas.Left="55" Canvas.Top="0" Content="{Binding StageId, Mode=OneWay}" Style="{StaticResource ResourceKey=EditLabel}" />
+        <Label  Canvas.Left="55" Canvas.Top="15">
+            <Label.Content>
+                <MultiBinding Converter="{StaticResource MultiGridHeaderConverter}">
+                    <Binding Path="cl" />
+                    <Binding Path="t2cl" />
+                    <Binding Path="t2vol" />
+                </MultiBinding>
+            </Label.Content>
+        </Label>
+        <Button Content="修改" Command="{Binding StrategyWorkViewModel.ModifyStage,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="5" Canvas.Top="11" Width="50"/>
+        <Button Content="重置仓位" Command="{Binding StrategyWorkViewModel.ResetPosition,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="5" Canvas.Top="275" Width="60"/>
+        <Button Content="关闭" Visibility="{Binding IsActivate, Converter={StaticResource BoolVisibilityConverter}}" Command="{Binding StrategyWorkViewModel.Activate,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="37" Width="60" Height="20" Background="Green"/>
+        <Button Content="打开" Visibility="{Binding IsNotActivate, Converter={StaticResource BoolVisibilityConverter}}" Command="{Binding StrategyWorkViewModel.Activate,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="37" Width="60" Height="20" Background="Red"/>
+        <Button Content="发送参数" Command="{Binding StrategyWorkViewModel.Send,Mode=OneWay,Source={StaticResource Locator}}" CommandParameter="{Binding whichGrid}" Canvas.Left="170" Canvas.Top="60" Width="60" Height="20" />
+        <Label Content="{Binding limit, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=限}" Canvas.Left="5" Canvas.Top="35" Style="{StaticResource ResourceKey=EditLabel}" />
+        <xctk:IntegerUpDown Height="20" Canvas.Left="5"  Text="10" Canvas.Top="55" Width="40" FormatString="N0" Value="{Binding limit}" Increment="1" Maximum="1000" Minimum="0"/>
+        <Label Content="{Binding lockNum, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=锁}" Canvas.Left="50" Canvas.Top="35" Style="{StaticResource ResourceKey=EditLabel}" />
+        <xctk:IntegerUpDown Height="20" Canvas.Left="52" Text="10" Canvas.Top="55" Width="40" FormatString="N0" Value="{Binding lockNum}" Increment="1" Maximum="1000" Minimum="0"/>
+        <Label Content="{Binding vol, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=每}" Canvas.Left="95" Canvas.Top="35" Style="{StaticResource ResourceKey=EditLabel}" />
+        <xctk:IntegerUpDown Height="20" Canvas.Left="98" Text="10" Canvas.Top="55" Width="40" FormatString="N0" Value="{Binding vol}" Increment="1" Maximum="1000" Minimum="0"/>
+        <Label Content="做空价差" Canvas.Left="5" Canvas.Top="85" />
+        <TextBox Height="24" Canvas.Left="5" TextWrapping="Wrap" Text="{Binding zkjc}" Canvas.Top="110" Width="60" IsEnabled="False"/>
+        <Label Content="{Binding kkjc, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=空开}" Canvas.Left="50" Canvas.Top="85" Style="{StaticResource ResourceKey=EditLabel}" />
+        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding kkjc}" Increment="{Binding incre}" Maximum="10000" Minimum="-10000" Canvas.Left="75" Text="999" Canvas.Top="110" Width="60"/>
+        <Label Content="{Binding kp, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=空平}" Canvas.Left="140" Canvas.Top="85" Style="{StaticResource ResourceKey=EditLabel}" />
+        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding kp}" Increment="{Binding incre}" Maximum="10000" Minimum="-10000" Canvas.Left="150" Text="999" Canvas.Top="110" Width="60"/>
+        <Label Content="做多价差" Canvas.Left="5" Canvas.Top="135" />
+        <TextBox Height="24" Canvas.Left="5" TextWrapping="Wrap" Text="{Binding zdjc}" Canvas.Top="160" Width="60" IsEnabled="False" />
+        <Label Content="{Binding dkjc, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=多开}" Canvas.Left="50" Canvas.Top="135" Style="{StaticResource ResourceKey=EditLabel}" />
+        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding dkjc}" Increment="{Binding incre}" Maximum="10000" Minimum="-10000" Canvas.Left="75" Text="999" Canvas.Top="160" Width="60"/>
+        <Label Content="{Binding dp, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=多平}" Canvas.Left="140" Canvas.Top="135" Style="{StaticResource ResourceKey=EditLabel}" />
+        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding dp}" Increment="{Binding incre}" Maximum="10000" Minimum="-10000" Canvas.Left="150" Text="999" Canvas.Top="160" Width="60"/>
         <Label Content="自动报单" Canvas.Left="5" Canvas.Top="190"/>
-        <RadioButton Content="关闭" Canvas.Left="5" Canvas.Top="215"/>
-        <RadioButton Content="时间1" Canvas.Left="5" Canvas.Top="235"/>
-        <RadioButton Content="时间2" Canvas.Left="5" Canvas.Top="255"/>
-        <Label Content="间距空开 10" Canvas.Left="75" Canvas.Top="190" Style="{StaticResource ResourceKey=EditLabel}"/>
-        <xctk:DecimalUpDown Height="24" Canvas.Left="75" Text="999" Canvas.Top="215" Width="60"/>
-        <Label Content="空平 10" Canvas.Left="150" Canvas.Top="190" Style="{StaticResource ResourceKey=EditLabel}"/>
-        <xctk:DecimalUpDown Height="24" Canvas.Left="150" Text="999" Canvas.Top="215" Width="60"/>
-        <Label Content="间距多开 10" Canvas.Left="75" Canvas.Top="240" Style="{StaticResource ResourceKey=EditLabel}"/>
-        <xctk:DecimalUpDown Height="24" Canvas.Left="75" Text="999" Canvas.Top="265" Width="60"/>
-        <Label Content="多平 10" Canvas.Left="150" Canvas.Top="240" Style="{StaticResource ResourceKey=EditLabel}"/>
-        <xctk:DecimalUpDown Height="24" Canvas.Left="150" Text="999" Canvas.Top="265" Width="60"/>
-        <Label Content="腿一超价0|腿一等待1|腿二超价0|腿二等待0" Canvas.Left="5" Canvas.Top="300"/>
+        <RadioButton GroupName="{Binding whichGrid}" Content="关闭" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter={x:Static local:AutoCallStatus.Close}}" Foreground="{Binding autoCall, Mode=OneWay, Converter={StaticResource RadioButtonColorConverter},ConverterParameter={x:Static local:AutoCallStatus.Close}}" Canvas.Left="5" Canvas.Top="215" />
+        <RadioButton GroupName="{Binding whichGrid}" Content="时间1" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter={x:Static local:AutoCallStatus.Time1}}" Foreground="{Binding autoCall, Mode=OneWay, Converter={StaticResource RadioButtonColorConverter},ConverterParameter={x:Static local:AutoCallStatus.Time1}}" Canvas.Left="5" Canvas.Top="235" />
+        <RadioButton GroupName="{Binding whichGrid}" Content="时间2" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter={x:Static local:AutoCallStatus.Time2}}" Foreground="{Binding autoCall, Mode=OneWay, Converter={StaticResource RadioButtonColorConverter},ConverterParameter={x:Static local:AutoCallStatus.Time2}}" Canvas.Left="5" Canvas.Top="255" />
+        <Label Content="{Binding jjkk, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=间距空开}" Canvas.Left="50" Canvas.Top="190" Style="{StaticResource ResourceKey=EditLabel}" />
+        <xctk:IntegerUpDown Height="24" FormatString="N0" Value="{Binding jjkk}" Increment="1" Maximum="99" Minimum="1" Canvas.Left="75" Text="1" Canvas.Top="215" Width="60" Style="{StaticResource ResourceKey=AutoCallStyle}" />
+        <Label Content="{Binding jjkp, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=空平}" Canvas.Left="140" Canvas.Top="190"  Style="{StaticResource ResourceKey=EditLabel}"/>
+        <xctk:IntegerUpDown Height="24" FormatString="N0" Value="{Binding jjkp}" Increment="1" Maximum="99" Minimum="1" Canvas.Left="150" Text="1" Canvas.Top="215" Width="60" Style="{StaticResource ResourceKey=AutoCallStyle}" />
+        <Label Content="{Binding jjdk, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=间距多开}" Canvas.Left="50" Canvas.Top="240" Style="{StaticResource ResourceKey=EditLabel}" />
+        <xctk:IntegerUpDown Height="24" FormatString="N0" Value="{Binding jjdk}" Increment="1" Maximum="99" Minimum="1" Canvas.Left="75" Text="1" Canvas.Top="265" Width="60" Style="{StaticResource ResourceKey=AutoCallStyle}" />
+        <Label Content="{Binding jjdp, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=多平}" Canvas.Left="140" Canvas.Top="240" Style="{StaticResource ResourceKey=EditLabel}" />
+        <xctk:IntegerUpDown Height="24" FormatString="N0" Value="{Binding jjdp}" Increment="1" Maximum="99" Minimum="1" Canvas.Left="150" Text="1" Canvas.Top="265" Width="60" Style="{StaticResource ResourceKey=AutoCallStyle}" />
+        <Label  Canvas.Left="5" Canvas.Top="300" Style="{StaticResource ResourceKey=EditLabel}">
+            <Label.Content>
+                <MultiBinding Converter="{StaticResource MultiGridBottomConverter}">
+                    <Binding Path="t1cj" />
+                    <Binding Path="t1dd" />
+                    <Binding Path="t2cj" />
+                    <Binding Path="t2dd" />
+                </MultiBinding>
+            </Label.Content>
+        </Label>
     </Canvas>
 
 </UserControl>

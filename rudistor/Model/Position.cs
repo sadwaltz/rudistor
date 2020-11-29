@@ -12,7 +12,7 @@ namespace rudistor.Model
         public String StageID
         {
             get { return stageID; }
-            set { stageID = value; }
+            set { stageID = beautifiy(value); }
         }
         public String T1
         {
@@ -69,6 +69,14 @@ namespace rudistor.Model
             this.expPrice = p6;
             this.volume = p7;
             
+        }
+
+        private string beautifiy(string stageID)
+        {
+            if (stageID == null)
+                return null;
+            int pos = int.Parse(stageID);
+            return string.Format("{0}-{1}", pos / 8 + 1, pos % 8 + 1);
         }
     }
     public class Canceled

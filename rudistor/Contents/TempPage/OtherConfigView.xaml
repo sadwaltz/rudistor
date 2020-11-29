@@ -1,31 +1,51 @@
 ﻿<Window x:Class="rudistor.Contents.TempPage.OtherConfigView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="修改" Height="410" Width="240">
-    <Canvas>
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        Title="修改" Height="485" Width="240">
+    <Canvas Margin="0,0,0,20">
+        <Canvas.Resources>
+            <XmlDataProvider x:Key="StaticsData" Source="pack://siteoforigin:,,,/Config/tactics.xml" XPath="/Config" />
+        </Canvas.Resources>
         <Label Content="腿一" Canvas.Left="10" Canvas.Top="10"/>
-        <ComboBox Canvas.Left="100" Canvas.Top="10" Width="120"/>
+        <ComboBox  ItemsSource="{Binding StrategyWorkViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t1,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="10" Width="120"/>
         <Label Content="腿二" Canvas.Left="10" Canvas.Top="40"/>
-        <ComboBox Canvas.Left="100" Canvas.Top="40" Width="120"/>
+        <ComboBox  ItemsSource="{Binding StrategyWorkViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t2,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="40" Width="120"/>
         <Label Content="策略" Canvas.Left="10" Canvas.Top="70"/>
-        <ComboBox Canvas.Left="100" Canvas.Top="70" Width="120"/>
+        <ComboBox Canvas.Left="100" Canvas.Top="70" Width="120"   DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding cl,Mode=TwoWay,diag:PresentationTraceSources.TraceLevel=High}" >
+            <ComboBox.ItemsSource>
+                <Binding Source="{StaticResource StaticsData}" XPath="Tactics[@type='T1']" Mode="OneTime" diag:PresentationTraceSources.TraceLevel="High"></Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
         <Label Content="腿二策略" Canvas.Left="10" Canvas.Top="100"/>
-        <ComboBox Canvas.Left="100" Canvas.Top="100" Width="120"/>
-        <Label Content="腿二配比" Canvas.Left="10" Canvas.Top="130"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="1" Canvas.Left="100" Canvas.Top="130" Width="120"/>
-        <Label Content="减/除" Canvas.Left="10" Canvas.Top="160"/>
-        <ComboBox Canvas.Left="100" Canvas.Top="160" Width="120"/>
-        <Label Content="腿一超价" Canvas.Left="10" Canvas.Top="190"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="0" Canvas.Left="100" Canvas.Top="190" Width="120"/>
-        <Label Content="腿一等待" Canvas.Left="10" Canvas.Top="220"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="1" Canvas.Left="100" Canvas.Top="220" Width="120"/>
-        <Label Content="腿二超价" Canvas.Left="10" Canvas.Top="250"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="0" Canvas.Left="100" Canvas.Top="250" Width="120"/>
-        <Label Content="腿二等待" Canvas.Left="10" Canvas.Top="280"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="0" Canvas.Left="100" Canvas.Top="280" Width="120"/>
-        <Label Content="Permit Vol" Canvas.Left="10" Canvas.Top="310"/>
-        <TextBox Height="24" TextWrapping="Wrap" Text="10" Canvas.Left="100" Canvas.Top="310" Width="120"/>
-        <Button Content="确定" Canvas.Left="75" Canvas.Top="350" Width="60"/>
-        <Button Content="取消" Canvas.Left="150" Canvas.Top="350" Width="60"/>
+        <ComboBox Canvas.Left="100" Canvas.Top="100" Width="120"  DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding t2cl,Mode=TwoWay}">
+            <ComboBox.ItemsSource>
+                <Binding Source="{StaticResource StaticsData}" XPath="Tactics[@type='T2']" Mode="OneTime"></Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <Label Content="腿一配比" Canvas.Left="10" Canvas.Top="130"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t1Weight,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="130" Width="120"/>
+        <Label Content="腿二配比" Canvas.Left="10" Canvas.Top="160"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2Weight,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="160" Width="120"/>
+        <Label Content="腿二倍数" Canvas.Left="10" Canvas.Top="190"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2Ratio,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="190" Width="120"/>
+        <Label Content="腿一超价" Canvas.Left="10" Canvas.Top="220"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t1cj,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="220" Width="120"/>
+        <Label Content="腿一等待" Canvas.Left="10" Canvas.Top="250"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t1dd,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="250" Width="120"/>
+        <Label Content="腿二超价" Canvas.Left="10" Canvas.Top="280"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2cj,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="280" Width="120"/>
+        <Label Content="腿二等待" Canvas.Left="10" Canvas.Top="310"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2dd,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="310" Width="120"/>
+        <Label Content="Permit Vol" Canvas.Left="10" Canvas.Top="340"/>
+        <TextBox Height="24" TextWrapping="Wrap" Text="{Binding t2vol,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="340" Width="120"/>
+        <Label Content="夜盘收盘" Canvas.Left="10" Canvas.Top="370"/>
+        <ComboBox Canvas.Left="100" Canvas.Top="370" Width="120"  DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding nightClosingTime,Mode=TwoWay}">
+            <ComboBox.ItemsSource>
+                <Binding Source="{StaticResource StaticsData}" XPath="Tactics[@type='NightClosingTime']" Mode="OneTime"></Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <Button Content="确定" x:Name="confirm" Canvas.Left="75" Canvas.Top="410" Width="60" Click="confirm_Click"/>
+        <Button Content="取消" x:Name="cancel" Canvas.Left="150" Canvas.Top="410" Width="60" Click="cancel_Click"/>
     </Canvas>
 </Window>

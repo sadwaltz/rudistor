@@ -23,5 +23,15 @@ namespace rudistor.Contents.TempPage
         {
             InitializeComponent();
         }
+
+        private void confirm_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+        }
     }
 }

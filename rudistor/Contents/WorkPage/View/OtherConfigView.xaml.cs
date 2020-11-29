@@ -1,5 +1,4 @@
-﻿using rudistor.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,25 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace rudistor.Contents.TempPage
+namespace rudistor.Contents.WorkPage.View
 {
     /// <summary>
-    /// StrategyGrid.xaml 的交互逻辑
+    /// OtherConfigView.xaml 的交互逻辑
     /// </summary>
-    public partial class StrategyGridView : UserControl
+    public partial class OtherConfigView : Window
     {
-        public StrategyGridView()
+        public OtherConfigView()
         {
             InitializeComponent();
         }
 
-        private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
+        private void confirm_Click(object sender, RoutedEventArgs e)
         {
-            //Strategy datacontext = (Strategy)this.DataContext;
-            //var temp = datacontext.lockNum;
+            this.DialogResult = true;
+        }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
         }
     }
 }
