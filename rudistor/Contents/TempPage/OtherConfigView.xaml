@@ -8,9 +8,9 @@
             <XmlDataProvider x:Key="StaticsData" Source="pack://siteoforigin:,,,/Config/tactics.xml" XPath="/Config" />
         </Canvas.Resources>
         <Label Content="腿一" Canvas.Left="10" Canvas.Top="10"/>
-        <ComboBox  ItemsSource="{Binding WorkerViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t1,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="10" Width="120"/>            
+        <ComboBox  ItemsSource="{Binding StrategyWorkViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t1,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="10" Width="120"/>            
         <Label Content="腿二" Canvas.Left="10" Canvas.Top="40"/>
-        <ComboBox  ItemsSource="{Binding WorkerViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t2,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="40" Width="120"/>
+        <ComboBox  ItemsSource="{Binding StrategyWorkViewModel.Instrument,Mode=OneTime,Source={StaticResource Locator}}"  SelectedItem="{Binding t2,Mode=TwoWay}" Canvas.Left="100" Canvas.Top="40" Width="120"/>
         <Label Content="策略" Canvas.Left="10" Canvas.Top="70"/>
         <ComboBox Canvas.Left="100" Canvas.Top="70" Width="120"   DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding cl,Mode=TwoWay,diag:PresentationTraceSources.TraceLevel=High}" >
             <ComboBox.ItemsSource>

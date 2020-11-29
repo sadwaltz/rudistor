@@ -736,6 +736,7 @@ namespace rudistor.Contents.TempPage
             }
             Instrument.Add(inst);
             Instrument.Sort(c => c);
+            RaisePropertyChanged("Instrument");
         }
         //保存最后一次成功登录信息
         private void saveLoginInfo()

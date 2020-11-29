@@ -69,7 +69,13 @@
   <brokers>
     <brokerName>localhost</brokerName>
     <brokerId>11</brokerId>
-	<host>127.0.0.1</host>
-	<port>61002</port>
+	  <host>127.0.0.1</host>
+	  <port>61002</port>
+  </brokers>
+  <brokers>
+    <brokerName>localhost2</brokerName>
+    <brokerId>12</brokerId>
+	  <host>127.0.0.1</host>
+	  <port>25701</port>
   </brokers>
 </BrokerData>
