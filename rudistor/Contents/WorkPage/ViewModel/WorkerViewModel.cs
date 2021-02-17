@@ -51,7 +51,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
         private User _currentUser;
         private String _currentCompany;
 
-        private List<string> _wantedInstrument;
+        //private List<string> _wantedInstrument;
 
         private Dictionary<string, StrategyRunningStatus> currentStrategyStatus;
 
@@ -101,7 +101,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             }
         }
 
-        public static readonly string IniFilePath = Path.Combine(Environment.CurrentDirectory, "Config", "config.ini");
+        //public static readonly string IniFilePath = Path.Combine(Environment.CurrentDirectory, "Config", "config.ini");
 
         #region combobox init
         private ObservableCollection<ComboboxItem> _T2ComboboxItems;
@@ -251,7 +251,7 @@ namespace rudistor.Contents.WorkPage.ViewModel
             }
 
             //initComm();
-            _wantedInstrument = getInstrumentsFromINI();
+            //_wantedInstrument = getInstrumentsFromINI();
         }
         private void initGUI()
         {
@@ -725,13 +725,13 @@ namespace rudistor.Contents.WorkPage.ViewModel
                 return;
             }
 
-            if (_wantedInstrument.Count > 1)
-            {
-                if (!_wantedInstrument.Contains(inst))
-                {
-                    return;
-                }
-            }
+            //if (_wantedInstrument.Count > 1)
+            //{
+            //    if (!_wantedInstrument.Contains(inst))
+            //    {
+            //        return;
+            //    }
+            //}
             Instrument.Add(inst);
             Instrument.Sort(c => c);
         }
@@ -747,19 +747,19 @@ namespace rudistor.Contents.WorkPage.ViewModel
             cfa.Save(ConfigurationSaveMode.Modified);
         }
         //从配置文件读取关注的品种类型
-        private List<string> getInstrumentsFromINI()
-        {
-            try
-            {
-                INIManager ini = new INIManager(IniFilePath);
-                return new List<string>(ini.IniReadValue("InstrumentList", "list").Split(','));
-            }
-            catch (Exception e)
-            {
-                logger.Error(e);
-                return new List<string>();
-            }
-        }
+        //private List<string> getInstrumentsFromINI()
+        //{
+        //    try
+        //    {
+        //        INIManager ini = new INIManager(IniFilePath);
+        //        return new List<string>(ini.IniReadValue("InstrumentList", "list").Split(','));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        logger.Error(e);
+        //        return new List<string>();
+        //    }
+        //}
 
         //查询定时器
         public void startTimer()

@@ -41,27 +41,48 @@
     <value>1</value>
   </Tactics>
   <Tactics type="NightClosingTime">
-	<name>0-无夜盘</name>
-	<value>0</value>
+    <name>0-无夜盘</name>
+    <value>0</value>
   </Tactics>
   <Tactics type="NightClosingTime">
-	<name>1-23:00:00</name>
-	<value>1</value>
+    <name>1-23:00:00</name>
+    <value>1</value>
   </Tactics>
   <Tactics type="NightClosingTime">
-	<name>2-23:30:00</name>
-	<value>2</value>
+    <name>2-23:30:00</name>
+    <value>2</value>
   </Tactics>
   <Tactics type="NightClosingTime">
-	<name>3-01:00:00</name>
-	<value>3</value>
+    <name>3-01:00:00</name>
+    <value>3</value>
   </Tactics>
   <Tactics type="NightClosingTime">
-	<name>4-02:00:00</name>
-	<value>4</value>
+    <name>4-02:00:00</name>
+    <value>4</value>
   </Tactics>
   <Tactics type="NightClosingTime">
-	<name>5-02:30:00</name>
-	<value>5</value>
+    <name>5-02:30:00</name>
+    <value>5</value>
   </Tactics>
+  <Tactics type="NightClosingTime">
+    <name>6-23:00:00(15点报单)</name>
+    <value>6</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+    <name>7-23:30:00(15点报单)</name>
+    <value>7</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+    <name>8-01:00:00(15点报单)</name>
+    <value>8</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+    <name>9-02:00:00(15点报单)</name>
+    <value>9</value>
+  </Tactics>
+  <Tactics type="NightClosingTime">
+    <name>10-02:30:00(15点报单)</name>
+    <value>10</value>
+  </Tactics>
+
 </Config>
