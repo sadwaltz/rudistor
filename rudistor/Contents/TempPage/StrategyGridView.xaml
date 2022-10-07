@@ -95,15 +95,15 @@
         <Label Content="做空价差" Canvas.Left="5" Canvas.Top="85" />
         <TextBox Height="24" Canvas.Left="5" TextWrapping="Wrap" Text="{Binding zkjc}" Canvas.Top="110" Width="60" IsEnabled="False"/>
         <Label Content="{Binding kkjc, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=空开}" Canvas.Left="50" Canvas.Top="85" Style="{StaticResource ResourceKey=EditLabel}" />
-        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding kkjc}" Increment="{Binding incre}" Maximum="10000" Minimum="-10000" Canvas.Left="75" Text="999" Canvas.Top="110" Width="60"/>
+        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding kkjc}" Increment="{Binding incre}" Maximum="100000" Minimum="-100000" Canvas.Left="75" Text="999" Canvas.Top="110" Width="60"/>
         <Label Content="{Binding kp, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=空平}" Canvas.Left="140" Canvas.Top="85" Style="{StaticResource ResourceKey=EditLabel}" />
-        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding kp}" Increment="{Binding incre}" Maximum="10000" Minimum="-10000" Canvas.Left="150" Text="999" Canvas.Top="110" Width="60"/>
+        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding kp}" Increment="{Binding incre}" Maximum="100000" Minimum="-100000" Canvas.Left="150" Text="999" Canvas.Top="110" Width="60"/>
         <Label Content="做多价差" Canvas.Left="5" Canvas.Top="135" />
         <TextBox Height="24" Canvas.Left="5" TextWrapping="Wrap" Text="{Binding zdjc}" Canvas.Top="160" Width="60" IsEnabled="False" />
         <Label Content="{Binding dkjc, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=多开}" Canvas.Left="50" Canvas.Top="135" Style="{StaticResource ResourceKey=EditLabel}" />
-        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding dkjc}" Increment="{Binding incre}" Maximum="10000" Minimum="-10000" Canvas.Left="75" Text="999" Canvas.Top="160" Width="60"/>
+        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding dkjc}" Increment="{Binding incre}" Maximum="100000" Minimum="-100000" Canvas.Left="75" Text="999" Canvas.Top="160" Width="60"/>
         <Label Content="{Binding dp, Mode=OneWay,Converter={StaticResource LabelConverter},ConverterParameter=多平}" Canvas.Left="140" Canvas.Top="135" Style="{StaticResource ResourceKey=EditLabel}" />
-        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding dp}" Increment="{Binding incre}" Maximum="10000" Minimum="-10000" Canvas.Left="150" Text="999" Canvas.Top="160" Width="60"/>
+        <xctk:DecimalUpDown Height="24" FormatString="{Binding formatString}" Value="{Binding dp}" Increment="{Binding incre}" Maximum="100000" Minimum="-100000" Canvas.Left="150" Text="999" Canvas.Top="160" Width="60"/>
         <Label Content="自动报单" Canvas.Left="5" Canvas.Top="190"/>
         <RadioButton GroupName="{Binding whichGrid}" Content="关闭" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter={x:Static local:AutoCallStatus.Close}}" Foreground="{Binding autoCall, Mode=OneWay, Converter={StaticResource RadioButtonColorConverter},ConverterParameter={x:Static local:AutoCallStatus.Close}}" Canvas.Left="5" Canvas.Top="215" />
         <RadioButton GroupName="{Binding whichGrid}" Content="时间1" IsChecked="{Binding autoCall, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter},ConverterParameter={x:Static local:AutoCallStatus.Time1}}" Foreground="{Binding autoCall, Mode=OneWay, Converter={StaticResource RadioButtonColorConverter},ConverterParameter={x:Static local:AutoCallStatus.Time1}}" Canvas.Left="5" Canvas.Top="235" />

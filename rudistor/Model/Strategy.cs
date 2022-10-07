@@ -57,6 +57,9 @@ namespace rudistor.Model
             this.t2Weight = s.t2Weight;
             this.t2Ratio = s.t2Ratio;
             this.nightClosingTime = s.nightClosingTime;
+            this.triggerType = s.triggerType;
+            this.ibLockCash = s.ibLockCash;
+            this.t2MarketPrice = s.t2MarketPrice;
             this.zdjc = s.zdjc;
             this.zkjc = s.zkjc;
             this.formatString = s.formatString;
@@ -308,6 +311,12 @@ namespace rudistor.Model
         public string t2Ratio { get; set; }
         //夜盘收盘时间
         public string nightClosingTime { get; set; }
+        //行情驱动方式
+        public string triggerType { get; set; }
+        //是否锁定汇率
+        public string ibLockCash { get; set; }
+        //腿二使用市价单
+        public string t2MarketPrice { get; set; }
         //做多价差--实际多开价差
         public string zdjc { get; set; }
         //做空价差--实际空开价差
@@ -350,18 +359,35 @@ namespace rudistor.Model
         public const string t2WeightPropertyName = "t2Weight";
         public const string t2RatioPropertyName = "t2Ratio";
         public const string nightClosingTimePropertyName = "nightClosingTime";
+        public const string triggerTypePropertyName = "triggerType";
         public const string zdjcPropertyName = "zdjc";
         public const string zkjcPropertyName = "zkjc";
+
+        public const string ibLockCashPropertyName = "ibLockCash";
+        public const string t2MarketPricePropertyName = "t2MarketPrice";
+
 
         #endregion // Fields
         #region create from config file
         public static Strategy FromDataRow(DataRow dataRow)
         {
             String defaultNightClosingTime = "0";
+            String defaultTriggerType = "3";
+            String defaultIbLockCash = "0";
+            String defaultT2MarketPrice = "0";
 
-            if(dataRow.Table.Columns.IndexOf(Strategy.nightClosingTimePropertyName) >= 0){
+            if (dataRow.Table.Columns.IndexOf(Strategy.nightClosingTimePropertyName) >= 0)
+            {
                 if (null != dataRow.Field<string>(Strategy.nightClosingTimePropertyName)) {
                     defaultNightClosingTime = dataRow.Field<string>(Strategy.nightClosingTimePropertyName);
+                }
+            }
+
+            if (dataRow.Table.Columns.IndexOf(Strategy.triggerTypePropertyName) >= 0)
+            {
+                if (null != dataRow.Field<string>(Strategy.triggerTypePropertyName))
+                {
+                    defaultTriggerType = dataRow.Field<string>(Strategy.triggerTypePropertyName);
                 }
             }
 
@@ -396,6 +422,9 @@ namespace rudistor.Model
                 t2Weight = dataRow.Field<string>(Strategy.t2WeightPropertyName),
                 t2Ratio = dataRow.Field<string>(Strategy.t2RatioPropertyName),
                 nightClosingTime = defaultNightClosingTime,
+                ibLockCash = defaultIbLockCash,
+                t2MarketPrice = defaultT2MarketPrice,
+                triggerType = defaultTriggerType,
                 zdjc = dataRow.Field<string>(Strategy.zdjcPropertyName),
                 zkjc = dataRow.Field<string>(Strategy.zkjcPropertyName)
             };

@@ -84,5 +84,40 @@
     <name>10-02:30:00(15点报单)</name>
     <value>10</value>
   </Tactics>
-
+  <Tactics type="TriggerType">
+    <name>0-按行情顺序报单</name>
+    <value>0</value>
+  </Tactics>
+  <Tactics type="TriggerType">
+    <name>1-根据T1报单</name>
+    <value>1</value>
+  </Tactics>
+  <Tactics type="TriggerType">
+    <name>2-根据T2报单</name>
+    <value>2</value>
+  </Tactics>
+  <Tactics type="TriggerType">
+    <name>3-自动判断</name>
+    <value>3</value>
+  </Tactics>
+  <Tactics type="TriggerType">
+    <name>4-行情在同一时刻才报单（不支持大商、郑商）</name>
+    <value>4</value>
+  </Tactics>
+  <Tactics type="IbLockCash">
+    <name>0-否</name>
+    <value>0</value>
+  </Tactics>
+  <Tactics type="IbLockCash">
+    <name>1-是</name>
+    <value>1</value>
+  </Tactics>
+  <Tactics type="T2MarketPrice">
+    <name>0-否</name>
+    <value>0</value>
+  </Tactics>
+  <Tactics type="T2MarketPrice">
+    <name>1-是</name>
+    <value>1</value>
+  </Tactics>
 </Config>

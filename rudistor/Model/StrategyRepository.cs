@@ -65,6 +65,10 @@ namespace rudistor.Model
                 {
                     strategies.Columns.Add(Strategy.nightClosingTimePropertyName, typeof(string));
                 }
+                if (strategies.Columns.IndexOf(Strategy.triggerTypePropertyName) < 0)
+                {
+                    strategies.Columns.Add(Strategy.triggerTypePropertyName, typeof(string));
+                }
             }
             catch (Exception e)
             {
@@ -112,6 +116,9 @@ namespace rudistor.Model
             strategies.Columns.Add(Strategy.t2WeightPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.t2RatioPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.nightClosingTimePropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.triggerTypePropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.ibLockCashPropertyName, typeof(string));
+            strategies.Columns.Add(Strategy.t2MarketPricePropertyName, typeof(string));
             strategies.Columns.Add(Strategy.zdjcPropertyName, typeof(string));
             strategies.Columns.Add(Strategy.zkjcPropertyName, typeof(string));
             
@@ -165,6 +172,9 @@ namespace rudistor.Model
                     t2Weight = "1",
                     t2Ratio="1",
                     nightClosingTime = "0",
+                    triggerType = "3",
+                    ibLockCash = "0",
+                    t2MarketPrice = "0",
                     zdjc = "66",
                     zkjc="77" 
                 };
@@ -203,6 +213,9 @@ namespace rudistor.Model
                     strategy.t2Weight,
                     strategy.t2Ratio,
                     strategy.nightClosingTime,
+                    strategy.triggerType,
+                    strategy.ibLockCash,
+                    strategy.t2MarketPrice,
                     strategy.zdjc,
                     strategy.zkjc
                 });
@@ -267,6 +280,9 @@ namespace rudistor.Model
                     strategy.t2Weight,
                     strategy.t2Ratio,
                     strategy.nightClosingTime,
+                    strategy.triggerType,
+                    strategy.ibLockCash,
+                    strategy.t2MarketPrice,
                     strategy.zdjc,
                     strategy.zkjc
                 };

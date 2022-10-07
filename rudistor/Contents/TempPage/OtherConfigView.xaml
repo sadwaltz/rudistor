@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
-        Title="修改" Height="485" Width="240">
+        Title="修改" Height="575" Width="240">
     <Canvas Margin="0,0,0,20">
         <Canvas.Resources>
             <XmlDataProvider x:Key="StaticsData" Source="pack://siteoforigin:,,,/Config/tactics.xml" XPath="/Config" />
@@ -45,7 +45,25 @@
                 <Binding Source="{StaticResource StaticsData}" XPath="Tactics[@type='NightClosingTime']" Mode="OneTime"></Binding>
             </ComboBox.ItemsSource>
         </ComboBox>
-        <Button Content="确定" x:Name="confirm" Canvas.Left="75" Canvas.Top="410" Width="60" Click="confirm_Click"/>
-        <Button Content="取消" x:Name="cancel" Canvas.Left="150" Canvas.Top="410" Width="60" Click="cancel_Click"/>
+        <Label Content="行情驱动方式" Canvas.Left="10" Canvas.Top="400"/>
+        <ComboBox Canvas.Left="100" Canvas.Top="400" Width="120"  DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding triggerType,Mode=TwoWay}">
+            <ComboBox.ItemsSource>
+                <Binding Source="{StaticResource StaticsData}" XPath="Tactics[@type='TriggerType']" Mode="OneTime"></Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <Label Content="是否锁定汇率" Canvas.Left="10" Canvas.Top="430"/>
+        <ComboBox Canvas.Left="100" Canvas.Top="430" Width="120"  DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding ibLockCash,Mode=TwoWay}">
+            <ComboBox.ItemsSource>
+                <Binding Source="{StaticResource StaticsData}" XPath="Tactics[@type='IbLockCash']" Mode="OneTime"></Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <Label Content="腿二市价单" Canvas.Left="10" Canvas.Top="460"/>
+        <ComboBox Canvas.Left="100" Canvas.Top="460" Width="120"  DisplayMemberPath="name" SelectedValuePath="value" SelectedValue="{Binding t2MarketPrice,Mode=TwoWay}">
+            <ComboBox.ItemsSource>
+                <Binding Source="{StaticResource StaticsData}" XPath="Tactics[@type='T2MarketPrice']" Mode="OneTime"></Binding>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+        <Button Content="确定" x:Name="confirm" Canvas.Left="75" Canvas.Top="500" Width="60" Click="confirm_Click"/>
+        <Button Content="取消" x:Name="cancel" Canvas.Left="150" Canvas.Top="500" Width="60" Click="cancel_Click"/>
     </Canvas>
 </Window>

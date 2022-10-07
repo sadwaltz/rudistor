@@ -1,11 +1,11 @@
 <?xml version="1.0" standalone="yes"?>
 <BrokerData>
-  <brokers>
+  <!--<brokers>
     <brokerName>阿里云1（仿真）</brokerName>
     <brokerId>0</brokerId>
     <host>139.196.107.106</host>
     <port>25701</port>
-  </brokers>
+  </brokers>-->
   <brokers>
     <brokerName>阿里云2（申万内网备份）</brokerName>
     <brokerId>1</brokerId>
