@@ -391,6 +391,22 @@ namespace rudistor.Model
                 }
             }
 
+            if (dataRow.Table.Columns.IndexOf(Strategy.ibLockCashPropertyName) >= 0)
+            {
+                if (null != dataRow.Field<string>(Strategy.ibLockCashPropertyName))
+                {
+                    defaultIbLockCash = dataRow.Field<string>(Strategy.ibLockCashPropertyName);
+                }
+            }
+
+            if (dataRow.Table.Columns.IndexOf(Strategy.t2MarketPricePropertyName) >= 0)
+            {
+                if (null != dataRow.Field<string>(Strategy.t2MarketPricePropertyName))
+                {
+                    defaultT2MarketPrice = dataRow.Field<string>(Strategy.t2MarketPricePropertyName);
+                }
+            }
+
             Strategy temp =  new Strategy()
             {
                 whichGrid = dataRow.Field<string>(Strategy.whichGridPropertyName),

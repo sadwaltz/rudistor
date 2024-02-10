@@ -140,7 +140,7 @@
                 <ColumnDefinition Width="235"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Positions}" CanUserAddRows="False" Grid.Column="0" Height="auto" Grid.Row="0" VerticalAlignment="Stretch"  Grid.ColumnSpan="3">
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Positions}" CanUserAddRows="False" Height="430" VerticalScrollBarVisibility="Visible" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch"  Grid.ColumnSpan="3">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="策略号" Binding="{Binding StageID}"/>
                     <DataGridTextColumn Header="腿1合约" Binding="{Binding T1}"/>
@@ -152,7 +152,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CanceledOrder}" CanUserAddRows="False" Grid.Column="3" Grid.Row="0" VerticalAlignment="Stretch">
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CanceledOrder}" CanUserAddRows="False" Height="430" VerticalScrollBarVisibility="Visible" Grid.Column="3" Grid.Row="0" VerticalAlignment="Stretch">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="合约" Binding="{Binding name}"/>
                     <DataGridTextColumn Header="撤单数量" Binding="{Binding cnt}"/>
